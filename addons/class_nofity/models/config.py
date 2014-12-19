@@ -6,14 +6,14 @@ from openerp import models, fields, api
 from openerp.tools.translate import _
 
 
-class Cource(models.Model):
-    _name = 'school.course'
+class Subject(models.Model):
+    _name = 'school.subject'
 
     name = fields.Char('Name', required=True)
 
 
 class Class(models.Model):
-    _name = 'school.class'
+    _name = 'school.classroom'
 
     name = fields.Char('Name', required=True)
 

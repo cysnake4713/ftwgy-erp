@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <openerp>
     <data>
-        <record id="view_school_course_tree" model="ir.ui.view">
-            <field name="name">view.school.course.tree</field>
-            <field name="model">school.course</field>
+        <record id="view_school_subject_tree" model="ir.ui.view">
+            <field name="name">view.school.subject.tree</field>
+            <field name="model">school.subject</field>
             <field name="arch" type="xml">
                 <tree editable="top">
                     <field name="name"/>
@@ -11,9 +11,9 @@
             </field>
         </record>
 
-        <record id="view_school_class_tree" model="ir.ui.view">
-            <field name="name">view.school.class.tree</field>
-            <field name="model">school.class</field>
+        <record id="view_school_classroom_tree" model="ir.ui.view">
+            <field name="name">view.school.classroom.tree</field>
+            <field name="model">school.classroom</field>
             <field name="arch" type="xml">
                 <tree editable="top">
                     <field name="name"/>
