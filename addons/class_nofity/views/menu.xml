@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+        <record id="action_school_semester_config" model="ir.actions.act_window">
+            <field name="name">学期设置</field>
+            <field name="res_model">school.semester</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="target">current</field>
+        </record>
+        
+        <record id="action_school_course_config" model="ir.actions.act_window">
+            <field name="name">科目设置</field>
+            <field name="res_model">school.course</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree</field>
+            <field name="target">current</field>
+        </record>
+        
+        <record id="action_school_class_config" model="ir.actions.act_window">
+            <field name="name">班级设置</field>
+            <field name="res_model">school.class</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree</field>
+            <field name="target">current</field>
+        </record>
+
+        <menuitem id="menuitem_school_root" name="课程管理"  sequence="10"/>
+
+        <menuitem id="menuitem_school_config" name="设置" parent='menuitem_school_root' sequence="50"/>
+
+        <menuitem id="menuitem_school_config_base" name="基础数据" parent="menuitem_school_config" sequence="10"/>
+
+        <menuitem id="menuitem_school_config_semester" name="学期" parent="menuitem_school_config_base" sequence="5"
+                action="action_school_semester_config"/>
+        <menuitem id="menuitem_school_config_course" name="科目" parent="menuitem_school_config_base" sequence="15"
+                action="action_school_course_config"/>
+        <menuitem id="menuitem_school_config_class" name="班级" parent="menuitem_school_config_base" sequence="20"
+                action="action_school_class_config"/>
+
+
+    </data>
+</openerp>
