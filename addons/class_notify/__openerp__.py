@@ -11,6 +11,7 @@ Class Nofity""",
     'depends': ['base'],
     'data': [
         'views/timetable_view.xml',
+        'views/plan_view.xml',
         'views/config_view.xml',
         'views/menu.xml',
     ],

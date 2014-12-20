@@ -35,4 +35,4 @@ class Curriculum(models.Model):
     semester_id = fields.Many2one('school.semester', required=True)
     cell_ids = fields.One2many('school.timetable.cell', 'timetable_id', 'Cells')
 
-    # lesson_type = fields.Selection([('summer', u'夏时'), ('winter', u'冬时')], 'Lesson Type')
+    initial_lesson_type = fields.Selection([('summer', u'夏时'), ('winter', u'冬时')], 'Initial Lesson Type')

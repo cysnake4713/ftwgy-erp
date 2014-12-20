@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+        <record id="view_school_plan_calendar" model="ir.ui.view">
+            <field name="name">view.school.timetable.plan.calendar</field>
+            <field name="model">school.timetable.plan</field>
+            <field name="arch" type="xml">
+                <calendar date_start="start_date" date_stop="end_date" quick_add="0"
+                          display="[teacher]" color="color_partner_id" event_open_popup="%(view_school_plan_form)s">
+                    <field name="teacher"/>
+                    <field name="color_partner_id"/>
+                </calendar>
+            </field>
+        </record>
+
+        <record id="view_school_plan_tree" model="ir.ui.view">
+            <field name="name">view.school.timetable.plan.tree</field>
+            <field name="model">school.timetable.plan</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="start_date"/>
+                    <field name="end_date"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_school_plan_form" model="ir.ui.view">
+            <field name="name">view.school.timetable.plan.form</field>
+            <field name="model">school.timetable.plan</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <field name="start_date"/>
+                        <field name="end_date"/>
+                        <field name="teacher"/>
+                        <field name="subject"/>
+                        <field name="classroom"/>
+                        <field name="lesson"/>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+    </data>
+</openerp>

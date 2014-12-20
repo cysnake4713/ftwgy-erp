@@ -1,6 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <openerp>
     <data>
+        <record id="action_timetable_sheet" model="ir.actions.act_window">
+            <field name="name">课表展示</field>
+            <field name="res_model">school.timetable</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">qweb</field>
+            <field name="target">current</field>
+            <field name="view_id" ref="view_school_timetable_qweb"/>
+        </record>
+
         <record id="view_school_timetable_tree" model="ir.ui.view">
             <field name="name">view.school.timetable.tree</field>
             <field name="model">school.timetable</field>
@@ -19,6 +28,7 @@
                     <group col="1">
                         <group col="4">
                             <field name="semester_id"/>
+                            <field name="initial_lesson_type"/>
                         </group>
                         <group col="1">
                             <label for="cell_ids"/>
@@ -31,6 +41,7 @@
                                     <field name="lesson"/>
                                 </tree>
                             </field>
+                            <button name="%(action_timetable_sheet)d" string="课表展示" type="action"/>
                         </group>
                     </group>
 
@@ -38,45 +49,7 @@
             </field>
         </record>
 
-        <record id="view_school_plan_calendar" model="ir.ui.view">
-            <field name="name">view.school.timetable.plan.calendar</field>
-            <field name="model">school.timetable.plan</field>
-            <field name="arch" type="xml">
-                <calendar date_start="start_date" date_stop="end_date" quick_add="0"
-                          display="[teacher]" color="color_partner_id" event_open_popup="%(view_school_plan_form)s">
-                    <field name="teacher"/>
-                    <field name="color_partner_id"/>
-                </calendar>
-            </field>
-        </record>
 
-        <record id="view_school_plan_tree" model="ir.ui.view">
-            <field name="name">view.school.timetable.plan.tree</field>
-            <field name="model">school.timetable.plan</field>
-            <field name="arch" type="xml">
-                <tree>
-                    <field name="start_date"/>
-                    <field name="end_date"/>
-                </tree>
-            </field>
-        </record>
-
-        <record id="view_school_plan_form" model="ir.ui.view">
-            <field name="name">view.school.timetable.plan.form</field>
-            <field name="model">school.timetable.plan</field>
-            <field name="arch" type="xml">
-                <form>
-                    <sheet>
-                        <field name="start_date"/>
-                        <field name="end_date"/>
-                        <field name="teacher"/>
-                        <field name="subject"/>
-                        <field name="classroom"/>
-                        <field name="lesson"/>
-                    </sheet>
-                </form>
-            </field>
-        </record>
         <!--<record id="view_school_timetable_cell_tree" model="ir.ui.view">-->
         <!--<field name="name">view.school.timetable.cell.tree</field>-->
         <!--<field name="model">school.timetable.cell</field>-->
