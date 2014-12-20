@@ -9,6 +9,13 @@
             <field name="target">current</field>
         </record>
 
+        <record id="action_school_plan_all" model="ir.actions.act_window">
+            <field name="name">所有上课提醒</field>
+            <field name="res_model">school.timetable.plan</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">calendar,tree,form</field>
+            <field name="target">current</field>
+        </record>
 
         <record id="action_school_semester_config" model="ir.actions.act_window">
             <field name="name">学期设置</field>
@@ -33,13 +40,23 @@
             <field name="view_mode">tree</field>
             <field name="target">current</field>
         </record>
+        <record id="action_school_lesson_config" model="ir.actions.act_window">
+            <field name="name">节数设置</field>
+            <field name="res_model">school.lesson</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="target">current</field>
+        </record>
 
         <menuitem id="menuitem_school_root" name="课程管理" sequence="51"/>
 
         <menuitem id="menuitem_school_timetable_manage" name="课表管理" parent='menuitem_school_root' sequence="20"/>
-
         <menuitem id="menuitem_school_timetable_all" name="课表" parent="menuitem_school_timetable_manage" sequence="10"
                 action="action_school_timetable_all"/>
+
+        <menuitem id="menuitem_school_plan_manage" name="上课提醒管理" parent='menuitem_school_root' sequence="10"/>
+        <menuitem id="menuitem_school_plan_all" name="上课提醒" parent="menuitem_school_plan_manage" sequence="10"
+                action="action_school_plan_all"/>
 
         <menuitem id="menuitem_school_config" name="设置" parent='menuitem_school_root' sequence="50"/>
 
@@ -50,6 +67,9 @@
                   action="action_school_subject_config"/>
         <menuitem id="menuitem_school_config_classroom" name="班级" parent="menuitem_school_config_base" sequence="20"
                   action="action_school_classroom_config"/>
+        <menuitem id="menuitem_school_config_lesson" name="节数" parent="menuitem_school_config_base" sequence="25"
+                  action="action_school_lesson_config"/>
+
 
 
     </data>

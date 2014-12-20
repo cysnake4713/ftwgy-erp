@@ -22,6 +22,16 @@ class ClassRoom(models.Model):
     _sql_constraints = [('school_classroom_unique', 'unique(name)', _('name must be unique !'))]
 
 
+class Lesson(models.Model):
+    _name = 'school.lesson'
+
+    name = fields.Integer('Name', required=True)
+    summer_start_time = fields.Datetime('Summer Start Time', required=True)
+    summer_end_time = fields.Datetime('Summer End Time', required=True)
+    winter_start_time = fields.Datetime('Winter Start Time', required=True)
+    winter_end_time = fields.Datetime('Winter End Time', required=True)
+
+
 class Semester(models.Model):
     _name = 'school.semester'
     _order = 'end_date desc'

@@ -52,5 +52,40 @@
                 </form>
             </field>
         </record>
+
+        <record id="view_school_lesson_tree" model="ir.ui.view">
+            <field name="name">view.school.lesson.tree</field>
+            <field name="model">school.lesson</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="summer_start_time"/>
+                    <field name="summer_end_time"/>
+                    <field name="winter_start_time"/>
+                    <field name="winter_end_time"/>
+                </tree>
+            </field>
+        </record>
+        <record id="view_school_lesson_form" model="ir.ui.view">
+            <field name="name">view.school.lesson.form</field>
+            <field name="model">school.lesson</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                        </group>
+                        <group col="4" string="夏时">
+                            <field name="summer_start_time"/>
+                            <field name="summer_end_time"/>
+                        </group>
+                        <group col="4" string="冬时">
+                            <field name="winter_start_time"/>
+                            <field name="winter_end_time"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
     </data>
 </openerp>
