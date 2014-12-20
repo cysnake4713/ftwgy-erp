@@ -31,20 +31,11 @@ class Semester(models.Model):
     end_date = fields.Date('End Date', required=True)
 
     @api.multi
+    @api.depends('name', 'start_date', 'end_date')
     def name_get(self):
-        """ name_get() -> [(id, name), ...]
-
-        Returns a textual representation for the records in ``self``.
-        By default this is the value of the ``display_name`` field.
-
-        :return: list of pairs ``(id, text_repr)`` for each records
-        :rtype: list(tuple)
-        """
         result = []
-        name = u'%s (%s - %s)'
-        date_convert = self._fields['start_date'].convert_to_display_name
-        for record in self:
-            result.append((record.id, name % (record.name, date_convert(record.start_date), date_convert(record.end_date))))
+        for semester in self:
+            result.append((semester.id, u'%s (%s - %s)' % (semester.name, semester.start_date, semester.end_date)))
         return result
 
     @api.one
