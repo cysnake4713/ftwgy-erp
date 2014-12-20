@@ -34,7 +34,7 @@
             <field name="target">current</field>
         </record>
 
-        <menuitem id="menuitem_school_root" name="课程管理" sequence="10"/>
+        <menuitem id="menuitem_school_root" name="课程管理" sequence="51"/>
 
         <menuitem id="menuitem_school_timetable_manage" name="课表管理" parent='menuitem_school_root' sequence="20"/>
 

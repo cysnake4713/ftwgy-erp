@@ -14,7 +14,7 @@ class Subject(models.Model):
     _sql_constraints = [('school_subject_unique', 'unique(name)', _('name must be unique !'))]
 
 
-class Class(models.Model):
+class ClassRoom(models.Model):
     _name = 'school.classroom'
 
     name = fields.Char('Name', required=True)
