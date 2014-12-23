@@ -30,12 +30,17 @@
             <field name="arch" type="xml">
                 <form>
                     <sheet>
-                        <field name="start_date"/>
-                        <field name="end_date"/>
-                        <field name="teacher"/>
-                        <field name="subject"/>
-                        <field name="classroom"/>
-                        <field name="lesson"/>
+                        <group>
+                            <field name="start_date"/>
+                            <field name="end_date"/>
+                            <field name="teacher"/>
+                            <field name="subject"/>
+                            <field name="classroom"/>
+                            <field name="lesson"/>
+                            <field name="lesson_type"/>
+                            <field name="start_datetime"/>
+                            <field name="end_datetime"/>
+                        </group>
                     </sheet>
                 </form>
             </field>

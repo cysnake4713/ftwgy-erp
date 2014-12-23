@@ -4,6 +4,7 @@ __author__ = 'cysnake4713'
 from openerp import tools
 from openerp import models, fields, api
 from openerp.tools.translate import _
+import datetime
 
 
 class Subject(models.Model):
@@ -30,6 +31,8 @@ class Lesson(models.Model):
     summer_end_time = fields.Datetime('Summer End Time', required=True)
     winter_start_time = fields.Datetime('Winter Start Time', required=True)
     winter_end_time = fields.Datetime('Winter End Time', required=True)
+
+
 
 
 class Semester(models.Model):
