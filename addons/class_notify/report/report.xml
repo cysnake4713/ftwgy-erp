@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+        <!-- QWeb Reports -->
+        <report
+            id="action_report_timetable"
+            model="school.timetable"
+            report_type="qweb-html"
+            string="课表一览"
+            name="class_notify.report_timetable"
+            file="class_notify.report_timetable"
+        />
+    </data>
+</openerp>

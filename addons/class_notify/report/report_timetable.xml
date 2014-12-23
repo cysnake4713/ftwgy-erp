@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <template id="report_timetable">
+            <t t-call="report.html_container">
+                <!--<t t-call="report.internal_layout">-->
+                    <div class="page">
+                        <h2>课程总表</h2>
+                        <table class="table table-bordered">
+                            <tr>
+                                <th>时间</th>
+                                <t t-foreach="weeks" t-as="week">
+                                    <th t-att-colspan="len(lessons)" t-esc="week_value"/>
+                                </t>
+                            </tr>
+                            <tr>
+                                <th>班级</th>
+                                <t t-foreach="range(len(weeks))" t-as="temp">
+                                    <t t-foreach="lessons" t-as="lesson">
+                                        <th t-esc="lesson.name"/>
+                                    </t>
+                                </t>
+                            </tr>
+                            <t t-foreach="classrooms" t-as="classroom">
+                                <tr>
+                                    <td t-esc="classroom.name"/>
+                                    <t t-foreach="weeks" t-as="week">
+                                        <t t-foreach="lessons" t-as="lesson">
+                                            <td t-raw="get_lesson_detail(week, lesson, classroom)"/>
+                                        </t>
+                                    </t>
+                                </tr>
+                            </t>
+
+                        </table>
+                    </div>
+                <!--</t>-->
+            </t>
+        </template>
+    </data>
+</openerp>

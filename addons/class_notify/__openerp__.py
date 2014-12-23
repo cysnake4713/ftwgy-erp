@@ -8,8 +8,10 @@
 Class Nofity""",
     'author': 'Matt Cai',
     'website': 'http://odoosoft.com',
-    'depends': ['base'],
+    'depends': ['base', 'report'],
     'data': [
+        'report/report.xml',
+        'report/report_timetable.xml',
         'views/timetable_view.xml',
         'views/plan_view.xml',
         'views/config_view.xml',
