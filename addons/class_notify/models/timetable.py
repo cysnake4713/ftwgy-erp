@@ -79,3 +79,18 @@ class Curriculum(models.Model):
         for timetable in self:
             timetable.plan_ids.unlink()
         return True
+
+
+class TypeChangeWizard(models.TransientModel):
+    _name = 'school.timetable.wizard'
+
+    lesson_type = fields.Selection([('summer', u'夏时'), ('winter', u'冬时')], 'Initial Lesson Type', required=True)
+    start_date = fields.Date('Start Date', required=True)
+
+
+    @api.one
+    def button_save(self):
+        timetable = self.env['school.timetable'].browse(self.env.context['active_id'])
+        plan_ids = timetable.plan_ids.filtered(lambda record: record.start_date >= self.start_date)
+        plan_ids.write({'lesson_type': self.lesson_type})
+        return True

@@ -1,6 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <openerp>
     <data>
+        <record id="view_school_timetable_wizard_form" model="ir.ui.view">
+            <field name="name">view.school.timetable.wizard.form</field>
+            <field name="model">school.timetable.wizard</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <field name="lesson_type"/>
+                            <field name="start_date"/>
+                        </group>
+                    </sheet>
+                    <footer>
+                        <button string="保存" name="button_save" type="object"/>
+                        or
+                        <button string="取消" name="cancel" type="cancel" class="oe_link"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+        <record id="action_school_timetable_wizard" model="ir.actions.act_window">
+            <field name="name">action.school.timetable.wizard</field>
+            <field name="res_model">school.timetable.wizard</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
 
         <record id="view_school_timetable_tree" model="ir.ui.view">
             <field name="name">view.school.timetable.tree</field>
@@ -20,6 +46,7 @@
                     <header>
                         <button name="button_generate_plans" type="object" string="生成上课提醒" class="oe_highlight"/>
                         <button name="button_clear_plans" type="object" string="清除上课计划"/>
+                        <button name="%(action_school_timetable_wizard)d" type="action" string="更新课程时刻类型"/>
                     </header>
                     <group col="1">
                         <group col="4">
