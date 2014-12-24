@@ -17,14 +17,18 @@
             <field name="model">school.timetable</field>
             <field name="arch" type="xml">
                 <form>
+                    <header>
+                        <button name="button_generate_plans" type="object" string="生成上课提醒" class="oe_highlight"/>
+                        <button name="button_clear_plans" type="object" string="清除上课计划"/>
+                    </header>
                     <group col="1">
                         <group col="4">
                             <field name="semester_id"/>
                             <field name="initial_lesson_type"/>
                         </group>
-                        <group col="1">
-                            <label for="cell_ids"/>
-                            <field name="cell_ids" nolabel="1">
+                        <notebook>
+                            <page string="课表信息">
+                                <field name="cell_ids" nolabel="1">
                                 <tree editable="top">
                                     <field name="classroom"/>
                                     <field name="subject"/>
@@ -33,9 +37,12 @@
                                     <field name="lesson"/>
                                 </tree>
                             </field>
-                        </group>
+                            </page>
+                            <page string="上课计划">
+                                <field name="plan_ids"/>
+                            </page>
+                        </notebook>
                     </group>
-
                 </form>
             </field>
         </record>

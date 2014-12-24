@@ -13,7 +13,6 @@ class Plan(models.Model):
     _inherit = 'school.timetable.cell.abstract'
 
     start_date = fields.Date('Start Date')
-    end_date = fields.Date('End Date')
 
     start_datetime = fields.Datetime('Start Datetime', compute='_compute_plan_datetimes')
     end_datetime = fields.Datetime('End Datetime', compute='_compute_plan_datetimes')
@@ -28,12 +27,11 @@ class Plan(models.Model):
         self.color_partner_id = self.teacher.partner_id.id
 
     @api.multi
-    @api.depends('lesson_type', 'lesson', 'start_date', 'end_date')
+    @api.depends('lesson_type', 'lesson', 'start_date')
     def _compute_plan_datetimes(self):
         for plan in self:
             plan.start_datetime = self._get_lesson_time(plan.start_date, plan.lesson, 'start_date', plan.lesson_type, )
-            plan.end_datetime = self._get_lesson_time(plan.end_date, plan.lesson, 'end_date', plan.lesson_type, )
-            # plan.start_datetime = None
+            plan.end_datetime = self._get_lesson_time(plan.start_date, plan.lesson, 'end_date', plan.lesson_type, )
 
     @api.model
     def _get_lesson_time(self, origin_date, lesson, field, type):
