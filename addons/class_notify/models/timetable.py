@@ -1,4 +1,5 @@
 # coding=utf-8
+from openerp.osv import osv
 from openerp.tools import DEFAULT_SERVER_DATE_FORMAT
 
 __author__ = 'cysnake4713'
@@ -42,24 +43,25 @@ class Curriculum(models.Model):
     plan_ids = fields.Many2many('school.timetable.plan', 'timetable_plan_rel', 'timetable_id', 'plan_id', string='Plans')
 
 
-    @api.multi
+    @api.one
     def button_generate_plans(self):
         week_map = {"Monday": 0, "Tuesday": 1,
                     "Wednesday": 2, "Thursday": 3,
                     "Friday": 4, "Saturday": 5, "Sunday": 6}
-        for timetable in self:
-            week_dict = self._get_date_week_dict(timetable.semester_id.start_date, timetable.semester_id.end_date)
-            for cell in self.cell_ids:
-                value = self.pool['school.timetable.cell'].copy_data(self.env.cr, self.env.uid, cell.id, context={})
-                value['lesson_type'] = timetable.initial_lesson_type
-                del (value['week'])
-                del (value['timetable_id'])
-                plan_ids = []
-                for target_date in week_dict[week_map[cell.week]]:
-                    value['start_date'] = target_date.strftime(DEFAULT_SERVER_DATE_FORMAT)
-                    # plan_ids += [self.env['school.timetable.plan'].create(value).id]
-                    plan_ids += [timetable.plan_ids.create(value).id]
-                timetable.plan_ids = plan_ids
+        if self.plan_ids:
+            raise osv.except_osv(_('Warning'), _('Current timetable already have plans!'))
+
+        week_dict = self._get_date_week_dict(self.semester_id.start_date, self.semester_id.end_date)
+        for cell in self.cell_ids:
+            value = self.pool['school.timetable.cell'].copy_data(self.env.cr, self.env.uid, cell.id, context={})
+            value['lesson_type'] = self.initial_lesson_type
+            del (value['week'])
+            del (value['timetable_id'])
+            plan_ids = []
+            for target_date in week_dict[week_map[cell.week]]:
+                value['start_date'] = target_date.strftime(DEFAULT_SERVER_DATE_FORMAT)
+                plan_ids += [self.plan_ids.create(value).id]
+            self.plan_ids = plan_ids
         return True
 
     @staticmethod
@@ -91,6 +93,7 @@ class TypeChangeWizard(models.TransientModel):
     @api.one
     def button_save(self):
         timetable = self.env['school.timetable'].browse(self.env.context['active_id'])
+        timetable.initial_lesson_type = self.lesson_type
         plan_ids = timetable.plan_ids.filtered(lambda record: record.start_date >= self.start_date)
         plan_ids.write({'lesson_type': self.lesson_type})
         return True
