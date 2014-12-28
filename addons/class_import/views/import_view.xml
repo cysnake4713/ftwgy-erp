@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+        <record id="action_school_timetable_import" model="ir.actions.act_window">
+            <field name="name">课表导入</field>
+            <field name="res_model">school.timetable.import</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+        <record id="view_school_timetable_import_form" model="ir.ui.view">
+            <field name="name">view.school.timetable.import.form</field>
+            <field name="model">school.timetable.import</field>
+            <field name="arch" type="xml">
+                <form>
+                    <field name="data"/>
+                    <footer>
+                        <button string="导入" name="button_import" type="object"/>
+                        or
+                        <button string="取消" special="cancel" class="oe_link"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_school_timetable_form_inherit" model="ir.ui.view">
+            <field name="name">view.school.timetable.form.import.inherit</field>
+            <field name="model">school.timetable</field>
+            <field name="inherit_id" ref="class_notify.view_school_timetable_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//header" position="inside">
+                    <button name="%(action_school_timetable_import)d" type="action" string="导入课表信息"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</openerp>
