@@ -11,6 +11,7 @@ class Subject(models.Model):
     _name = 'school.subject'
 
     name = fields.Char('Name', required=True)
+    short_name = fields.Char('Short Name')
 
     _sql_constraints = [('school_subject_unique', 'unique(name)', _('name must be unique !'))]
 
@@ -31,8 +32,6 @@ class Lesson(models.Model):
     summer_end_time = fields.Datetime('Summer End Time', required=True)
     winter_start_time = fields.Datetime('Winter Start Time', required=True)
     winter_end_time = fields.Datetime('Winter End Time', required=True)
-
-
 
 
 class Semester(models.Model):
