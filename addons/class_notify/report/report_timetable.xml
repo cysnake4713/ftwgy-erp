@@ -2,8 +2,9 @@
 <openerp>
     <data>
         <template id="report_timetable">
-            <t t-call="report.html_container">
-                <!--<t t-call="report.internal_layout">-->
+            <t t-set="body_classname" t-value="'container'"/>
+            <t t-call="report.layout">
+                <t t-call="report.internal_layout">
                     <div class="page">
                         <h2>课程总表</h2>
                         <table class="table table-bordered">
@@ -31,10 +32,16 @@
                                     </t>
                                 </tr>
                             </t>
-
                         </table>
                     </div>
-                <!--</t>-->
+                </t>
+                <t t-set="head">
+                    <style type="text/css">
+                        body.container {
+                            width:2500px !important
+                        }
+                    </style>
+                </t>
             </t>
         </template>
     </data>

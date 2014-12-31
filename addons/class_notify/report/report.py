@@ -24,22 +24,32 @@ class Timetable(report_sxw.rml_parse):
         lesson_obj = self.pool['school.lesson']
         self.lessons = lesson_obj.browse(self.cr, self.uid, lesson_obj.search(self.cr, self.uid, [], order='name'), context=self.localcontext)
 
+        cell_obj = self.pool['school.timetable.cell']
+        cells = cell_obj.search_read(self.cr, self.uid, [('timetable_id', 'in', self.ids)], ['classroom', 'week', 'lesson', 'subject', 'teacher'],
+                                     context=self.localcontext)
+        lesson_map = {}
+        for cell in cells:
+            lesson_map[(cell['classroom'][0], cell['week'], cell['lesson'][0])] = (
+                cell['subject'][1] if 'subject' in cell else '',
+                cell['teacher'][1] if 'teacher' in cell else '',)
+
         self.localcontext.update({
             'classrooms': self.classrooms,
             'weeks': self.weeks,
             'lessons': self.lessons,
+            'lesson_map': lesson_map,
             'get_lesson_detail': self._get_lesson_detail,
+
         })
         return super(Timetable, self).set_context(objects, data, ids, report_type=report_type)
 
     def _get_lesson_detail(self, week, lesson, classroom):
-        cell_obj = self.pool['school.timetable.cell']
-        cell_id = cell_obj.search(self.cr, self.uid, [
-            ('timetable_id', 'in', self.ids), ('classroom', '=', classroom.id),
-            ('week', '=', week), ('lesson', '=', lesson.id)
-        ])
-        cell = cell_obj.browse(self.cr, self.uid, cell_id, self.localcontext)
-        return '%s<br/>%s' % (cell.subject.name if cell.subject else '', cell.teacher.name if cell.teacher else '')
+        lesson_map = self.localcontext['lesson_map']
+        if (classroom.id, week, lesson.id) in lesson_map:
+            detail = lesson_map[(classroom.id, week, lesson.id)]
+            return '%s<br/>%s' % (detail[0], detail[1])
+        else:
+            return None
 
 
 class ReportTimetable(models.AbstractModel):
