@@ -18,16 +18,18 @@ class TimetableImport(models.TransientModel):
     message = fields.Html('Error Message')
     timetable_id = fields.Integer('Timetable Id')
     state = fields.Selection([('draft', 'Draft'), ('finish', 'Finish')], 'State')
+    code = fields.Selection([('utf-8', 'UTF-8'), ('gbk', 'GBK')], 'Code', required=True)
 
     _defaults = {
         'state': 'draft',
+        'code': 'gbk',
     }
 
     @staticmethod
     def _get_head(datas):
-        week_map = dict([(u"星期一", "Monday"), ( u"星期二", "Tuesday"),
-                         ( u"星期三", "Wednesday"), ( u"星期四", "Thursday"),
-                         ( u"星期五", "Friday"), ( u"星期六", "Saturday"), ( u"星期日", "Sunday")])
+        week_map = dict([(u"星期一", "Monday"), (u"星期二", "Tuesday"),
+                         (u"星期三", "Wednesday"), (u"星期四", "Thursday"),
+                         (u"星期五", "Friday"), (u"星期六", "Saturday"), (u"星期日", "Sunday")])
         head_map = {}
         head_week = datas.next()
         head_lesson = datas.next()
@@ -54,7 +56,7 @@ class TimetableImport(models.TransientModel):
         return results, import_fields
 
     @staticmethod
-    def _read_csv(record):
+    def _read_csv(record, encoding):
         """ Returns a CSV-parsed iterator of all empty lines in the file
 
         :throws csv.Error: if an error is detected during CSV parsing
@@ -63,7 +65,6 @@ class TimetableImport(models.TransientModel):
         csv_iterator = csv.reader(
             StringIO.StringIO(record))
         csv_nonempty = itertools.ifilter(None, csv_iterator)
-        encoding = 'utf-8'
         return itertools.imap(
             lambda row: [item.decode(encoding) for item in row],
             csv_nonempty)
@@ -74,8 +75,11 @@ class TimetableImport(models.TransientModel):
             self[0].timetable_id = self.env.context['timetable_id']
         if self.env['school.timetable'].browse(self[0].timetable_id).cell_ids:
             raise exceptions.Warning(_('Already Have Cells, if what redo import, please delete current cells and import again.'))
-        datas = self._read_csv(base64.decodestring(self[0].data))
-        data, import_fields = self._convert_import_data(datas, self[0].timetable_id)
+        try:
+            datas = self._read_csv(base64.decodestring(self[0].data), self[0].code)
+            data, import_fields = self._convert_import_data(datas, self[0].timetable_id)
+        except UnicodeDecodeError:
+            raise exceptions.Warning(_('Code Error, please select correct code to import file.'))
 
         _logger.info('importing %d rows...', len(data))
         self.env.cr.execute('SAVEPOINT import')

@@ -17,6 +17,7 @@
                 <form>
                     <field name="state" invisible="1"/>
                     <group>
+                        <field name="code"/>
                         <field string="文件上传" name="data"/>
                         <field string="结果" name="message" readonly="1" colspan="2"/>
                     </group>
