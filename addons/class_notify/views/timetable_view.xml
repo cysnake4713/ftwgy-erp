@@ -66,9 +66,6 @@
                                 </tree>
                             </field>
                             </page>
-                            <page string="上课计划">
-                                <field name="plan_ids"/>
-                            </page>
                         </notebook>
                     </group>
                 </form>

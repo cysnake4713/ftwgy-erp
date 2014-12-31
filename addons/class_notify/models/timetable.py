@@ -57,11 +57,9 @@ class Curriculum(models.Model):
             value['lesson_type'] = self.initial_lesson_type
             del (value['week'])
             del (value['timetable_id'])
-            plan_ids = []
             for target_date in week_dict[week_map[cell.week]]:
                 value['start_date'] = target_date.strftime(DEFAULT_SERVER_DATE_FORMAT)
-                plan_ids += [self.plan_ids.create(value).id]
-            self.plan_ids = plan_ids
+                self.write({'plan_ids': [(0, 0, value)]})
         return True
 
     @staticmethod

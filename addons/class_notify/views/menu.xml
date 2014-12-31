@@ -13,7 +13,7 @@
             <field name="name">所有上课提醒</field>
             <field name="res_model">school.timetable.plan</field>
             <field name="view_type">form</field>
-            <field name="view_mode">calendar,tree,form</field>
+            <field name="view_mode">tree,form</field>
             <field name="target">current</field>
         </record>
 

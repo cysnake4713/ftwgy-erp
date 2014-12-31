@@ -20,7 +20,12 @@
             <field name="model">school.timetable.plan</field>
             <field name="arch" type="xml">
                 <tree>
+                    <field name="classroom"/>
+                    <field name="subject"/>
+                    <field name="teacher"/>
+                    <field name="lesson_type"/>
                     <field name="start_date"/>
+                    <field name="lesson"/>
                 </tree>
             </field>
         </record>
