@@ -46,6 +46,7 @@
                     <header>
                         <button name="button_generate_plans" type="object" string="生成上课提醒" class="oe_highlight"/>
                         <button name="button_clear_plans" type="object" string="清除上课计划"/>
+                        <button name="button_clear_cells" type="object" string="清除课表信息"/>
                         <button name="%(action_school_timetable_wizard)d" type="action" string="更新课程时刻类型"/>
                     </header>
                     <group col="1">

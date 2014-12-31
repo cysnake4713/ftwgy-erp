@@ -4,7 +4,7 @@ from openerp.tools import DEFAULT_SERVER_DATE_FORMAT
 
 __author__ = 'cysnake4713'
 from openerp import tools
-from openerp import models, fields, api
+from openerp import models, fields, api, exceptions
 from openerp.tools.translate import _
 from dateutil import rrule, parser
 
@@ -80,6 +80,14 @@ class Curriculum(models.Model):
     def button_clear_plans(self):
         for timetable in self:
             timetable.plan_ids.unlink()
+        return True
+
+    @api.multi
+    def button_clear_cells(self):
+        for timetable in self:
+            if timetable.plan_ids:
+                raise exceptions.Warning(_('Timetable have plans, please delete plans before delete the timetable.'))
+            timetable.cell_ids.unlink()
         return True
 
 

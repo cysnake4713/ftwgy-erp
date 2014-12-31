@@ -22,9 +22,8 @@
                     </group>
                     <footer>
                         <button string="导入" name="button_import" type="object" class="oe_highlight" states="draft"/>
-                        <button string="关闭" special="cancel" states="finish"/>
                         or
-                        <button string="取消" special="cancel" class="oe_link"/>
+                        <button string="关闭" special="cancel" class="oe_link"/>
                     </footer>
                 </form>
             </field>
