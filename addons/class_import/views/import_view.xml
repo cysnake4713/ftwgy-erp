@@ -7,6 +7,7 @@
             <field name="view_type">form</field>
             <field name="view_mode">form</field>
             <field name="target">new</field>
+            <field name="context">{'timetable_id':active_id}</field>
         </record>
 
         <record id="view_school_timetable_import_form" model="ir.ui.view">
@@ -14,9 +15,14 @@
             <field name="model">school.timetable.import</field>
             <field name="arch" type="xml">
                 <form>
-                    <field name="data"/>
+                    <field name="state" invisible="1"/>
+                    <group>
+                        <field string="文件上传" name="data"/>
+                        <field string="结果" name="message" readonly="1" colspan="2"/>
+                    </group>
                     <footer>
-                        <button string="导入" name="button_import" type="object"/>
+                        <button string="导入" name="button_import" type="object" class="oe_highlight" states="draft"/>
+                        <button string="关闭" special="cancel" states="finish"/>
                         or
                         <button string="取消" special="cancel" class="oe_link"/>
                     </footer>

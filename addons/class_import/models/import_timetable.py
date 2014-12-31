@@ -7,7 +7,7 @@ import itertools
 __author__ = 'cysnake4713'
 import csv
 from openerp import tools
-from openerp import models, fields, api
+from openerp import models, fields, api, exceptions
 from openerp.tools.translate import _, _logger
 
 
@@ -16,6 +16,12 @@ class TimetableImport(models.TransientModel):
 
     data = fields.Binary('Data')
     message = fields.Html('Error Message')
+    timetable_id = fields.Integer('Timetable Id')
+    state = fields.Selection([('draft', 'Draft'), ('finish', 'Finish')], 'State')
+
+    _defaults = {
+        'state': 'draft',
+    }
 
     @staticmethod
     def _get_head(datas):
@@ -62,15 +68,29 @@ class TimetableImport(models.TransientModel):
             lambda row: [item.decode(encoding) for item in row],
             csv_nonempty)
 
-    @api.one
+    @api.multi
     def button_import(self):
-        self.env.cr.execute('SAVEPOINT import')
-        datas = self._read_csv(base64.decodestring(self.data))
-        data, import_fields = self._convert_import_data(datas, self.env.context['active_id'])
+        if not self[0].timetable_id:
+            self[0].timetable_id = self.env.context['timetable_id']
+        if self.env['school.timetable'].browse(self[0].timetable_id).cell_ids:
+            raise exceptions.Warning(_('Already Have Cells, if what redo import, please delete current cells and import again.'))
+        datas = self._read_csv(base64.decodestring(self[0].data))
+        data, import_fields = self._convert_import_data(datas, self[0].timetable_id)
 
         _logger.info('importing %d rows...', len(data))
+        self.env.cr.execute('SAVEPOINT import')
         results = self.pool['school.timetable.cell'].load(self.env.cr, self.env.uid, import_fields, data, context=self.env.context)
-        if results:
-            print
-        _logger.info('done')
-        self.env.cr.execute('RELEASE SAVEPOINT import')
+        if results and results['messages']:
+            messages = ['<p style="color:red">%s</p>' % r['message'] for r in results['messages']]
+            _logger.info('Error occur during import!')
+            self.env.cr.execute('ROLLBACK TO SAVEPOINT import')
+            self.message = ''.join(messages)
+        else:
+            self.env.cr.execute('RELEASE SAVEPOINT import')
+            self.message = '<p style="color: green">%s</p>' % u'成功'
+            self.state = 'finish'
+            _logger.info('done')
+
+        res = self.env['ir.actions.act_window'].for_xml_id('class_import', 'action_school_timetable_import')
+        res['res_id'] = self[0].id
+        return res
