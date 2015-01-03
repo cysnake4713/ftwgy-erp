@@ -3,7 +3,7 @@ import datetime
 
 __author__ = 'cysnake4713'
 from openerp import tools
-from openerp import models, fields, api
+from openerp import models, fields, api, exceptions
 from openerp.tools.translate import _
 from openerp.tools import DEFAULT_SERVER_DATETIME_FORMAT
 
@@ -49,3 +49,44 @@ class Plan(models.Model):
             else:
                 return None
             return datetime.datetime.strptime(origin_date + ' ' + target_time, DEFAULT_SERVER_DATETIME_FORMAT)
+
+    @api.multi
+    @api.depends('start_date', 'lesson', 'teacher', 'classroom', 'subject')
+    def name_get(self):
+        result = []
+        for plan in self:
+            result.append(
+                (plan.id, u'(%s 第%s节)%s %s %s' % (plan.start_date, plan.lesson.name, plan.teacher.name, plan.classroom.name, plan.subject.name)))
+        return result
+
+
+class PlanWizard(models.TransientModel):
+    _name = 'school.timetable.plan.switch.wizard'
+
+    origin_plan = fields.Many2one('school.timetable.plan', 'Origin Plan')
+    target_plan = fields.Many2one('school.timetable.plan', 'Target Plan')
+
+    # origin_date = fields.Date('Origin Date', required=True)
+    # origin_classroom = fields.Many2one('school.classroom', 'Origin Classroom', required=True)
+    # origin_lesson = fields.Many2one('school.lesson', 'Origin Lesson', required=True)
+    # origin_teacher = fields.Many2one('res.users', 'Origin Teacher', required=True)
+    # origin_subject = fields.Many2one('school.subject', 'Origin Subject', required=True)
+    #
+    # target_date = fields.Date('Target Date', required=True)
+    # target_classroom = fields.Many2one('school.classroom', 'Target Classroom', required=True)
+    # target_lesson = fields.Many2one('school.lesson', 'Target Lesson', required=True)
+    # target_teacher = fields.Many2one('res.users', 'Target Teacher', required=True)
+    # target_subject = fields.Many2one('school.subject', 'Target Subject', required=True)
+
+    @api.multi
+    def button_switch_plan(self):
+        if not (self.origin_plan or self.target_plan):
+            raise exceptions.Warning(_('Must have both Origin Plan and Target Plan!'))
+
+        temp_teacher = self.origin_plan.teacher
+        temp_subject = self.origin_plan.subject
+        self.origin_plan.teacher = self.target_plan.teacher
+        self.origin_plan.subject = self.target_plan.subject
+        self.target_plan.teacher = temp_teacher
+        self.target_plan.subject = temp_subject
+        return True

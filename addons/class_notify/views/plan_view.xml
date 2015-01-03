@@ -20,12 +20,12 @@
             <field name="model">school.timetable.plan</field>
             <field name="arch" type="xml">
                 <tree>
+                    <field name="start_date"/>
+                    <field name="lesson"/>
                     <field name="classroom"/>
                     <field name="subject"/>
                     <field name="teacher"/>
                     <field name="lesson_type"/>
-                    <field name="start_date"/>
-                    <field name="lesson"/>
                 </tree>
             </field>
         </record>
@@ -42,11 +42,43 @@
                             <field name="subject"/>
                             <field name="classroom"/>
                             <field name="lesson"/>
-                            <field name="lesson_type"/>
                             <field name="start_datetime"/>
                             <field name="end_datetime"/>
+                            <field name="lesson_type"/>
                         </group>
                     </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_school_plan_switch_form" model="ir.ui.view">
+            <field name="name">school.timetable.plan.switch.wizard.form</field>
+            <field name="model">school.timetable.plan.switch.wizard</field>
+            <field name="arch" type="xml">
+                <form>
+                    <group>
+                        <group string="原课程">
+                            <!--<field name="origin_date"/>-->
+                            <!--<field name="origin_lesson"/>-->
+                            <!--<field name="origin_classroom"/>-->
+                            <!--<field name="origin_subject"/>-->
+                            <!--<field name="origin_teacher"/>-->
+                            <field name="origin_plan" required="1"/>
+                        </group>
+                        <group string="换到">
+                            <!--<field name="target_date"/>-->
+                            <!--<field name="target_lesson"/>-->
+                            <!--<field name="target_classroom"/>-->
+                            <!--<field name="target_subject"/>-->
+                            <!--<field name="target_teacher"/>-->
+                            <field name="target_plan" required="1"/>
+                        </group>
+                        <footer>
+                            <button name="button_switch_plan" type="object" string="课程变换"/>
+                            or
+                            <button string="取消" special="cancel" class="oe_link"/>
+                        </footer>
+                    </group>
                 </form>
             </field>
         </record>

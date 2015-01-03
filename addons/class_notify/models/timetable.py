@@ -12,11 +12,11 @@ from dateutil import rrule, parser
 class CellAbstract(models.AbstractModel):
     _name = 'school.timetable.cell.abstract'
 
-    teacher = fields.Many2one('res.users')
+    teacher = fields.Many2one('res.users', 'Teacher')
     # 科目
-    subject = fields.Many2one('school.subject', required=True)
+    subject = fields.Many2one('school.subject', 'Subject', required=True)
     # 班级
-    classroom = fields.Many2one('school.classroom', required=True)
+    classroom = fields.Many2one('school.classroom', 'Classroom', required=True)
     # 第几节课
     lesson = fields.Many2one('school.lesson', 'Lesson', required=True)
 
