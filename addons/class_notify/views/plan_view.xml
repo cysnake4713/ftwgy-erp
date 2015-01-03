@@ -1,6 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <openerp>
     <data>
+        <record id="view_school_plan_search" model="ir.ui.view">
+            <field name="name">课程计划搜索</field>
+            <field name="model">school.timetable.plan</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="start_date"/>
+                    <field name="lesson"/>
+                    <field name="classroom"/>
+                    <field name="subject"/>
+                    <field name="teacher"/>
+                </search>
+            </field>
+        </record>
         <record id="view_school_plan_calendar" model="ir.ui.view">
             <field name="name">view.school.timetable.plan.calendar</field>
             <field name="model">school.timetable.plan</field>
