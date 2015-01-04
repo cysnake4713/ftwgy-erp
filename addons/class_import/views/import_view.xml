@@ -36,7 +36,7 @@
             <field name="inherit_id" ref="class_notify.view_school_timetable_form"/>
             <field name="arch" type="xml">
                 <xpath expr="//header" position="inside">
-                    <button name="%(action_school_timetable_import)d" type="action" string="导入课表信息"/>
+                    <button name="%(action_school_timetable_import)d" type="action" string="导入课表信息" groups="class_notify.group_class_admin"/>
                 </xpath>
             </field>
         </record>
