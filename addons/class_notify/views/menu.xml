@@ -57,27 +57,30 @@
             <field name="target">current</field>
         </record>
 
-        <menuitem id="menuitem_school_root" name="课程管理" sequence="51"/>
+        <menuitem id="menuitem_school_root" name="课程管理" sequence="51" groups="class_notify.group_class_user"/>
 
-        <menuitem id="menuitem_school_plan_manage" name="课程计划管理" parent='menuitem_school_root' sequence="10"/>
+        <menuitem id="menuitem_school_plan_manage" name="课程计划管理" parent='menuitem_school_root' sequence="10" groups="class_notify.group_class_user"/>
         <menuitem id="menuitem_school_plan_all" name="课程计划" parent="menuitem_school_plan_manage" sequence="10"
                   action="action_school_plan_all"/>
         <menuitem id="menuitem_school_plan_switch" name="课程计划变更" parent="menuitem_school_plan_manage" sequence="15"
+                  groups="class_notify.group_class_admin"
                   action="action_school_plan_switch"/>
 
-        <menuitem id="menuitem_school_timetable_manage" name="课表管理" parent='menuitem_school_root' sequence="20"/>
+        <menuitem id="menuitem_school_timetable_manage" name="课表管理" parent='menuitem_school_root' sequence="20"
+                  groups="class_notify.group_class_admin"/>
         <menuitem id="menuitem_school_timetable_all" name="课表" parent="menuitem_school_timetable_manage" sequence="10"
                   action="action_school_timetable_all"/>
 
-        <menuitem id="menuitem_school_config" name="设置" parent='menuitem_school_root' sequence="50"/>
-
-        <menuitem id="menuitem_school_config_base" name="基础数据" parent="menuitem_school_config" sequence="10"/>
-        <menuitem id="menuitem_school_config_semester" name="学期" parent="menuitem_school_config_base" sequence="5"
+        <menuitem id="menuitem_school_config" name="设置" parent='menuitem_school_root' sequence="50" groups="class_notify.group_class_admin"/>
+        <menuitem id="menuitem_school_config_semester" name="学期" parent="menuitem_school_config" sequence="5"
                   action="action_school_semester_config"/>
-        <menuitem id="menuitem_school_config_subject" name="科目" parent="menuitem_school_config_base" sequence="15"
-                  action="action_school_subject_config"/>
         <menuitem id="menuitem_school_config_classroom" name="班级" parent="menuitem_school_config_base" sequence="20"
                   action="action_school_classroom_config"/>
+
+        <menuitem id="menuitem_school_config_base" name="基础数据" parent="menuitem_school_config" sequence="10"/>
+        <menuitem id="menuitem_school_config_subject" name="科目" parent="menuitem_school_config_base" sequence="15"
+                  action="action_school_subject_config"/>
+
         <menuitem id="menuitem_school_config_lesson" name="节数" parent="menuitem_school_config_base" sequence="25"
                   action="action_school_lesson_config"/>
 

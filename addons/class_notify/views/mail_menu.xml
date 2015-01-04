@@ -10,7 +10,7 @@
             <field name="domain">[('teacher','=',uid)]</field>
         </record>
 
-        <menuitem id="menuitem_mail_timetable_plan" name="课程" parent="mail.mail_feeds_main" sequence="11" groups="base.group_user"/>
+        <menuitem id="menuitem_mail_timetable_plan" name="课程" parent="mail.mail_feeds_main" sequence="11" groups="class_notify.group_class_user"/>
         <menuitem id="menuitem_mail_personal_timetable_plan" name="我的课程" parent="menuitem_mail_timetable_plan" sequence="10"
                   action="action_my_personal_timetable_plan" />
     </data>

@@ -92,7 +92,7 @@
                             <field name="target_plan" required="1"/>
                         </group>
                         <footer>
-                            <button name="button_switch_plan" type="object" string="课程变换"/>
+                            <button name="button_switch_plan" type="object" string="课程变换" groups="class_notify.group_class_admin"/>
                             or
                             <button string="取消" special="cancel" class="oe_link"/>
                         </footer>

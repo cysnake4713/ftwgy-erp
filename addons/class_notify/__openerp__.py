@@ -10,6 +10,9 @@ Class Nofity""",
     'website': 'http://odoosoft.com',
     'depends': ['base', 'report'],
     'data': [
+        'security/security.xml',
+        'security/ir.model.access.csv',
+
         'report/report.xml',
         'report/report_timetable.xml',
         'views/timetable_view.xml',
@@ -18,6 +21,7 @@ Class Nofity""",
         'views/menu.xml',
         'views/mail_menu.xml',
         'views/templates.xml',
+
     ],
     'qweb': [
         'static/src/xml/*.xml',
