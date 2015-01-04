@@ -11,6 +11,11 @@
                     <field name="classroom"/>
                     <field name="subject"/>
                     <field name="teacher"/>
+                    <group expand="0" string="Group By">
+                        <filter string="班级" icon="terp-folder-orange" context="{'group_by':'classroom'}"/>
+                        <filter string="课程" icon="terp-folder-orange" context="{'group_by':'subject'}"/>
+                        <filter string="老师" icon="terp-folder-orange" context="{'group_by':'teacher'}"/>
+                    </group>
                 </search>
             </field>
         </record>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+        <template id="assets_backend" name="account assets" inherit_id="web.assets_backend">
+            <xpath expr="." position="inside">
+                <!--<link rel="stylesheet" href="/account/static/src/css/account_bank_statement_reconciliation.css"/>-->
+                <script type="text/javascript" src="/class_notify/static/src/js/plan.js"></script>
+            </xpath>
+        </template>
+    </data>
+</openerp>

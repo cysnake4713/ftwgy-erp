@@ -17,6 +17,7 @@ Class Nofity""",
         'views/config_view.xml',
         'views/menu.xml',
         'views/mail_menu.xml',
+        'views/templates.xml',
     ],
     'qweb': [
         'static/src/xml/*.xml',
