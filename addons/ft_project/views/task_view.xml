@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+        <record id="view_task_form2_inherit" model="ir.ui.view">
+            <field name="name">project.task.form.inherit</field>
+            <field name="model">project.task</field>
+            <field name="inherit_id" ref="project.view_task_form2"/>
+            <field name="arch" type="xml">
+                <field name="user_id" position="before">
+                    <field name="department_id"/>
+                </field>
+                <field name="user_id" position="attributes">
+                    <attribute name="domain">[('department_id','=',department_id)]</attribute>
+                </field>
+                <xpath expr="//page[@string='Extra Info']" position="replace"/>
+                <xpath expr="//tree/field[@name='effective_hours']" position="replace"/>
+                <xpath expr="//tree/field[@name='progress']" position="replace"/>
+                <xpath expr="//tree/field[@name='remaining_hours']" position="replace"/>
+            </field>
+        </record>
+
+        <record id="view_task_tree2_inherit" model="ir.ui.view">
+            <field name="name">roject.task.tree.inherit</field>
+            <field name="model">project.task</field>
+            <field name="inherit_id" ref="project.view_task_tree2"/>
+            <field name="arch" type="xml">
+                <field name="progress" position="replace">
+                    <field name="date_deadline"/>
+                </field>
+                <field name="date_deadline" position="replace"/>
+            </field>
+        </record>
+
+        <record id="view_task_kanban_inherit" model="ir.ui.view">
+            <field name="name">project.task.kanban.inherit</field>
+            <field name="model">project.task</field>
+            <field name="inherit_id" ref="project.view_task_kanban"/>
+            <field name="arch" type="xml">
+                <field name="categ_ids" position="after">
+                    <field name="department_id"/>
+                </field>
+                <field name="project_id" position="before">
+                    <span style="color:green">
+                        <field name="department_id"/>
+                    </span>
+                    <br/>
+                </field>
+            </field>
+        </record>
+    </data>
+</openerp>

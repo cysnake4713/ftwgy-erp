@@ -12,16 +12,13 @@
             <field name="context">{'search_default_Current': 1}</field>
         </record>
 
-        <record id="action_project_department" model="ir.actions.act_window">
-            <field name="name">部门管理</field>
-            <field name="res_model">hr.department</field>
-            <field name="view_type">form</field>
-            <field name="view_mode">tree</field>
-            <field name="target">current</field>
+        <record id="project.action_view_task" model="ir.actions.act_window">
+            <field name="name">Tasks</field>
+            <field name="res_model">project.task</field>
+            <field name="view_mode">kanban,tree,form,calendar,graph</field>
+            <field name="search_view_id" ref="project.view_task_search_form"/>
         </record>
 
 
-        <menuitem id="menuitem_project_department_config" name="部门" parent="base.menu_definitions" sequence="50" groups="base.group_no_one"
-                  action="action_project_department"/>
     </data>
 </openerp>

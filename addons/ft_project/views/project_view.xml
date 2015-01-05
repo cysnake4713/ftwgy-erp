@@ -1,16 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <openerp>
     <data>
-        <record id="view_hr_department_tree" model="ir.ui.view">
-            <field name="name">hr.department.tree</field>
-            <field name="model">hr.department</field>
-            <field name="arch" type="xml">
-                <tree editable="top">
-                    <field name="name"/>
-                </tree>
-            </field>
-        </record>
-
         <record id="view_project_tree_inherit" model="ir.ui.view">
             <field name="name">project.project.tree.inherit</field>
             <field name="model">project.project</field>
@@ -51,10 +41,10 @@
                     <field name="department_id"/>
                 </field>
                 <xpath expr="//div[@class='oe_kanban_project_list']" position="before">
-                    <p>部门:
+                    <p style="color:green">
                         <field name="department_id" class="oe_inline"/>
                     </p>
-                    <p>负责人:
+                    <p>
                         <field name="user_id" class="oe_inline"/>
                     </p>
                 </xpath>

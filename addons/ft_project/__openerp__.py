@@ -1,16 +1,17 @@
 # -*- coding: utf-8 -*-
 {
-    'name': 'UPDIS HR Module',
+    'name': 'FTWGY Project Module',
     'version': '0.2',
-    'category': 'updis',
+    'category': 'project',
     'complexity': "easy",
     'description': """
-UPDIS HR """,
+FTWGY Project Module """,
     'author': 'Matt Cai',
     'website': 'http://odoosoft.com',
-    'depends': ['base', 'project'],
+    'depends': ['base', 'project', 'ft_department'],
     'data': [
         'views/project_view.xml',
+        'views/task_view.xml',
         'views/menu.xml',
     ],
     'qweb': [
