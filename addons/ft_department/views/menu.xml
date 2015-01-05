@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+
+        <record id="action_project_department" model="ir.actions.act_window">
+            <field name="name">部门管理</field>
+            <field name="res_model">hr.department</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree</field>
+            <field name="target">current</field>
+        </record>
+
+        <menuitem id="menuitem_project_department_config" name="部门" parent="base.menu_users" sequence="50" groups="base.group_no_one"
+                  action="action_project_department"/>
+    </data>
+</openerp>
