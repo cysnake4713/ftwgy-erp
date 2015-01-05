@@ -17,6 +17,7 @@
                 <field name="state" position="after">
                     <field name="date_start" string="Start Date"/>
                     <field name="date" string="End Date"/>
+                    <field name="task_process" widget="progressbar"/>
                 </field>
             </field>
         </record>

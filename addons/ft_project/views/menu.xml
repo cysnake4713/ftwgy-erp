@@ -19,6 +19,30 @@
             <field name="search_view_id" ref="project.view_task_search_form"/>
         </record>
 
+         <record id="project.act_project_project_2_project_task_all" model="ir.actions.act_window">
+            <field name="name">Tasks</field>
+            <field name="res_model">project.task</field>
+            <field name="view_mode">kanban,tree,form,calendar,graph</field>
+            <field name="context">{
+                'search_default_project_id': [active_id],
+                'default_project_id': active_id,
+                'active_test': False,
+            }</field>
+            <field name="search_view_id" ref="project.view_task_search_form"/>
+        </record>
+
+        <record id="project.dblc_proj" model="ir.actions.act_window">
+            <field name="res_model">project.task</field>
+            <field name="name">Project's tasks</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form,calendar,graph,kanban</field>
+            <field name="domain">[('project_id', 'child_of', [active_id])]</field>
+            <field name="context">{'project_id':active_id, 'active_test':False}</field>
+        </record>
+
+        <act_window context="{'search_default_user_id': [active_id], 'default_user_id': active_id}"
+                    id="project.act_res_users_2_project_task_opened" name="Assigned Tasks"
+                    res_model="project.task" src_model="res.users" view_mode="tree,form,calendar,graph" view_type="form"/>
 
     </data>
 </openerp>

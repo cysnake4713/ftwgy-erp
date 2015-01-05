@@ -16,6 +16,10 @@
                 <xpath expr="//tree/field[@name='effective_hours']" position="replace"/>
                 <xpath expr="//tree/field[@name='progress']" position="replace"/>
                 <xpath expr="//tree/field[@name='remaining_hours']" position="replace"/>
+                <field name="date_deadline" position="after">
+                    <field name="date_start"/>
+                    <field name="date_end"/>
+                </field>
             </field>
         </record>
 
@@ -44,6 +48,17 @@
                         <field name="department_id"/>
                     </span>
                     <br/>
+                </field>
+            </field>
+        </record>
+
+        <record id="view_task_type_edit_inherit" model="ir.ui.view">
+            <field name="name">project.task.type.form.inherit</field>
+            <field name="model">project.task.type</field>
+            <field name="inherit_id" ref="project.task_type_edit"/>
+            <field name="arch" type="xml">
+                <field name="sequence" position="after">
+                    <field name="is_end"/>
                 </field>
             </field>
         </record>
