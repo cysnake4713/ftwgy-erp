@@ -1,11 +1,12 @@
 # coding=utf-8
 import datetime
+import pytz
 
 __author__ = 'cysnake4713'
 from openerp import tools
 from openerp import models, fields, api, exceptions
 from openerp.tools.translate import _
-from openerp.tools import DEFAULT_SERVER_DATETIME_FORMAT
+from openerp.tools import DEFAULT_SERVER_DATE_FORMAT
 
 
 class Plan(models.Model):
@@ -39,16 +40,39 @@ class Plan(models.Model):
             return None
         else:
             if type == 'summer' and field == 'start_date':
-                target_time = lesson.summer_start_time.split(' ')[1]
+                target_time = lesson.summer_start_time
             elif type == 'summer' and field == 'end_date':
-                target_time = lesson.summer_end_time.split(' ')[1]
+                target_time = lesson.summer_end_time
             elif type == 'winter' and field == 'start_date':
-                target_time = lesson.winter_start_time.split(' ')[1]
+                target_time = lesson.winter_start_time
             elif type == 'winter' and field == 'end_date':
-                target_time = lesson.winter_end_time.split(' ')[1]
+                target_time = lesson.winter_end_time
             else:
                 return None
-            return datetime.datetime.strptime(origin_date + ' ' + target_time, DEFAULT_SERVER_DATETIME_FORMAT)
+            return self._utc_timestamp(datetime.datetime.strptime(origin_date, DEFAULT_SERVER_DATE_FORMAT) + datetime.timedelta(hours=target_time))
+
+    @api.model
+    def _utc_timestamp(self, timestamp):
+        """Returns the given timestamp converted to the client's timezone.
+           This method is *not* meant for use as a _defaults initializer,
+           because datetime fields are automatically converted upon
+           display on client side. For _defaults you :meth:`fields.datetime.now`
+           should be used instead.
+
+           :param datetime timestamp: naive datetime value (expressed in UTC)
+                                      to be converted to the client timezone
+           :rtype: datetime
+           :return: timestamp converted to timezone-aware datetime in context
+                    timezone
+        """
+        assert isinstance(timestamp, datetime.datetime), 'Datetime instance expected'
+        tz_name = self._context.get('tz') or self.env.user.tz
+        if tz_name:
+            utc = pytz.timezone('UTC')
+            context_tz = pytz.timezone(tz_name)
+            context_timestamp = context_tz.localize(timestamp, is_dst=False)  # UTC = no DST
+            return context_timestamp.astimezone(utc)
+        return timestamp
 
     @api.multi
     @api.depends('start_date', 'lesson', 'teacher', 'classroom', 'subject')

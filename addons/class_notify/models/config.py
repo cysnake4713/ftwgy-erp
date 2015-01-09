@@ -28,11 +28,10 @@ class Lesson(models.Model):
     _name = 'school.lesson'
 
     name = fields.Integer('Name', required=True)
-    summer_start_time = fields.Datetime('Summer Start Time', required=True)
-    summer_end_time = fields.Datetime('Summer End Time', required=True)
-    winter_start_time = fields.Datetime('Winter Start Time', required=True)
-    winter_end_time = fields.Datetime('Winter End Time', required=True)
-
+    summer_start_time = fields.Float('Summer Start Time', required=True)
+    summer_end_time = fields.Float('Summer End Time', required=True)
+    winter_start_time = fields.Float('Winter Start Time', required=True)
+    winter_end_time = fields.Float('Winter End Time', required=True)
 
 class Semester(models.Model):
     _name = 'school.semester'
