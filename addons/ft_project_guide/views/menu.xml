@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+        <record id="action_project_create_guide" model="ir.actions.act_window">
+            <field name="name">项目启动</field>
+            <field name="res_model">project.project.create.guide</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="target">current</field>
+        </record>
+
+        <record id="action_project_project_plan" model="ir.actions.act_window">
+            <field name="name">任务模板</field>
+            <field name="res_model">project.project.plan</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="target">current</field>
+        </record>
+
+        <menuitem id="menuitem_project_process_root" name="项目流程" parent="base.menu_main_pm" sequence="30"/>
+        <menuitem id="menuitem_project_create_guide" name="项目启动申请" parent="menuitem_project_process_root" sequence="20"
+                  action="action_project_create_guide"/>
+
+        <menuitem id="menuitem_project_process_config" name="项目流程配置" parent="base.menu_definitions" sequence="50"/>
+        <menuitem id="menuitem_project_create_config" name="项目启动" parent="menuitem_project_process_config" sequence="10"/>
+        <menuitem id="menuitem_project_create_plan" name="任务模板" parent="menuitem_project_create_config" sequence="10"
+                  action="action_project_project_plan"/>
+    </data>
+</openerp>
