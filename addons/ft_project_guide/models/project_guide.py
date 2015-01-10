@@ -26,6 +26,34 @@ class ProjectGuide(models.Model):
 
     }
 
+    # def onchange_plan_id(self, cr, uid, ids, plan_id, context=None):
+    # ret = {'value': {}}
+    #     if plan_id:
+    #         # clean old value
+    #         # if ids:
+    #         # guide = self.browse(cr, uid, ids[0], context=context)
+    #         # task_ids = [(2, t.id,) for t in guide.task_ids]
+    #         #     self.write(cr, uid, ids, {'task_ids': task_ids}, context=context)
+    #         plan = self.pool['project.project.plan'].browse(cr, uid, plan_id, context=context)
+    #         tasks = []
+    #         for task in plan.tasks:
+    #             task_value = self.pool['project.project.plan.task'].copy_data(cr, uid, task.id, context=context)
+    #             task_value['is_template'] = False
+    #             tasks += [(0, 0, task_value)]
+    #         ret['value'] = {'task_ids': [(5,)] + tasks}
+    #     return ret
+
+    # @api.onchange('plan_id')
+    @api.multi
+    def onchange_plan_id(self):
+        if self.plan_id:
+            self.task_ids.unlink()
+            new_tasks = self.plan_id.tasks.copy()
+            new_tasks.write({'is_template': False,
+                             'date_start': fields.Date.today()})
+            self.task_ids = [(6, 0, [t.id for t in new_tasks])]
+            # self.task_ids = [t.id for t in new_tasks]
+
 
 class TaskPlan(models.Model):
     _name = 'project.project.plan'
@@ -46,6 +74,7 @@ class TaskLine(models.Model):
     date_start = fields.Date('Date start')
     date_end = fields.Date('Date End')
     categ_ids = fields.Many2many('project.category', 'rel_plan_task_category', 'task_id', 'category_id', 'Categories')
+    is_template = fields.Boolean('Is Template')
 
     _defaults = {
         'date_start': lambda *a: fields.Date.today()
