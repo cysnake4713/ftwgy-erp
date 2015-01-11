@@ -21,6 +21,16 @@
                     <header>
                         <field name="state" readonly="1" widget="statusbar"/>
                     </header>
+                    <div>
+                        <group col="1">
+                            <group col="3">
+                                <field name="sign_template" nolabel="1"/>
+                                <button name="onchange_sign_template" type="object" string="使用此流程"/>
+                            </group>
+                            <label for="sign_group"/>
+                            <field name="sign_group" nolabel="1" readonly="1"/>
+                        </group>
+                    </div>
 
                     <sheet>
                         <div class="oe_title">
@@ -42,11 +52,11 @@
                         <group col="1">
 
                             <group col="3">
-                                <field name="plan_id" nolabel="1" on_change="1"/>
-                                <button name="onchange_plan_id" type="object" string="使用此模板"/>
+                                <field name="plan" nolabel="1"/>
+                                <button name="onchange_plan" type="object" string="使用此模板"/>
                             </group>
-                            <label for="task_ids"/>
-                            <field name="task_ids" widget="one2many" nolabel="1"/>
+                            <label for="tasks"/>
+                            <field name="tasks" widget="one2many" nolabel="1"/>
                         </group>
                     </sheet>
                 </form>
@@ -54,8 +64,8 @@
         </record>
 
         <record id="view_project_plan_task_tree" model="ir.ui.view">
-            <field name="name">view.project.project.plan.task.tree</field>
-            <field name="model">project.project.plan.task</field>
+            <field name="name">view.project.project.create.task.tree</field>
+            <field name="model">project.project.create.task</field>
             <field name="arch" type="xml">
                 <tree>
                     <field name="name"/>
@@ -70,8 +80,8 @@
         </record>
 
         <record id="view_project_plan_task_form" model="ir.ui.view">
-            <field name="name">view.project.project.plan.task.form</field>
-            <field name="model">project.project.plan.task</field>
+            <field name="name">view.project.project.create.task.form</field>
+            <field name="model">project.project.create.task</field>
             <field name="arch" type="xml">
                 <form>
                     <div class="oe_title">
@@ -104,8 +114,8 @@
         </record>
 
         <record id="view_project_plan_tree" model="ir.ui.view">
-            <field name="name">view.project.project.plan.tree</field>
-            <field name="model">project.project.plan</field>
+            <field name="name">view.project.project.create.plan.tree</field>
+            <field name="model">project.project.create.plan</field>
             <field name="arch" type="xml">
                 <tree>
                     <field name="name"/>
@@ -114,8 +124,8 @@
         </record>
 
         <record id="view_project_plan_form" model="ir.ui.view">
-            <field name="name">view.project.project.plan.form</field>
-            <field name="model">project.project.plan</field>
+            <field name="name">view.project.project.create.plan.form</field>
+            <field name="model">project.project.create.plan</field>
             <field name="arch" type="xml">
                 <form>
                     <group>
@@ -128,6 +138,45 @@
                         <newline/>
                     </group>
                 </form>
+            </field>
+        </record>
+
+        <record id="view_project_sign_template_tree" model="ir.ui.view">
+            <field name="name">view.project.project.create.sign.tree</field>
+            <field name="model">project.project.create.sign</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_project_sign_template_form" model="ir.ui.view">
+            <field name="name">view.project.project.create.sign.form</field>
+            <field name="model">project.project.create.sign</field>
+            <field name="arch" type="xml">
+               <form>
+                    <group>
+                        <field name="name"/>
+                    </group>
+                    <group>
+                        <label for="users"/>
+                        <newline/>
+                        <field name="users" nolabel="1"/>
+                        <newline/>
+                    </group>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_project_sign" model="ir.ui.view">
+            <field name="name">view.project.project.create.sign.group.tree</field>
+            <field name="model">project.project.create.sign.group</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="user"/>
+                    <field name="result"/>
+                </tree>
             </field>
         </record>
     </data>

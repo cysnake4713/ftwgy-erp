@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
 {
-    'name': 'Project Guide Module',
+    'name': 'Project Create Guide Module',
     'version': '0.2',
     'category': 'updis',
     'complexity': "easy",
     'description': """
-Project Guide Module""",
+Project Create Guide Module""",
     'author': 'Matt Cai',
     'website': 'http://odoosoft.com',
     'depends': ['base', 'ft_project'],

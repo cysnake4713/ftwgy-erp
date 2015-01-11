@@ -11,7 +11,15 @@
 
         <record id="action_project_project_plan" model="ir.actions.act_window">
             <field name="name">任务模板</field>
-            <field name="res_model">project.project.plan</field>
+            <field name="res_model">project.project.create.plan</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="target">current</field>
+        </record>
+
+        <record id="action_project_project_sign_template" model="ir.actions.act_window">
+            <field name="name">签字流程模板</field>
+            <field name="res_model">project.project.create.sign</field>
             <field name="view_type">form</field>
             <field name="view_mode">tree,form</field>
             <field name="target">current</field>
@@ -25,5 +33,8 @@
         <menuitem id="menuitem_project_create_config" name="项目启动" parent="menuitem_project_process_config" sequence="10"/>
         <menuitem id="menuitem_project_create_plan" name="任务模板" parent="menuitem_project_create_config" sequence="10"
                   action="action_project_project_plan"/>
+
+        <menuitem id="menuitem_project_create_sign_template" name="签字流程模板" parent="menuitem_project_create_config" sequence="20"
+                  action="action_project_project_sign_template"/>
     </data>
 </openerp>
