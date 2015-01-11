@@ -19,7 +19,14 @@
             <field name="arch" type="xml">
                 <form>
                     <header>
-                        <field name="state" readonly="1" widget="statusbar"/>
+                        <button name="button_draft" type="object" string="提交" class="oe_highlight" states="draft"/>
+                        <button name="button_select_approver" type="object" string="提交" class="oe_highlight" states="select_approver"/>
+                        <button name="button_approver_sign" type="object" string="审批通过" class="oe_highlight" states="approver_confirm"/>
+                        <button name="button_approver_reject" type="object" string="拒签" states="approver_confirm"/>
+                        <button name="create_project" type="object" string="启动项目"/>
+                        <button name="button_cancel" type="object" string="取消"/>
+
+                        <field name="state" readonly="1" widget="statusbar" statusbar_visible="draft,select_approver,approver_confirm,finished"/>
                     </header>
 
                     <div>
@@ -40,12 +47,27 @@
                                 <field name="name"/>
                             </h1>
                             <div name="options_active">
-                                <field name="is_create_project" class="oe_inline" style="display:inline-block !important"/>
-                                <label for="is_create_project" string="流程审批通过后创建项目"/>
+                                <field name="is_create_project" class="oe_inline"/>
+                                <label for="is_create_project" string="流程审批通过后创建项目" style="display:inline-block !important"/>
                             </div>
                         </div>
+                        <div class="oe_right">
+                            <p>相关项目:
+                                <field name="project_id" readonly="1" nolabel="1" class="oe_inline"/>
+                            </p>
+                        </div>
                         <notebook>
-                            <page string="项目信息">
+                            <page string="项目信息" col="1">
+                                <group>
+                                    <group>
+                                        <field name="department_id"/>
+                                        <field name="user_id" domain="[('department_id','=',department_id)]"/>
+                                    </group>
+                                    <group>
+                                        <field name="date_start"/>
+                                        <field name="date"/>
+                                    </group>
+                                </group>
                                 <group col="1">
                                     <field name="description" nolabel="1" placeholder="项目的说明信息...."/>
                                 </group>

@@ -22,6 +22,15 @@ class ProjectInherit(models.Model):
             project.task_process = finished / float(total) * 100 if total else 0
 
 
+class Analytic(models.Model):
+    _inherit = 'account.analytic.account'
+
+    @api.model
+    def create(self, vals):
+        rec = self.with_context({'mail_create_nolog': True})
+        return super(Analytic, rec).create(vals)
+
+
 class TaskInherit(models.Model):
     _inherit = 'project.task'
 

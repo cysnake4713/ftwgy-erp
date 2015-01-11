@@ -21,13 +21,13 @@ class TaskLine(models.Model):
     reviewer_id = fields.Many2one('res.users', 'Reviewer')
     description = fields.Text('Description')
     date_deadline = fields.Date('Deadline')
-    date_start = fields.Date('Date start')
-    date_end = fields.Date('Date End')
+    date_start = fields.Datetime('Date start')
+    date_end = fields.Datetime('Date End')
     categ_ids = fields.Many2many('project.category', 'rel_project_create_task_category', 'task_id', 'category_id', 'Categories')
     is_template = fields.Boolean('Is Template')
 
     _defaults = {
-        'date_start': lambda *a: fields.Date.today()
+        'date_start': lambda *a: fields.Datetime.now()
     }
 
 
