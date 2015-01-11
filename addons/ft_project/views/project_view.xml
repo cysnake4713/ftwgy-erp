@@ -67,6 +67,11 @@
                 <xpath expr="//group[@name='group_alias']" position="replace"/>
                 <xpath expr="//p" position="replace"/>
                 <xpath expr="//page[@string='Other Info']" position="replace"/>
+                <xpath expr="//page[@name='team']" position="before">
+                    <page string="项目简介">
+                        <field name="description" nolabel="1" placeholder="这里填写项目简介..."/>
+                    </page>
+                </xpath>
 
             </field>
         </record>

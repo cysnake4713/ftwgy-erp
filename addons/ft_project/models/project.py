@@ -11,6 +11,7 @@ class ProjectInherit(models.Model):
     department_id = fields.Many2one('hr.department', 'Department')
 
     task_process = fields.Float('Task Process', compute='_compute_task_process')
+    description = fields.Text('Description')
 
     @api.multi
     @api.depends('tasks.stage_id.is_end')
