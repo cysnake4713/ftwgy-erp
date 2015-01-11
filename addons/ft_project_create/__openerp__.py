@@ -10,6 +10,7 @@ Project Create Guide Module""",
     'website': 'http://odoosoft.com',
     'depends': ['base', 'ft_project'],
     'data': [
+        'views/create_config_view.xml',
         'views/create_guide_view.xml',
         'views/menu.xml',
     ],
