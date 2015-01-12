@@ -23,20 +23,20 @@
                         <button name="button_select_approver" type="object" string="提交" class="oe_highlight" states="select_approver"/>
                         <button name="button_approver_sign" type="object" string="审批通过" class="oe_highlight" states="approver_confirm"/>
                         <button name="button_approver_reject" type="object" string="拒签" states="approver_confirm"/>
-                        <button name="create_project" type="object" string="启动项目"/>
+
                         <button name="button_cancel" type="object" string="取消"/>
 
                         <field name="state" readonly="1" widget="statusbar" statusbar_visible="draft,select_approver,approver_confirm,finished"/>
                     </header>
 
-                    <div>
+                    <div states="select_approver,approver_confirm,finished,cancel">
                         <div class="oe_edit_only">
                             <p>审批流程选择：
                                 <field name="sign_template" nolabel="1" class="oe_inline"/>
                                 <button name="onchange_sign_template" type="object" string="使用"/>
                             </p>
                         </div>
-                        <label for="sign_group" string="参与审批人员"/>
+                        <label for="sign_group" string="审批人"/>
                         <field name="sign_group" nolabel="1"/>
                     </div>
 

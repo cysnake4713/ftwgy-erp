@@ -60,21 +60,23 @@ class ProjectGuide(models.Model):
 
     @api.multi
     def button_select_approver(self):
+        if not self.sign_group:
+            raise exceptions.Warning(_('No Approver Selected, Selected approver before apply.'))
         self.state = 'approver_confirm'
 
     @api.multi
     def button_approver_sign(self):
         # sign the form
         for group in self.sign_group:
-            if self.env.uid == self.sign_group.user.id:
-                self.sign_group.result = 'signed'
+            if group.user.id == self.env.uid:
+                group.result = 'signed'
                 break
         else:
             raise exceptions.Warning(_('You are not in the sign group!'))
         # if everyone is signed the form
         if not self.sign_group.filtered(lambda record: record.result != 'signed'):
             if self.is_create_project:
-                    self.create_project()
+                self.create_project()
             self.state = 'finished'
 
     @api.multi
