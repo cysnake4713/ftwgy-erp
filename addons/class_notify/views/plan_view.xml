@@ -1,6 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <openerp>
     <data>
+        <record id="view_school_plan_form" model="ir.ui.view">
+            <field name="name">view.school.timetable.plan.form</field>
+            <field name="model">school.timetable.plan</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <field name="start_date"/>
+                            <field name="teacher"/>
+                            <field name="subject"/>
+                            <field name="classroom"/>
+                            <field name="lesson"/>
+                            <field name="start_datetime"/>
+                            <field name="end_datetime"/>
+                            <field name="lesson_type"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
         <record id="view_school_plan_search" model="ir.ui.view">
             <field name="name">课程计划搜索</field>
             <field name="model">school.timetable.plan</field>
@@ -45,27 +66,6 @@
                     <field name="teacher"/>
                     <field name="lesson_type"/>
                 </tree>
-            </field>
-        </record>
-
-        <record id="view_school_plan_form" model="ir.ui.view">
-            <field name="name">view.school.timetable.plan.form</field>
-            <field name="model">school.timetable.plan</field>
-            <field name="arch" type="xml">
-                <form>
-                    <sheet>
-                        <group>
-                            <field name="start_date"/>
-                            <field name="teacher"/>
-                            <field name="subject"/>
-                            <field name="classroom"/>
-                            <field name="lesson"/>
-                            <field name="start_datetime"/>
-                            <field name="end_datetime"/>
-                            <field name="lesson_type"/>
-                        </group>
-                    </sheet>
-                </form>
             </field>
         </record>
 

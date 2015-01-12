@@ -74,15 +74,14 @@
         <menuitem id="menuitem_school_config" name="设置" parent='menuitem_school_root' sequence="50" groups="class_notify.group_class_admin"/>
         <menuitem id="menuitem_school_config_semester" name="学期" parent="menuitem_school_config" sequence="5"
                   action="action_school_semester_config"/>
-        <menuitem id="menuitem_school_config_classroom" name="班级" parent="menuitem_school_config_base" sequence="20"
-                  action="action_school_classroom_config"/>
 
         <menuitem id="menuitem_school_config_base" name="基础数据" parent="menuitem_school_config" sequence="10"/>
         <menuitem id="menuitem_school_config_subject" name="科目" parent="menuitem_school_config_base" sequence="15"
                   action="action_school_subject_config"/>
-
         <menuitem id="menuitem_school_config_lesson" name="节数" parent="menuitem_school_config_base" sequence="25"
                   action="action_school_lesson_config"/>
+        <menuitem id="menuitem_school_config_classroom" name="班级" parent="menuitem_school_config_base" sequence="20"
+                  action="action_school_classroom_config"/>
 
 
     </data>
