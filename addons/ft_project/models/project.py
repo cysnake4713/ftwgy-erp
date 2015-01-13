@@ -38,9 +38,26 @@ class TaskInherit(models.Model):
 
     @api.multi
     def write(self, vals):
+        # auto update date end
         if 'stage_id' in vals and self.env['project.task.type'].browse(vals['stage_id']).is_end is True:
             vals['date_end'] = fields.Datetime.now()
-        return super(TaskInherit, self).write(vals)
+        # auto update members
+        result = super(TaskInherit, self).write(vals)
+        self._update_members(vals)
+        return result
+
+    @api.model
+    def create(self, vals):
+        result = super(TaskInherit, self).create(vals)
+        result._update_members(vals)
+        return result
+
+    @api.multi
+    def _update_members(self, vals):
+        if ('user_id' in vals and vals['user_id']) or ('project_id' in vals and vals['project_id']):
+            for task in self:
+                if task.project_id:
+                    task.project_id.write({'members': [(4, task.user_id.id)]})
 
 
 class TaskTypeInherit(models.Model):
