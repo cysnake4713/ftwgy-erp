@@ -13,6 +13,7 @@ FTWGY Project Module """,
         'views/project_view.xml',
         'views/task_view.xml',
         'views/menu.xml',
+        'views/mail_menu.xml',
     ],
     'qweb': [
         'static/src/xml/*.xml',

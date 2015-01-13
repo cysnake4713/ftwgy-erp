@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+        <record id="action_project_task_personal" model="ir.actions.act_window">
+            <field name="name">我的任务</field>
+            <field name="res_model">project.task</field>
+            <field name="view_mode">kanban,tree,form,calendar,graph</field>
+            <field name="search_view_id" ref="project.view_task_search_form"/>
+            <field name="domain">[('user_id','=',uid)]</field>
+        </record>
+
+        <menuitem id="menuitem_mail_project_task" name="任务" parent="mail.mail_feeds_main" sequence="11"/>
+        <menuitem id="menuitem_mail_project_task_personal" name="我的任务" parent="menuitem_mail_project_task" sequence="10"
+                  action="action_project_task_personal" />
+    </data>
+</openerp>
