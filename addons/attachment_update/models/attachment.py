@@ -1,6 +1,8 @@
 __author__ = 'cysnake4713'
 # coding=utf-8
 
+import hashlib
+import os
 import logging
 
 _logger = logging.getLogger(__name__)
@@ -15,87 +17,43 @@ class AttachmentInherit(models.Model):
 
     @api.v7
     def get_attachment_file(self, cr, uid, id, context):
-
         attachment = self.browse(cr, uid, id, context)
-
         full_path = self._full_path(cr, uid, attachment.store_fname)
         r = open(full_path, 'rb')
         return attachment.name, r
 
+    @api.v7
+    def set_attachment_file(self, cr, uid, name, ufile, datas_fname, res_model, res_id, context):
+        if context is None:
+            context = {}
+        file_size = 0
+        sha1 = hashlib.sha1()
+        while True:
+            # read 16MB
+            block = ufile.read(16 * 1024 * 1024)
+            if block:
+                sha1.update(block)
+            else:
+                break
+        fname = sha1.hexdigest()
+        fname = fname[:3] + '/' + fname
+        full_path = self._full_path(cr, uid, fname)
+        try:
+            ufile.seek(0, 0)
+            dirname = os.path.dirname(full_path)
+            if not os.path.isdir(dirname):
+                os.makedirs(dirname)
+            ufile.save(full_path)
+            file_size = os.path.getsize(full_path)
+        except IOError:
+            _logger.error("_file_write writing %s", full_path)
 
-        # def a_data_set(self, cr, uid, id, name, value, arg, context=None):
-        # # We dont handle setting data to null
-        # if not value:
-        #         return True
-        #     if context is None:
-        #         context = {}
-        #     location = self._storage(cr, uid, context)
-        #     file_size = len(value.decode('base64')) if isinstance(value, str) else 0
-        #     attach = self.browse(cr, uid, id, context=context)
-        #     fname_to_delete = attach.store_fname
-        #     if location != 'db':
-        #         fname, file_size = self._file_write(cr, uid, value)
-        #         # SUPERUSER_ID as probably don't have write access, trigger during create
-        #         super(AttachmentInherit, self).write(cr, SUPERUSER_ID, [id], {'store_fname': fname, 'file_size': file_size, 'db_datas': False},
-        #                                              context=context)
-        #     else:
-        #         super(AttachmentInherit, self).write(cr, SUPERUSER_ID, [id], {'db_datas': value, 'file_size': file_size, 'store_fname': False},
-        #                                              context=context)
-        #
-        #     # After de-referencing the file in the database, check whether we need
-        #     # to garbage-collect it on the filesystem
-        #     if fname_to_delete:
-        #         self._file_delete(cr, uid, fname_to_delete)
-        #     return True
-        #
-        # def _data_set(self, cr, uid, id, name, value, arg, context=None):
-        #     # We dont handle setting data to null
-        #     if not value:
-        #         return True
-        #     if context is None:
-        #         context = {}
-        #     location = self._storage(cr, uid, context)
-        #     file_size = len(value.decode('base64'))
-        #     attach = self.browse(cr, uid, id, context=context)
-        #     fname_to_delete = attach.store_fname
-        #     if location != 'db':
-        #         fname = self._file_write(cr, uid, value)
-        #         # SUPERUSER_ID as probably don't have write access, trigger during create
-        #         super(AttachmentInherit, self).write(cr, SUPERUSER_ID, [id], {'store_fname': fname, 'file_size': file_size, 'db_datas': False}, context=context)
-        #     else:
-        #         super(AttachmentInherit, self).write(cr, SUPERUSER_ID, [id], {'db_datas': value, 'file_size': file_size, 'store_fname': False}, context=context)
-        #
-        #     # After de-referencing the file in the database, check whether we need
-        #     # to garbage-collect it on the filesystem
-        #     if fname_to_delete:
-        #         self._file_delete(cr, uid, fname_to_delete)
-        #     return True
-        #
-        # def _file_read(self, cr, uid, fname, bin_size=False):
-        #     full_path = self._full_path(cr, uid, fname)
-        #     r = ''
-        #     try:
-        #         if bin_size:
-        #             r = os.path.getsize(full_path)
-        #         else:
-        #             r = open(full_path, 'rb')
-        #     except IOError:
-        #         _logger.exception("_read_file reading %s", full_path)
-        #     return r
-        #
-        #
-        # def _data_get(self, cr, uid, ids, name, arg, context=None):
-        #     if context is None:
-        #         context = {}
-        #     result = {}
-        #     bin_size = context.get('bin_size')
-        #     for attach in self.browse(cr, uid, ids, context=context):
-        #         if attach.store_fname:
-        #             result[attach.id] = self._file_read(cr, uid, attach.store_fname, bin_size)
-        #         else:
-        #             result[attach.id] = attach.db_datas
-        #     return result
-        #
-        # _columns = {
-        #     'datas': fields.function(_data_get, fnct_inv=_data_set, string='File Content', type="binary", nodrop=True),
-        # }
+        # create db record
+        return self.create(cr, uid, {
+            'name': name,
+            'store_fname': fname,
+            'file_size': file_size,
+            'datas_fname': datas_fname,
+            'res_id': res_id,
+            'res_model': res_model,
+        }, context=context)

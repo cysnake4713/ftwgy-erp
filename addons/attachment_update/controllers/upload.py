@@ -48,3 +48,27 @@ class BinaryExtend(Binary):
             return self.attachment_saveas_ajax(data, token)
         else:
             return super(BinaryExtend, self).saveas_ajax(data, token)
+
+    @http.route('/web/binary/upload_attachment', type='http', auth="user")
+    @serialize_exception
+    def upload_attachment(self, callback, model, id, ufile):
+        Model = request.session.model('ir.attachment')
+        out = """<script language="javascript" type="text/javascript">
+                    var win = window.top.window;
+                    win.jQuery(win).trigger(%s, %s);
+                </script>"""
+        try:
+            attachment_id = Model.set_attachment_file(
+                name=ufile.filename,
+                ufile=ufile,
+                datas_fname=ufile.filename,
+                res_model=model,
+                res_id=int(id),
+                context=request.context)
+            args = {
+                'filename': ufile.filename,
+                'id': attachment_id
+            }
+        except Exception:
+            args = {'error': "Something horrible happened"}
+        return out % (simplejson.dumps(callback), simplejson.dumps(args))
