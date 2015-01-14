@@ -8,7 +8,7 @@
 Class Nofity""",
     'author': 'Matt Cai',
     'website': 'http://odoosoft.com',
-    'depends': ['base', 'report'],
+    'depends': ['base', 'report', 'mail'],
     'data': [
         'security/security.xml',
         'security/ir.model.access.csv',
