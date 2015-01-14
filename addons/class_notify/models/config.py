@@ -56,11 +56,11 @@ class Semester(models.Model):
         if self.end_date < self.start_date:
             raise Warning(_('End Date cannot be set before Start Date.'))
 
-        result = self.env['school.semester'].search(['|', '|',
-                                                     '&', ('start_date', '<=', self.start_date), ('end_date', '>=', self.start_date),
-                                                     '&', ('start_date', '<=', self.end_date), ('end_date', '>=', self.end_date),
-                                                     '&', ('start_date', '>=', self.start_date), ('end_date', '<=', self.end_date),
-                                                     ('id', '!=', self.id)])
-        if len(result):
-            raise Warning(_('Date period have overlapping'))
+        # result = self.env['school.semester'].search(['|', '|',
+        #                                              '&', ('start_date', '<=', self.start_date), ('end_date', '>=', self.start_date),
+        #                                              '&', ('start_date', '<=', self.end_date), ('end_date', '>=', self.end_date),
+        #                                              '&', ('start_date', '>=', self.start_date), ('end_date', '<=', self.end_date),
+        #                                              ('id', '!=', self.id)])
+        # if len(result):
+        #     raise Warning(_('Date period have overlapping'))
 
