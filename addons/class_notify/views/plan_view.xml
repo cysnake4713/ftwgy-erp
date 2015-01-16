@@ -45,7 +45,8 @@
             <field name="model">school.timetable.plan</field>
             <field name="arch" type="xml">
                 <calendar date_start="start_datetime" date_stop="end_datetime"
-                          display="[subject] [classroom]" color="color_partner_id" event_open_popup="%(view_school_plan_form)s">
+                          display="[subject] [classroom]" color="color_partner_id" event_open_popup="%(view_school_plan_form)s"
+                        class="oe_school_plan_calender">
                     <field name="subject"/>
                     <field name="teacher"/>
                     <field name="classroom"/>

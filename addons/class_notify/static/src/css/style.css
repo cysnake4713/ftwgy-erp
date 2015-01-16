@@ -1,0 +1,15 @@
+.openerp .oe_school_plan_calender .fc-view-agendaWeek .fc-event-time {
+    display: inline-block !important;
+}
+
+.openerp .oe_school_plan_calender .fc-view-agendaWeek .fc-event-title {
+    display: inline-block !important;
+}
+
+.openerp .oe_school_plan_calender .fc-view-agendaDay .fc-event-time {
+    display: inline-block !important;
+}
+
+.openerp .oe_school_plan_calender .fc-view-agendaDay .fc-event-title {
+    display: inline-block !important;
+}
