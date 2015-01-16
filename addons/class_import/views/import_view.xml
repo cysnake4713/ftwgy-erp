@@ -36,7 +36,8 @@
             <field name="inherit_id" ref="class_notify.view_school_timetable_form"/>
             <field name="arch" type="xml">
                 <xpath expr="//header" position="inside">
-                    <button name="%(action_school_timetable_import)d" type="action" string="导入课表信息" groups="class_notify.group_class_admin"/>
+                    <button name="%(action_school_timetable_import)d" type="action" string="导入课表信息" groups="class_notify.group_class_admin"
+                            confirm="如果需要重新导入本课表内容，请先点击[清除课表信息]，再执行本操作。"/>
                 </xpath>
             </field>
         </record>

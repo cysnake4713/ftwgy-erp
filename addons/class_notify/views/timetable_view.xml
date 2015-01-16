@@ -44,11 +44,15 @@
             <field name="arch" type="xml">
                 <form>
                     <header>
-                        <button name="button_generate_plans" type="object" string="生成上课提醒" class="oe_highlight"
-                                groups="class_notify.group_class_admin"/>
-                        <button name="button_clear_plans" type="object" string="清除上课计划" groups="class_notify.group_class_admin"/>
-                        <button name="button_clear_cells" type="object" string="清除课表信息" groups="class_notify.group_class_admin"/>
-                        <button name="%(action_school_timetable_wizard)d" type="action" string="更新课程时刻类型" groups="class_notify.group_class_admin"/>
+                        <button name="button_generate_plans" type="object" string="生成课程计划" class="oe_highlight"
+                                groups="class_notify.group_class_admin"
+                                confirm="请在确认课表信息无误后，再生成课程计划，生成课程计划会花费较长时间，期间请耐心等待"/>
+                        <button name="button_clear_plans" type="object" string="清除课程计划" groups="class_notify.group_class_admin"
+                                confirm="课程计划一旦清除后数据不可恢复，请谨慎处理。"/>
+                        <button name="button_clear_cells" type="object" string="清除课表信息" groups="class_notify.group_class_admin"
+                                confirm="确定清除本课表的排课信息？"/>
+                        <button name="%(action_school_timetable_wizard)d" type="action" string="更新课程时刻类型" groups="class_notify.group_class_admin"
+                                confirm="更新课程时刻会对当前课表下的所有课程计划产生影响，请谨慎处理。"/>
                     </header>
                     <group col="1">
                         <group col="4">
