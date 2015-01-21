@@ -52,6 +52,7 @@ class Curriculum(models.Model):
             raise osv.except_osv(_('Warning'), _('Current timetable already have plans!'))
 
         week_dict = self._get_date_week_dict(self.semester_id.start_date, self.semester_id.end_date)
+        nolog_rec = self.with_context({'mail_create_nolog': True, 'mail_notify_noemail': True, 'mail_create_nosubscribe': True})
         for cell in self.cell_ids:
             value = self.pool['school.timetable.cell'].copy_data(self.env.cr, self.env.uid, cell.id, context={})
             value['lesson_type'] = self.initial_lesson_type
@@ -59,7 +60,7 @@ class Curriculum(models.Model):
             del (value['timetable_id'])
             for target_date in week_dict[week_map[cell.week]]:
                 value['start_date'] = target_date.strftime(DEFAULT_SERVER_DATE_FORMAT)
-                self.write({'plan_ids': [(0, 0, value)]})
+                nolog_rec.write({'plan_ids': [(0, 0, value)]})
         return True
 
     @staticmethod
