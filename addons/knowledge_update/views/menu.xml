@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+        <record id="action_attachment_all" model="ir.actions.act_window">
+            <field name="name">所有文件</field>
+            <field name="res_model">ir.attachment</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="target">current</field>
+        </record>
+
+        <menuitem id="menuitem_attachment_root" name="文件管理" parent="knowledge.menu_document" sequence="1"/>
+        <menuitem id="menuitem_attachment_all" name="所有文件" parent="menuitem_attachment_root" action="action_attachment_all" sequence="10"/>
+    </data>
+</openerp>
