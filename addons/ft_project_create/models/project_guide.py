@@ -30,6 +30,8 @@ class ProjectGuide(models.Model):
 
     project_id = fields.Many2one('project.project', 'Relative Project')
 
+    attachments = fields.Many2many('ir.attachment', 'project_create_attachment_rel', 'create_id', 'attachment_id', 'Attachments')
+
     _defaults = {
         'state': 'draft',
         'is_create_project': True,
@@ -84,7 +86,6 @@ class ProjectGuide(models.Model):
         pass
 
     @api.one
-    # TODO: need delete this button
     def create_project(self):
         # create relative project
         project_value = self.pool['project.project.create.guide'].copy_data(self.env.cr, self.env.uid, self.id, dict(self.env.context))

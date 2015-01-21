@@ -56,6 +56,9 @@
                                 <field name="project_id" readonly="1" nolabel="1" class="oe_inline"/>
                             </p>
                         </div>
+                        <group string="相关文件">
+                            <field name="attachments" widget="many2many_binary" nolabel="1"/>
+                        </group>
                         <notebook>
                             <page string="项目信息" col="1">
                                 <group>
