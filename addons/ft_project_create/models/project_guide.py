@@ -102,6 +102,7 @@ class ProjectGuide(models.Model):
 
         project = self.env['project.project'].sudo().create(project_value)
         self.project_id = project
+        self.attachments.write({'res_model': 'project.project', 'res_id': project.id})
         # create relative task
         for task in self.tasks:
             task_value = self.pool['project.project.create.task'].copy_data(self.env.cr, self.env.uid, task.id, dict(self.env.context))
