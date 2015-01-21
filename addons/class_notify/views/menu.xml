@@ -24,6 +24,7 @@
             <field name="view_id" ref="class_notify.view_school_plan_tree"/>
             <field name="view_mode">school_plan_quick,form</field>
             <field name="target">current</field>
+            <field name="context">{'search_default_future-plan':1}</field>
         </record>
 
         <record id="action_school_semester_config" model="ir.actions.act_window">

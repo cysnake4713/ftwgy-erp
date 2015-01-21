@@ -11,7 +11,7 @@ openerp.class_notify = function (instance) {
             this._super.apply(this, arguments);
             this.journals = [];
             this.periods = [];
-            this.start_date = new Date().toString('yyyy-MM-dd');
+            //this.start_date = new Date().toString('yyyy-MM-dd');
         },
         start: function () {
             var tmp = this._super.apply(this, arguments);
@@ -24,7 +24,7 @@ openerp.class_notify = function (instance) {
                 self.do_search(self.last_domain, self.last_context, self.last_group_by);
             }, this));
             this.date_picker.appendTo(this.$el.parent().find('div.oe_start_date_picker'));
-            this.date_picker.set_value(new Date().toString('yyyy-MM-dd'));
+            //this.date_picker.set_value(new Date().toString('yyyy-MM-dd'));
 
             return tmp;
         },
