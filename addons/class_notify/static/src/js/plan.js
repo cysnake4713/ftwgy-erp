@@ -3,12 +3,6 @@ openerp.class_notify = function (instance) {
         _lt = instance.web._lt;
     var QWeb = instance.web.qweb;
 
-    instance.web.tree = instance.web.tree || {};
-
-    instance.web.tree.Date = instance.web.DateWidget.extend({
-        name: 'a'
-    });
-
     instance.web.class_notify = instance.web.class_notify || {};
 
     instance.web.views.add('school_plan_quick', 'instance.class_notify.QuickSearchListView');
@@ -17,7 +11,7 @@ openerp.class_notify = function (instance) {
             this._super.apply(this, arguments);
             this.journals = [];
             this.periods = [];
-            this.start_date = null;
+            this.start_date = new Date().toString('yyyy-MM-dd');
         },
         start: function () {
             var tmp = this._super.apply(this, arguments);
@@ -30,6 +24,7 @@ openerp.class_notify = function (instance) {
                 self.do_search(self.last_domain, self.last_context, self.last_group_by);
             }, this));
             this.date_picker.appendTo(this.$el.parent().find('div.oe_start_date_picker'));
+            this.date_picker.set_value(new Date().toString('yyyy-MM-dd'));
 
             return tmp;
         },
@@ -44,7 +39,7 @@ openerp.class_notify = function (instance) {
         search_by_start_date: function () {
             var self = this;
             var domain = [];
-            if (self.start_date !== null) domain.push(["start_date", "=", self.start_date]);
+            if (self.start_date != null && self.start_date != false) domain.push(["start_date", "=", self.start_date]);
             var compound_domain = new instance.web.CompoundDomain(self.last_domain, domain);
             self.dataset.domain = compound_domain.eval();
             return self.old_search(compound_domain, self.last_context, self.last_group_by);

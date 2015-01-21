@@ -74,7 +74,7 @@
             <field name="name">view.school.timetable.plan.tree</field>
             <field name="model">school.timetable.plan</field>
             <field name="arch" type="xml">
-                <tree>
+                <tree colors="grey:start_date &lt; current_date">
                     <field name="start_date"/>
                     <field name="lesson"/>
                     <field name="classroom"/>
