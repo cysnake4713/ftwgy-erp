@@ -62,5 +62,25 @@
                 </field>
             </field>
         </record>
+
+        <record id="view_project_task_delegate_inherit" model="ir.ui.view">
+            <field name="name">Project Task Delegate Inherit</field>
+            <field name="model">project.task.delegate</field>
+            <field name="inherit_id" ref="project.view_project_task_delegate"/>
+            <field name="arch" type="xml">
+                <field name="user_id" position="before">
+                    <field name="department_id"/>
+                </field>
+                <field name="user_id" position="attributes">
+                    <attribute name="domain">[('department_id','=',department_id)]</attribute>
+                </field>
+                <field name="planned_hours" position="replace">
+                    <field name="date_deadline"/>
+                    <field name="date_start"/>
+                    <field name="date_end"/>
+                </field>
+                <field name="planned_hours_me" position="replace"/>
+            </field>
+        </record>
     </data>
 </openerp>
