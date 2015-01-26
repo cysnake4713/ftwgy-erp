@@ -14,12 +14,13 @@ class ProjectGuide(models.Model):
                               ('approver_confirm', u'审批人确认'),
                               ('finished', u'项目已启动'),
                               ('cancel', u'项目取消'), ], 'State')
-    is_create_project = fields.Boolean('Is Create Project')
+    create_type = fields.Selection([('create_project', u'完成后创建项目和任务'), ('create_task', u'完成后创建任务'), ('no_create', u'不创建')], 'Create Type')
 
     department_id = fields.Many2one('hr.department', 'Department')
     user_id = fields.Many2one('res.users', 'Manager')
     date_start = fields.Date('Date Start')
     date = fields.Date('Date End')
+    date_deadline = fields.Date('Deadline')
     description = fields.Text('Description')
 
     plan = fields.Many2one('project.project.create.plan', 'Plan')
@@ -29,15 +30,23 @@ class ProjectGuide(models.Model):
     sign_group = fields.One2many('project.project.create.sign.group', 'guide_id', 'Sign Group')
 
     project_id = fields.Many2one('project.project', 'Relative Project')
+    task_id = fields.Many2one('project.task', 'Relative Task')
 
     attachments = fields.Many2many('ir.attachment', 'project_create_attachment_rel', 'create_id', 'attachment_id', 'Attachments')
 
     _defaults = {
         'state': 'draft',
-        'is_create_project': True,
+        'create_type': 'create_project',
         'date_start': lambda *a: fields.Date.today()
 
     }
+
+    @api.one
+    @api.constrains('date_start', 'date')
+    def _check_dates(self):
+        if self.date and self.date_start:
+            if self.date < self.date_start:
+                raise Warning(_('End Date cannot be set before Start Date.'))
 
     @api.multi
     def onchange_plan(self):
@@ -77,8 +86,10 @@ class ProjectGuide(models.Model):
             raise exceptions.Warning(_('You are not in the sign group!'))
         # if everyone is signed the form
         if not self.sign_group.filtered(lambda record: record.result != 'signed'):
-            if self.is_create_project:
+            if self.create_type == 'create_project':
                 self.create_project()
+            if self.create_type == 'create_task':
+                self.create_task()
             self.state = 'finished'
 
     @api.multi
@@ -91,7 +102,7 @@ class ProjectGuide(models.Model):
         project_value = self.pool['project.project.create.guide'].copy_data(self.env.cr, self.env.uid, self.id, dict(self.env.context))
         # clean value
         del (project_value['state'])
-        del (project_value['is_create_project'])
+        del (project_value['create_type'])
         del (project_value['plan'])
         del (project_value['tasks'])
         del (project_value['sign_template'])
@@ -114,6 +125,20 @@ class ProjectGuide(models.Model):
             del (task_value['uid'])
             self.env['project.task'].sudo().create(task_value)
 
+    @api.one
+    def create_task(self):
+        # create relative project
+        task = self.env['project.task'].sudo().create({
+            'name': self.name,
+            'department_id': self.department_id.id,
+            'user_id': self.user_id.id,
+            'description': self.description,
+            'date_start': self.date_start,
+            'date_end': self.date,
+            'date_deadline': self.date_deadline,
+        })
+        self.task_id = task
+        self.attachments.write({'res_model': 'project.task', 'res_id': task.id})
 
     @api.multi
     def button_cancel(self):
