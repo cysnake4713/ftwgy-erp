@@ -11,7 +11,7 @@ from openerp.tools import DEFAULT_SERVER_DATE_FORMAT
 
 class Plan(models.Model):
     _name = 'school.timetable.plan'
-    _inherit = ['school.timetable.cell.abstract', 'mail.thread']
+    _inherit = 'school.timetable.cell.abstract'
     _order = 'start_date,lesson,classroom,subject'
 
     start_date = fields.Date('Start Date')
