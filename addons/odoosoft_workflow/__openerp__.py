@@ -10,6 +10,7 @@
     'website': 'http://odoosoft.com',
     'depends': ['base'],
     'data': [
+        'views/templates.xml',
     ],
     'qweb': [
         'static/src/xml/*.xml',
