@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+        <record id="view_doc_transform_tree" model="ir.ui.view">
+            <field name="name">view.ft.document.transform.tree</field>
+            <field name="model">ft.document.transform</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="state"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_doc_transform_form" model="ir.ui.view">
+            <field name="name">view.ft.document.transform.form</field>
+            <field name="model">ft.document.transform</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <button name="common_apply" string="提交" type="object" class="oe_highlight" states="draft"
+                                context="{'state':'principal'}"/>
+
+                        <button name="common_apply" string="提交" type="object" class="oe_highlight" states="principal"
+                                context="{'state':'department'}"/>
+                        <button name="common_reject" string="打回" type="object" states="principal"
+                                context="{'state':'draft'}" is_reject="1"/>
+
+                        <button name="common_apply" string="提交" type="object" class="oe_highlight" states="department"
+                                context="{'state':'finish'}"/>
+                        <button name="common_reject" string="打回" type="object" states="department"
+                                context="{'state':'principal'}" is_reject="1"/>
+
+                        <button name="common_reject" string="打回" type="object" states="finish"
+                                context="{'state':'department'}" is_reject="1"/>
+
+                        <field name="state" widget="statusbar" readonly="1"/>
+                    </header>
+                    <sheet>
+                        <group string="草稿">
+                            <field name="name" states_editable="draft"/>
+                            <field name="attachments" widget="many2many_binary" states_editable="draft"/>
+                            <field name="request_principal_user" domain="[('groups_id','=',%(ft_doc_transform.group_doc_trans_principal)d)]"
+                                   required="1" states_editable="draft"/>
+                            <group colspan="2" col="4">
+                                <field name="draft_user" readonly="1"/>
+                                <field name="draft_datetime" readonly="1"/>
+                            </group>
+                        </group>
+                        <group string="校领导批示" states="principal,department,finish">
+                            <field name="request_department_users" widget="many2many_tags" states_required="principal" states_editable="principal"/>
+                            <group colspan="2" col="4">
+                                <field name="principal_user" readonly="1"/>
+                                <field name="principal_datetime" readonly="1"/>
+                            </group>
+                        </group>
+                        <group string="部门落实" states="department,finish">
+                            <field name="department_comment" states_required="department" states_editable="department"/>
+                            <group colspan="2" col="4">
+                                <field name="department_user" readonly="1"/>
+                                <field name="department_datetime" readonly="1"/>
+                            </group>
+                        </group>
+                        <group string="备注">
+                            <field name="comment" nolabel="1"/>
+                        </group>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+    </data>
+</openerp>

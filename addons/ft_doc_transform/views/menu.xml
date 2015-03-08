@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+        <record id="action_process_doc_transform" model="ir.actions.act_window">
+            <field name="name">公文审批</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">ft.document.transform</field>
+            <field name="view_mode">tree,form</field>
+            <field name="context">{'mail_create_nolog':True}</field>
+        </record>
+
+        <!-- This Menu Item Must have a parent -->
+        <menuitem id="menu_process_root" name="常用" parent="mail.mail_feeds_main" sequence="11"/>
+        <!-- This Menu Item must have a parent and an action -->
+        <menuitem id="menu_process_doc_transform" name="公文审批" parent="menu_process_root" action="action_process_doc_transform" sequence="5"/>
+
+    </data>
+</openerp>
