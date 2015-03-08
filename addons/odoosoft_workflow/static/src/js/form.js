@@ -13,10 +13,15 @@ openerp.odoosoft_workflow = function (instance) {
     instance.web.form.WidgetButton.include({
         init: function (field_manager, node) {
             this._super(field_manager, node);
-            this.is_reject = this.node.attrs.is_reject == '1';
+            this.is_reject = this.node.attrs.is_reject === 'True' || this.node.attrs.is_reject === '1';
         },
         on_click: function () {
-            this.view.is_reject = this.is_reject;
+            var context = this.build_context().eval();
+            if (context.state !== undefined && this.is_reject) {
+                this.view.reject_state = context.state;
+            } else {
+                this.view.reject_state = undefined;
+            }
             return this._super();
         }
 
@@ -31,19 +36,93 @@ openerp.odoosoft_workflow = function (instance) {
             return this.is_syntax_valid() && !(this.get('required') && this.is_false()) && !(this.is_states_required() && this.is_false());
         },
         is_states_required: function () {
-            if (this.states_required != undefined && this.view.is_reject != true) {
+            var result = false;
+            if (this.states_required != undefined) {
                 var current_state = this.view.get_field_value('state');
                 if ($.inArray(current_state, this.states_required.split(',')) > -1) {
-                    return true;
-                } else {
-                    return false;
+                    result = true;
                 }
-            } else {
-                return false;
+                if (this.view.reject_state != undefined) {
+                    if ($.inArray(this.view.reject_state, this.states_required.split(',')) < 0) {
+                        result = false;
+                    } else {
+                        result = true;
+                    }
+                }
             }
+            return result;
         },
+
         _set_required: function () {
             this.$el.toggleClass('oe_form_required', this.is_states_required() || this.get("required"));
+        }
+    });
+    //
+    //instance.web.form.FormWidget.include({
+    //    init: function (field_manager, node) {
+    //        this._super(field_manager, node);
+    //        this.states_editable = this.node.attrs.states_editable;
+    //        var self = this;
+    //        var test_effective_readonly = function () {
+    //            self.set({"effective_readonly": self.get("readonly") || self.field_manager.get("actual_mode") === "view" || self.is_states_readonly()});
+    //        };
+    //        this.on("change:readonly", this, test_effective_readonly);
+    //        this.field_manager.on("change:actual_mode", this, test_effective_readonly);
+    //        test_effective_readonly.call(this);
+    //    },
+    //
+    //    is_states_readonly: function () {
+    //        if (this.states_editable != undefined) {
+    //            var current_state = this.view.get_field_value('state');
+    //            if ($.inArray(current_state, this.states_editable.split(',')) > -1) {
+    //                return false;
+    //            } else {
+    //                return true;
+    //            }
+    //        } else {
+    //            return false;
+    //        }
+    //    }
+    //})
+
+    instance.web.form.FormWidget.include({
+
+
+        init: function (field_manager, node) {
+            this._super(field_manager, node);
+            this.states_required = this.node.attrs.states_required;
+            this.states_editable = this.node.attrs.states_editable;
+            //this.field_manager.on("view_content_has_changed", this, this.check_states_required);
+            this.field_manager.on("view_content_has_changed", this, this.check_states_readonly);
+        },
+        renderElement: function () {
+            //this.check_states_required();
+            this.check_states_readonly();
+            this._super();
+        },
+
+        //check_states_required: function () {
+        //    var current_state = this.view.get_field_value('state');
+        //    if (this.states_required != undefined) {
+        //        if ($.inArray(current_state, this.states_required.split(',')) > -1) {
+        //            this.set({required: true});
+        //        } else {
+        //            this.set({required: false});
+        //        }
+        //        if (this.view.reject_state != undefined && $.inArray(this.view.reject_state, this.states_required.split(',')) < 0) {
+        //            this.set({required: false});
+        //        }
+        //    }
+        //},
+        check_states_readonly: function () {
+            if (this.states_editable != undefined) {
+                var current_state = this.view.get_field_value('state');
+                if ($.inArray(current_state, this.states_editable.split(',')) > -1) {
+                    this.set({readonly: false});
+                } else {
+                    this.set({readonly: true});
+                }
+            }
         }
     });
 
