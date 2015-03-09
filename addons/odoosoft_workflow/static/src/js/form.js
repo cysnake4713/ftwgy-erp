@@ -114,11 +114,31 @@ openerp.odoosoft_workflow = function (instance) {
         //        }
         //    }
         //},
+
         check_states_readonly: function () {
+            var self = this;
             if (this.states_editable != undefined) {
                 var current_state = this.view.get_field_value('state');
-                if ($.inArray(current_state, this.states_editable.split(',')) > -1) {
-                    this.set({readonly: false});
+                var states_map = py.eval(this.states_editable);
+                if (_.has(states_map, current_state)) {
+                    var current_state_setting = states_map[current_state];
+                    if (current_state_setting == false) {
+                        this.set({readonly: false});
+                    } else if (_.has(current_state_setting, 'groups')) {
+                        new instance.web.DataSetSearch(this, 'res.users', this.session.user_context, [
+                            ['id', '=', this.session.uid], ['groups_id', '=', current_state_setting.groups]
+                        ]).read_slice(['id']).done(function (result) {
+                                if (_.isEmpty(result)) {
+                                        self.set({readonly: true});
+                                } else {
+                                    self.set({readonly: false});
+                                }
+                            });
+
+                    } else {
+                        console.log('mismatch state_editable type!!');
+                        this.set({readonly: true});
+                    }
                 } else {
                     this.set({readonly: true});
                 }
