@@ -19,43 +19,62 @@
                 <form>
                     <header>
                         <button name="common_apply" string="提交" type="object" class="oe_highlight" states="draft"
-                                context="{'state':'principal'}"/>
+                                groups="ft_doc_transform.group_doc_trans_user"
+                                context="{'state':'principal',
+                                'message_users':request_principal_user,
+                                'message':'需要您的批示',
+                                }"/>
 
-                        <button name="common_apply" string="提交" type="object" class="oe_highlight" states="principal"
-                                context="{'state':'department'}"/>
-                        <button name="common_reject" string="打回" type="object" states="principal"
-                                context="{'state':'draft'}" is_reject="1"/>
-
-                        <button name="common_apply" string="提交" type="object" class="oe_highlight" states="department"
+                        <button name="common_apply" string="提交" type="object" class="oe_highlight"
+                                states_editable="{'principal':{'users':[request_principal_user]}}"
+                                context="{'state':'department',
+                                'message_users':request_department_users,
+                                'message':'需要您的处理',
+                                }"/>
+                        <button name="common_reject" string="打回" type="object"
+                                states_editable="{'principal':{'users':[request_principal_user]}}"
+                                context="{'state':'draft',
+                                'message_users':draft_user,
+                                'message':'打回了你的请求,请处理',
+                                }" is_reject="1"/>
+                        <button name="common_apply" string="提交" type="object" class="oe_highlight"
+                                states_editable="{'department':{'users':[request_department_users]}}"
                                 context="{'state':'finish'}"/>
-                        <button name="common_reject" string="打回" type="object" states="department"
+                        <button name="common_reject" string="打回" type="object"
+                                states_editable="{'department':{'users':[request_department_users]}}"
                                 context="{'state':'principal'}" is_reject="1"/>
 
-                        <button name="common_reject" string="打回" type="object" states="finish"
+                        <button name="common_reject" string="撤销" type="object"
+                                states_editable="{'finish':{'users':[request_department_users]}}"
                                 context="{'state':'department'}" is_reject="1"/>
 
                         <field name="state" widget="statusbar" readonly="1"/>
                     </header>
                     <sheet>
                         <group string="草稿">
-                            <field name="name" states_editable="draft"/>
-                            <field name="attachments" widget="many2many_binary" states_editable="draft"/>
-                            <field name="request_principal_user" domain="[('groups_id','=',%(ft_doc_transform.group_doc_trans_principal)d)]"
-                                   required="1" states_editable="draft"/>
+                            <field name="name" states_editable="{'draft':{'groups':%(ft_doc_transform.group_doc_trans_user)d}}"/>
+                            <field name="attachments" widget="many2many_binary"
+                                   states_editable="{'draft':{'groups':[%(ft_doc_transform.group_doc_trans_user)d]}}"/>
+                            <field name="request_principal_user" required="1"
+                                   domain="[('groups_id','=',%(ft_doc_transform.group_doc_trans_principal)d)]"
+                                   states_editable="{'draft':{'groups':[%(ft_doc_transform.group_doc_trans_user)d]}}"/>
                             <group colspan="2" col="4">
                                 <field name="draft_user" readonly="1"/>
                                 <field name="draft_datetime" readonly="1"/>
                             </group>
                         </group>
                         <group string="校领导批示" states="principal,department,finish">
-                            <field name="request_department_users" widget="many2many_tags" states_required="principal" states_editable="principal"/>
+                            <field name="request_department_users" widget="many2many_tags" states_required="principal"
+                                   states_editable="{'principal':{'groups':[%(ft_doc_transform.group_doc_trans_user)d]}}"/>
                             <group colspan="2" col="4">
                                 <field name="principal_user" readonly="1"/>
                                 <field name="principal_datetime" readonly="1"/>
                             </group>
                         </group>
                         <group string="部门落实" states="department,finish">
-                            <field name="department_comment" states_required="department" states_editable="department"/>
+                            <field name="department_comment" states_required="department"
+                                   states_editable="{'department':{'groups':[%(ft_doc_transform.group_doc_trans_user)d]}}"
+                                    />
                             <group colspan="2" col="4">
                                 <field name="department_user" readonly="1"/>
                                 <field name="department_datetime" readonly="1"/>
