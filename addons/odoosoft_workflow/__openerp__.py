@@ -8,7 +8,7 @@
 """,
     'author': 'Matt Cai',
     'website': 'http://odoosoft.com',
-    'depends': ['base'],
+    'depends': ['base', 'mail'],
     'data': [
         'views/templates.xml',
     ],
