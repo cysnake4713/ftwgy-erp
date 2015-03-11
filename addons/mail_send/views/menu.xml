@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+        <record id="action_send_mail" model="ir.actions.act_window">
+            <field name="name">写邮件</field>
+            <field name="res_model">mail.compose.message</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+        <menuitem id="menuitiem_send_mail" name="写邮件" parent="mail.mail_feeds" sequence="12" groups="base.group_user"
+                 action="action_send_mail"/>
+    </data>
+</openerp>
