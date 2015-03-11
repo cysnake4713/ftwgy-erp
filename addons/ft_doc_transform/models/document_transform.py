@@ -14,7 +14,7 @@ class DocumentTransform(models.Model):
     state = fields.Selection([('draft', 'Draft'),
                               ('principal', 'Principal'),
                               ('department', 'Department'),
-                              ('finish', 'Finish'), ], 'State', default='draft')
+                              ('finish', 'Finish'), ], 'State', default='draft', track_visibility='onchange')
     # draft
     attachments = fields.Many2many('ir.attachment', 'rel_ft_doc_attachments', 'doc_id', 'attachment_id', 'Attachments')
     request_principal_user = fields.Many2one('res.users', 'Request Principal User')
@@ -26,6 +26,7 @@ class DocumentTransform(models.Model):
     principal_datetime = fields.Datetime('Principal Datetime')
     # department
     department_comment = fields.Text('Department Comment')
+    department_comment_user = fields.Many2many('res.users', 'rel_ft_doc_trans_comment_users', 'doc_id', 'user_id', 'Department Comment User')
     department_user = fields.Many2one('res.users', 'Department User')
     department_datetime = fields.Datetime('Department Datetime')
 
