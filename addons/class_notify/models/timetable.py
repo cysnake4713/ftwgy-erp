@@ -94,10 +94,10 @@ class Curriculum(models.Model):
 
 class TypeChangeWizard(models.TransientModel):
     _name = 'school.timetable.wizard'
+    _rec_name = 'start_date'
 
     lesson_type = fields.Selection([('summer', u'夏时'), ('winter', u'冬时')], 'Initial Lesson Type', required=True)
     start_date = fields.Date('Start Date', required=True)
-
 
     @api.one
     def button_save(self):

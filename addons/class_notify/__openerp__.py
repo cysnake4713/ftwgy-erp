@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
 {
-    'name': 'Class Nofity Module',
+    'name': 'Class Notify Module',
     'version': '0.2',
     'category': 'school',
     'complexity': "easy",
     'description': """
-Class Nofity""",
+Class Notify""",
     'author': 'Matt Cai',
     'website': 'http://odoosoft.com',
     'depends': ['base', 'report', 'mail'],
