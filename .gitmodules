@@ -1,3 +1,0 @@
-[submodule "addons/db_backup"]
-	path = addons/db_backup
-	url = https://github.com/cysnake4713/db_backup.git
