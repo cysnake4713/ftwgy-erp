@@ -7,6 +7,7 @@ from openerp.tools.translate import _
 
 class TempDepartment(models.Model):
     _name = 'hr.department'
+    _rec_name = 'name'
 
     name = fields.Char('Name', required=True)
 

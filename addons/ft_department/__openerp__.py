@@ -10,6 +10,7 @@ FTWGY Department """,
     'website': 'http://odoosoft.com',
     'depends': ['base'],
     'data': [
+        'security/ir.model.access.csv',
         'views/department_view.xml',
         'views/menu.xml',
     ],
