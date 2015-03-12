@@ -8,7 +8,7 @@
 Class Notify""",
     'author': 'Matt Cai',
     'website': 'http://odoosoft.com',
-    'depends': ['base', 'report', 'mail'],
+    'depends': ['base', 'report', 'mail', 'odoosoft_workflow'],
     'data': [
         'security/security.xml',
         'security/ir.model.access.csv',

@@ -17,8 +17,8 @@ class Plan(models.Model):
 
     start_date = fields.Date('Start Date')
 
-    start_datetime = fields.Datetime('Start Datetime', compute='_compute_plan_datetimes')
-    end_datetime = fields.Datetime('End Datetime', compute='_compute_plan_datetimes')
+    start_datetime = fields.Datetime('Start Datetime', compute='_compute_plan_datetimes', store=True)
+    end_datetime = fields.Datetime('End Datetime', compute='_compute_plan_datetimes', store=True)
 
     lesson_type = fields.Selection([('summer', u'夏时'), ('winter', u'冬时')], 'Lesson Type')
 

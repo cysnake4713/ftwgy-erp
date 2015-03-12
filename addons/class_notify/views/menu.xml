@@ -15,6 +15,7 @@
             <field name="view_type">form</field>
             <field name="view_mode">tree,form</field>
             <field name="target">current</field>
+            <field name="context">{'mail_create_nosubscribe':True}</field>
         </record>
 
         <record id="action_school_plan_all" model="ir.actions.act_window">
