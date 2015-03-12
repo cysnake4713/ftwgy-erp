@@ -9,6 +9,7 @@ import datetime
 
 class Subject(models.Model):
     _name = 'school.subject'
+    _rec_name = 'name'
 
     name = fields.Char('Name', required=True)
     short_name = fields.Char('Short Name')
@@ -18,6 +19,7 @@ class Subject(models.Model):
 
 class ClassRoom(models.Model):
     _name = 'school.classroom'
+    _rec_name = 'name'
 
     name = fields.Char('Name', required=True)
 
@@ -26,6 +28,7 @@ class ClassRoom(models.Model):
 
 class Lesson(models.Model):
     _name = 'school.lesson'
+    _rec_name = 'name'
 
     name = fields.Integer('Name', required=True)
     summer_start_time = fields.Float('Summer Start Time', required=True)
@@ -37,6 +40,7 @@ class Lesson(models.Model):
 class Semester(models.Model):
     _name = 'school.semester'
     _order = 'end_date desc'
+    _rec_name = 'name'
 
     name = fields.Char('Name', required=True)
     start_date = fields.Date('Start Date', required=True)

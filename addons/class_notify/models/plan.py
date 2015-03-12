@@ -13,6 +13,7 @@ class Plan(models.Model):
     _name = 'school.timetable.plan'
     _inherit = 'school.timetable.cell.abstract'
     _order = 'start_date,lesson,classroom,subject'
+    _rec_name = 'start_date'
 
     start_date = fields.Date('Start Date')
 

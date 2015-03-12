@@ -11,6 +11,7 @@ from dateutil import rrule, parser
 
 class CellAbstract(models.AbstractModel):
     _name = 'school.timetable.cell.abstract'
+    _rec_name = 'teacher'
 
     teacher = fields.Many2one('res.users', 'Teacher')
     # 科目
@@ -24,6 +25,7 @@ class CellAbstract(models.AbstractModel):
 class CurriculumCell(models.Model):
     _name = 'school.timetable.cell'
     _inherit = 'school.timetable.cell.abstract'
+    _rec_name = 'timetable_id'
 
     timetable_id = fields.Many2one('school.timetable', 'Timetable', ondelete='cascade')
     # 周几

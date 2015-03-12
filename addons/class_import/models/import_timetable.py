@@ -13,6 +13,7 @@ from openerp.tools.translate import _, _logger
 
 class TimetableImport(models.TransientModel):
     _name = 'school.timetable.import'
+    _rec_name = 'timetable_id'
 
     data = fields.Binary('Data')
     message = fields.Html('Error Message')

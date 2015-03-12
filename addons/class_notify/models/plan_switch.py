@@ -7,6 +7,7 @@ from openerp.tools.translate import _
 
 class PlanWizard(models.Model):
     _name = 'school.timetable.plan.switch.wizard'
+    _rec_name = 'state'
 
     state = fields.Selection([('draft', 'Draft'), ('confirmed', 'Confirmed')], 'State', default='draft')
     origin_plan = fields.Many2one('school.timetable.plan', 'Origin Plan')

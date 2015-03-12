@@ -7,6 +7,7 @@ from openerp.tools.translate import _
 
 class TaskPlan(models.Model):
     _name = 'project.project.create.plan'
+    _rec_name = 'name'
 
     name = fields.Char('Name', required=True)
     tasks = fields.Many2many('project.project.create.task', 'rel_project_create_plan_tasks', 'plan_id', 'task_id', 'Plan Tasks')
@@ -14,6 +15,7 @@ class TaskPlan(models.Model):
 
 class TaskLine(models.Model):
     _name = 'project.project.create.task'
+    _rec_name = 'name'
 
     name = fields.Char('Name', required=True)
     department_id = fields.Many2one('hr.department', 'Department')
@@ -33,6 +35,7 @@ class TaskLine(models.Model):
 
 class SignTemplate(models.Model):
     _name = 'project.project.create.sign'
+    _rec_name = 'name'
 
     name = fields.Char('Name', required=True)
     users = fields.Many2many('res.users', 'project_create_sign_user', 'sign_id', 'user_id', 'Users')

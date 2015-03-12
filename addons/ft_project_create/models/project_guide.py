@@ -7,6 +7,7 @@ from openerp.tools.translate import _
 
 class ProjectGuide(models.Model):
     _name = 'project.project.create.guide'
+    _rec_name = 'name'
 
     name = fields.Char('Name', required=True)
     state = fields.Selection([('draft', u'项目设计'),
