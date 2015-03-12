@@ -11,7 +11,7 @@
     'depends': ['base', 'mail', 'odoosoft_workflow'],
     'data': [
         'security/security.xml',
-
+        'security/ir.model.access.csv',
         'views/menu.xml',
         'views/doc_transform_view.xml',
     ],

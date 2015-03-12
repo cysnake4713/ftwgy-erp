@@ -9,6 +9,7 @@ class DocumentTransform(models.Model):
     _name = 'ft.document.transform'
     _inherit = ['mail.thread', 'odoosoft.workflow.abstract']
     _rec_name = 'name'
+    _description = 'FT Doc Transform'
 
     name = fields.Char('Name', required=True)
     state = fields.Selection([('draft', 'Draft'),
@@ -38,12 +39,8 @@ class DocumentTransform(models.Model):
             'user': ['principal_user'],
             'time': ['principal_datetime'],
         },
-        'department': {
-            'user': ['department_user'],
-            'time': ['department_datetime'],
-        },
+        'department': True,
         'finish': False,
-
     }
 
 
