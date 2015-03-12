@@ -10,7 +10,7 @@ _build/
 *.egg-info
 # emacs backup files
 *~
-
+odoosoft
 # various virtualenv
 /bin/
 /build/
