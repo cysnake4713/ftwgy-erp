@@ -16,6 +16,10 @@
             <field name="arch" type="xml">
                 <form>
                     <field name="state" invisible="1"/>
+                    <div>
+                        <p>点击<a href="/class_import/static/src/file/demo.csv">下载</a>参考样例文件</p>
+                        <p>上传的文件必须是csv格式,并且注意编码选择,一般windows用户请选择gbk,linux用户选择utf-8</p>
+                    </div>
                     <group>
                         <field name="code"/>
                         <field string="文件上传" name="data"/>
