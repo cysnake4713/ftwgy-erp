@@ -100,10 +100,12 @@
                         </group>
                         <group string="需要调换的课程">
                             <group>
-                                <field name="origin_plan" required="1"/>
+                                <field name="origin_plan" required="1"
+                                        states_editable="{'draft':True}"/>
                             </group>
                             <group>
-                                <field name="target_plan" required="1"/>
+                                <field name="target_plan" required="1"
+                                        states_editable="{'draft':True}"/>
                             </group>
                         </group>
                     </sheet>
