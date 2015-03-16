@@ -30,6 +30,8 @@ openerp.ft_mail_send = function (instance) {
                 });
                 self.focus();
             });
+        },
+        _check_email_popup: function (ids) {
         }
     });
 
