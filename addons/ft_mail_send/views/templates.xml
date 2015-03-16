@@ -3,7 +3,7 @@
     <data>
         <template id="assets_backend" name="account assets" inherit_id="web.assets_backend">
             <xpath expr="." position="inside">
-                <script type="text/javascript" src="/mail_send/static/src/js/many2many_tags_email.js"/>
+                <script type="text/javascript" src="/ft_mail_send/static/src/js/many2many_tags_email.js"/>
             </xpath>
         </template>
     </data>

@@ -2,10 +2,10 @@
  * Created by cysnake4713 on 15-2-9.
  */
 
-openerp.mail_send = function (instance) {
+openerp.ft_mail_send = function (instance) {
     var _t = instance.web._t;
 
-    instance.web.form.FieldMany2ManyTagsEmail.include({
+    instance.web.form.FieldMany2ManyTagsEmailMulti = instance.web.form.FieldMany2ManyTagsEmail.extend({
 
 
         _search_create_popup: function (view, ids, context) {
@@ -31,6 +31,10 @@ openerp.mail_send = function (instance) {
                 self.focus();
             });
         }
+    });
+
+    instance.web.form.widgets = instance.web.form.widgets.extend({
+        'many2many_tags_email_multi': 'instance.web.form.FieldMany2ManyTagsEmailMulti'
     });
 };
 

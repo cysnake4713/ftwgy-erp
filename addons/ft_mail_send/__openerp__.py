@@ -12,6 +12,7 @@ Mail Send Plugin""",
     'data': [
         'views/templates.xml',
         'views/menu.xml',
+        'views/mail_view.xml',
     ],
     'qweb': [
         'static/src/xml/*.xml',
