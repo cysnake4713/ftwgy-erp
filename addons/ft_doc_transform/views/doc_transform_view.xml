@@ -5,8 +5,12 @@
             <field name="name">view.ft.document.transform.tree</field>
             <field name="model">ft.document.transform</field>
             <field name="arch" type="xml">
-                <tree>
+                <tree colors="grey:state == 'finish'">
                     <field name="name"/>
+                    <field name="principal_user"/>
+                    <field name="principal_datetime"/>
+                    <field name="department_user"/>
+                    <field name="department_datetime"/>
                     <field name="state"/>
                 </tree>
             </field>
