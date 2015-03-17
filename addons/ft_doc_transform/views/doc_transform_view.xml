@@ -25,13 +25,13 @@
                                 'message':'需要您的批示',
                                 }"/>
 
-                        <button name="common_apply" string="提交" type="object" class="oe_highlight"
+                        <button name="common_apply" string="提交" type="object" class="oe_highlight" is_log="1"
                                 states_editable="{'principal':{'users':[request_principal_user]}}"
                                 context="{'state':'department',
                                 'message_users':request_department_users,
                                 'message':'需要您的处理',
                                 }"/>
-                        <button name="common_reject" string="打回" type="object"
+                        <button name="common_reject" string="打回" type="object" is_log="1"
                                 states_editable="{'principal':{'users':[request_principal_user]}}"
                                 context="{'state':'draft',
                                 'message_users':draft_user,
@@ -44,14 +44,14 @@
                                 'message_users':department_comment_user,
                                 'message':department_comment,
                                 }"/>
-                        <button name="common_reject" string="打回" type="object" is_reject="1"
+                        <button name="common_reject" string="打回" type="object" is_reject="1" is_log="1"
                                 states_editable="{'department':{'users':[request_department_users]}}"
                                 context="{'state':'principal',
                                 'message_users':request_principal_user,
                                 'message':'您的请求被打回,请处理',
                                 }"/>
 
-                        <button name="common_reject" string="撤销" type="object"
+                        <button name="common_reject" string="撤销" type="object" is_log="1"
                                 states_editable="{'finish':{'users':[request_department_users]}}"
                                 context="{'state':'department'}" is_reject="1"/>
 
