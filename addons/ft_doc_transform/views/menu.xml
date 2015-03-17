@@ -13,7 +13,7 @@
         <menuitem id="menu_process_root" name="常用" parent="mail.mail_feeds_main" sequence="11" groups="base.group_user"/>
         <!-- This Menu Item must have a parent and an action -->
         <menuitem id="menu_process_doc_transform" name="公文审批" parent="menu_process_root" action="action_process_doc_transform" sequence="5"
-                  groups="base.group_user"/>
+                  groups="ft_doc_transform.group_doc_trans_user,ft_doc_transform.group_doc_trans_principal,group_doc_trans_principal,group_doc_trans_department,ft_doc_transform.group_doc_trans_admin,base.group_system"/>
 
     </data>
 </openerp>
