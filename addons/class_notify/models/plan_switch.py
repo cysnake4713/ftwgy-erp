@@ -14,18 +14,32 @@ class PlanWizard(models.Model):
     state = fields.Selection(
         [('draft', 'Draft'), ('target_teacher', 'Target Teacher Confirm'), ('center_confirm', 'Center Confirm'), ('confirmed', 'Confirmed')], 'State',
         default='draft')
-    origin_plan = fields.Many2one('school.timetable.plan', 'Origin Plan')
-    origin_plan_classroom = fields.Many2one('school.classroom', 'Origin Plan Classroom', compute='_compute_origin_plan_classroom')
-    target_plan = fields.Many2one('school.timetable.plan', 'Target Plan')
+
+    origin_plan = fields.Many2one('school.timetable.plan', 'Need To Switch')
+    origin_plan_classroom = fields.Many2one('school.classroom', 'Origin Plan Classroom', compute='_compute_origin_plan_info')
+    # origin_plan_date = fields.Date('Origin Plan Date',compute='_compute_origin_plan_info')
+    # origin_plan_lesson = fields.Many2one('school.lesson', 'Origin Plan Lesson', compute='_compute_origin_plan_info')
+
+    target_plan = fields.Many2one('school.timetable.plan', 'Switch To')
 
     result_origin_plan = fields.Many2one('school.timetable.plan', 'Result Origin Plan')
     result_target_plan = fields.Many2one('school.timetable.plan', 'Result Target Plan')
 
-
     @api.one
     @api.depends('origin_plan')
-    def _compute_origin_plan_classroom(self):
+    def _compute_origin_plan_info(self):
         self.origin_plan_classroom = self.origin_plan.classroom
+        # self.origin_plan_date = self.origin_plan.start_date
+        # self.origin_plan_lesson = self.origin_plan.lesson
+
+    @api.constrains('origin_plan', 'target_plan')
+    def _constrains_origin_target_plan(self):
+
+        result = self.env['school.timetable.plan'].search(
+            [('teacher', '=', self.target_plan.teacher.id), ('start_date', '=', self.origin_plan.start_date),
+             ('lesson', '=', self.origin_plan.lesson.id)])
+        if result:
+            raise exceptions.Warning(_("target plan teacher's plan is conflict to the origin plan date and lesson!"))
 
     @api.multi
     def button_switch_plan(self):
