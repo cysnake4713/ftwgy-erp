@@ -11,12 +11,21 @@ class PlanWizard(models.Model):
     _rec_name = 'origin_plan'
     _description = 'School Timetable Wizard'
 
-    state = fields.Selection([('draft', 'Draft'), ('confirmed', 'Confirmed')], 'State', default='draft')
+    state = fields.Selection(
+        [('draft', 'Draft'), ('target_teacher', 'Target Teacher Confirm'), ('center_confirm', 'Center Confirm'), ('confirmed', 'Confirmed')], 'State',
+        default='draft')
     origin_plan = fields.Many2one('school.timetable.plan', 'Origin Plan')
+    origin_plan_classroom = fields.Many2one('school.classroom', 'Origin Plan Classroom', compute='_compute_origin_plan_classroom')
     target_plan = fields.Many2one('school.timetable.plan', 'Target Plan')
 
     result_origin_plan = fields.Many2one('school.timetable.plan', 'Result Origin Plan')
     result_target_plan = fields.Many2one('school.timetable.plan', 'Result Target Plan')
+
+
+    @api.one
+    @api.depends('origin_plan')
+    def _compute_origin_plan_classroom(self):
+        self.origin_plan_classroom = self.origin_plan.classroom
 
     @api.multi
     def button_switch_plan(self):

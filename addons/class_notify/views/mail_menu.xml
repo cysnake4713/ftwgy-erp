@@ -10,8 +10,20 @@
             <field name="domain">[('teacher','=',uid)]</field>
         </record>
 
+        <record id="action_school_plan_switch_my" model="ir.actions.act_window">
+            <field name="name">我的换课</field>
+            <field name="res_model">school.timetable.plan.switch.wizard</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="target">current</field>
+            <field name="domain">[('create_uid','=',uid)]</field>
+            <field name="context">{'mail_create_nosubscribe':True}</field>
+        </record>
+
         <menuitem id="menuitem_mail_timetable_plan" name="课程" parent="mail.mail_feeds_main" sequence="11" groups="class_notify.group_class_user"/>
         <menuitem id="menuitem_mail_personal_timetable_plan" name="我的课程" parent="menuitem_mail_timetable_plan" sequence="10"
-                  action="action_my_personal_timetable_plan" />
+                  action="action_my_personal_timetable_plan"/>
+        <menuitem id="menuitem_school_plan_switch_my" name="我的换课申请" parent="menuitem_mail_timetable_plan" sequence="12"
+                  action="action_school_plan_switch_my"/>
     </data>
 </openerp>

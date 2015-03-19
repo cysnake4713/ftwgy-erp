@@ -10,7 +10,7 @@
         </record>
 
         <record id="action_school_plan_switch" model="ir.actions.act_window">
-            <field name="name">课程计划变更</field>
+            <field name="name">换课管理</field>
             <field name="res_model">school.timetable.plan.switch.wizard</field>
             <field name="view_type">form</field>
             <field name="view_mode">tree,form</field>
@@ -64,7 +64,8 @@
         <menuitem id="menuitem_school_plan_manage" name="课程计划管理" parent='menuitem_school_root' sequence="10" groups="class_notify.group_class_user"/>
         <menuitem id="menuitem_school_plan_all" name="课程计划" parent="menuitem_school_plan_manage" sequence="10"
                   action="action_school_plan_all"/>
-        <menuitem id="menuitem_school_plan_switch" name="课程计划变更" parent="menuitem_school_plan_manage" sequence="15"
+
+        <menuitem id="menuitem_school_plan_switch" name="换课申请管理" parent="menuitem_school_plan_manage" sequence="15"
                   groups="class_notify.group_class_admin"
                   action="action_school_plan_switch"/>
 
