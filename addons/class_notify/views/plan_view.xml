@@ -78,6 +78,7 @@
                     <field name="classroom"/>
                     <field name="subject"/>
                     <field name="teacher"/>
+                    <button string="该教师课程日历" name="button_teacher_related_plan" context="{'teacher':teacher}" type="object"/>
                     <field name="lesson_type"/>
                 </tree>
             </field>

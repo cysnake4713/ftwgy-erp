@@ -90,4 +90,17 @@ class Plan(models.Model):
                 (plan.id, u'(%s 第%s节)%s %s %s' % (plan.start_date, plan.lesson.name, plan.teacher.name, plan.classroom.name, plan.subject.name)))
         return result
 
-
+    @api.multi
+    def button_teacher_related_plan(self):
+        # compute the number of invoices to display
+        teacher_id = self.env.context.get('teacher')
+        return {
+            'name': u'教师课程日历',
+            'type': 'ir.actions.act_window',
+            'view_mode': 'calendar',
+            'view_type': 'form',
+            'res_model': 'school.timetable.plan',
+            'target': 'new',
+            'domain': [('teacher', '=', teacher_id)],
+            'context': self.env.context,
+        }
