@@ -19,48 +19,38 @@ msgstr ""
 #: code:addons/class_import/models/import_timetable.py:78
 #, python-format
 msgid "Already Have Cells, if what redo import, please delete current cells and import again."
-msgstr "Already Have Cells, if what redo import, please delete current cells and import again."
+msgstr "已经有课表信息,如果需要重新导入,请先清空课表."
 
 #. module: class_import
 #: field:school.timetable.import,code:0
 msgid "Code"
-msgstr "Code"
+msgstr "编码"
 
 #. module: class_import
 #: code:addons/class_import/models/import_timetable.py:83
 #, python-format
 msgid "Code Error, please select correct code to import file."
-msgstr "Code Error, please select correct code to import file."
-
-#. module: class_import
-#: field:school.timetable.import,create_uid:0
-msgid "Created by"
-msgstr "Created by"
-
-#. module: class_import
-#: field:school.timetable.import,create_date:0
-msgid "Created on"
-msgstr "Created on"
+msgstr "编码编码错误,请检查文件编码."
 
 #. module: class_import
 #: field:school.timetable.import,data:0
 msgid "Data"
-msgstr "Data"
+msgstr "数据"
 
 #. module: class_import
 #: selection:school.timetable.import,state:0
 msgid "Draft"
-msgstr "Draft"
+msgstr "草稿"
 
 #. module: class_import
 #: field:school.timetable.import,message:0
 msgid "Error Message"
-msgstr "Error Message"
+msgstr "错误信息"
 
 #. module: class_import
 #: selection:school.timetable.import,state:0
 msgid "Finish"
-msgstr "Finish"
+msgstr "完成"
 
 #. module: class_import
 #: selection:school.timetable.import,code:0
@@ -73,30 +63,20 @@ msgid "ID"
 msgstr "ID"
 
 #. module: class_import
-#: field:school.timetable.import,write_uid:0
-msgid "Last Updated by"
-msgstr "Last Updated by"
-
-#. module: class_import
-#: field:school.timetable.import,write_date:0
-msgid "Last Updated on"
-msgstr "Last Updated on"
-
-#. module: class_import
 #: field:school.timetable.import,state:0
 msgid "State"
-msgstr "State"
+msgstr "状态"
 
 #. module: class_import
 #: code:addons/class_import/models/import_timetable.py:38
 #, python-format
 msgid "The head is not equal"
-msgstr "The head is not equal"
+msgstr "表头不正确"
 
 #. module: class_import
 #: field:school.timetable.import,timetable_id:0
 msgid "Timetable Id"
-msgstr "Timetable Id"
+msgstr "课程表"
 
 #. module: class_import
 #: selection:school.timetable.import,code:0
@@ -106,7 +86,7 @@ msgstr "UTF-8"
 #. module: class_import
 #: view:school.timetable.import:class_import.view_school_timetable_import_form
 msgid "or"
-msgstr "or"
+msgstr "或者"
 
 #. module: class_import
 #: view:school.timetable.import:class_import.view_school_timetable_import_form
