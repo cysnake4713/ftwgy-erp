@@ -9,28 +9,38 @@ class PlanWizard(models.Model):
     _name = 'school.timetable.plan.switch.wizard'
     _inherit = 'odoosoft.workflow.abstract'
     _rec_name = 'origin_plan'
+    _order = 'id desc'
     _description = 'School Timetable Wizard'
 
+    _state_field_map = {
+        'center_confirm': True,
+    }
+
     state = fields.Selection(
-        [('draft', 'Draft'), ('target_teacher', 'Target Teacher Confirm'), ('center_confirm', 'Center Confirm'), ('confirmed', 'Confirmed')], 'State',
-        default='draft')
+        [('draft', 'Draft'), ('target_teacher', 'Target Teacher Confirm'), ('center_confirm', 'Center Confirm'), ('confirmed', 'Confirmed'),
+         ('cancel', 'Cancel')], 'State', track_visibility='onchange', default='draft')
 
     origin_plan = fields.Many2one('school.timetable.plan', 'Need To Switch')
-    origin_plan_classroom = fields.Many2one('school.classroom', 'Origin Plan Classroom', compute='_compute_origin_plan_info')
+    origin_plan_teacher = fields.Many2one('res.users', 'Origin Teacher', compute='_compute_plan_info')
+    origin_plan_classroom = fields.Many2one('school.classroom', 'Origin Plan Classroom', compute='_compute_plan_info')
     # origin_plan_date = fields.Date('Origin Plan Date',compute='_compute_origin_plan_info')
     # origin_plan_lesson = fields.Many2one('school.lesson', 'Origin Plan Lesson', compute='_compute_origin_plan_info')
 
     target_plan = fields.Many2one('school.timetable.plan', 'Switch To')
+    target_plan_teacher = fields.Many2one('res.users', 'Target Teacher', compute='_compute_plan_info')
 
     result_origin_plan = fields.Many2one('school.timetable.plan', 'Result Origin Plan')
     result_target_plan = fields.Many2one('school.timetable.plan', 'Result Target Plan')
 
+    center_confirm_user = fields.Many2one('res.users', 'Center Confirm User')
+    center_confirm_datetime = fields.Datetime('Center Confirm Datetime')
+
     @api.one
-    @api.depends('origin_plan')
-    def _compute_origin_plan_info(self):
+    @api.depends('origin_plan', 'target_plan')
+    def _compute_plan_info(self):
         self.origin_plan_classroom = self.origin_plan.classroom
-        # self.origin_plan_date = self.origin_plan.start_date
-        # self.origin_plan_lesson = self.origin_plan.lesson
+        self.origin_plan_teacher = self.origin_plan.teacher
+        self.target_plan_teacher = self.target_plan.teacher
 
     @api.constrains('origin_plan', 'target_plan')
     def _constrains_origin_target_plan(self):
@@ -42,7 +52,7 @@ class PlanWizard(models.Model):
             raise exceptions.Warning(_("target plan teacher's plan is conflict to the origin plan date and lesson!"))
 
     @api.multi
-    def button_switch_plan(self):
+    def switch_plan_confirm(self):
         if not (self.origin_plan or self.target_plan):
             raise exceptions.Warning(_('Must have both Origin Plan and Target Plan!'))
 
@@ -75,7 +85,7 @@ class PlanWizard(models.Model):
         if origin_plan and target_plan:
             text = u'您的课程:%s 调换到了:%s,<br/>请注意上课时间' % (origin_plan.name_get()[0][1], target_plan.name_get()[0][1])
             self.with_context({
-                'message_users': origin_plan.teacher.id,
+                'message_users': [origin_plan.teacher.id],
                 'message': text,
             }).common_apply()
 

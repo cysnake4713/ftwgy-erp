@@ -106,27 +106,50 @@
             <field name="arch" type="xml">
                 <form>
                     <header>
-                        <button name="button_switch_plan" type="object" string="课程变换" groups="class_notify.group_class_admin" states="draft"/>
-                        <button name="button_reverse_plan" type="object" string="恢复" groups="class_notify.group_class_admin" states="confirmed"/>
-                        <field name="state" widget="statusbar"/>
+                        <button name="common_apply" string="提交" type="object" class="oe_highlight" states="draft"
+                                context="{'state':'target_teacher',
+                                'message_users':[target_plan_teacher],
+                                'message':'提出同您换课,请确认',
+                                }"/>
+
+                        <button name="common_apply" string="确认" type="object" class="oe_highlight" states="target_teacher"
+                                context="{'state':'center_confirm',
+                                'message_groups':[%(class_notify.group_class_switch_manager)d],
+                                'message':'提出换课申请,请审批',
+                                }"/>
+
+                        <button name="switch_plan_confirm" string="审批通过" type="object" class="oe_highlight" states="center_confirm" is_log="1"/>
+
+                        <button name="common_reject" string="取消申请" type="object" states="draft,target_teacher,center_confirm" is_reject="1" is_log="1"
+                                context="{'state':'cancel',
+                                'message_users':[origin_plan_teacher,target_plan_teacher],
+                                'message':'换课申请被取消,请注意课程安排',
+                                }"/>
+                        <!--<button name="button_switch_plan" type="object" string="课程变换" groups="class_notify.group_class_admin" states="draft"/>-->
+                        <!--<button name="button_reverse_plan" type="object" string="恢复" groups="class_notify.group_class_admin" states="confirmed"/>-->
+                        <field name="state" widget="statusbar" statusbar_visible="draft,target_teacher,center_confirm,confirmed"/>
                     </header>
                     <sheet>
+                        <group invisible="1">
+                            <field name="origin_plan_classroom"/>
+                            <field name="origin_plan_teacher"/>
+                            <field name="target_plan_teacher"/>
+                        </group>
                         <group string="调换结果" col="4" states="confirmed">
                             <field name="result_origin_plan" readonly="1"/>
                             <field name="result_target_plan" readonly="1"/>
                         </group>
-                        <group string="需要调换的课程">
-                            <group>
-                                <field name="origin_plan" required="1" context="{'tree_view_ref': 'class_notify.view_school_plan_tree'}"
-                                       domain="[('teacher','=',uid),('start_date','&gt;=',current_date)]"
-                                       states_editable="{'draft':True}"/>
-                            </group>
-                            <group>
-                                <field name="origin_plan_classroom" invisible="1"/>
-                                <field name="target_plan" required="1" context="{'tree_view_ref': 'class_notify.view_school_plan_tree'}"
-                                       domain="[('classroom','=',origin_plan_classroom),('start_date','&gt;=',current_date),('teacher','!=',uid)]"
-                                       states_editable="{'draft':True}"/>
-                            </group>
+                        <group string="需要调换的课程" col="4">
+                            <field name="origin_plan" required="1" context="{'tree_view_ref': 'class_notify.view_school_plan_tree'}"
+                                   domain="[('teacher','=',uid),('start_date','&gt;=',current_date)]"
+                                   states_editable="{'draft':True}"/>
+                            <field name="target_plan" required="1" context="{'tree_view_ref': 'class_notify.view_school_plan_tree'}"
+                                   domain="[('classroom','=',origin_plan_classroom),('start_date','&gt;=',current_date),('teacher','!=',uid)]"
+                                   states_editable="{'draft':True}"/>
+                        </group>
+                        <group string="审批信息" col="4" states="confirmed">
+                            <field name="center_confirm_user" readonly="1"/>
+                            <field name="center_confirm_datetime" readonly="1"/>
                         </group>
                     </sheet>
                     <div class="oe_chatter">
@@ -146,6 +169,7 @@
                     <field name="target_plan"/>
                     <field name="result_origin_plan"/>
                     <field name="result_target_plan"/>
+                    <field name="state"/>
                 </tree>
             </field>
         </record>

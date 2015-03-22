@@ -5,7 +5,11 @@
             <field name="name">普通老师</field>
             <field name="category_id" ref="base.module_category_school"/>
         </record>
-
+        <record id="group_class_switch_manager" model="res.groups">
+            <field name="name">换课审批</field>
+            <field name="category_id" ref="base.module_category_school"/>
+            <field name="implied_ids" eval="[(4, ref('class_notify.group_class_user'))]"/>
+        </record>
         <record id="group_class_admin" model="res.groups">
             <field name="name">管理员</field>
             <field name="category_id" ref="base.module_category_school"/>
