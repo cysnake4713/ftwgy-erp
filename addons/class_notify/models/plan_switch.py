@@ -13,6 +13,8 @@ class PlanWizard(models.Model):
     _description = 'School Timetable Wizard'
 
     _state_field_map = {
+        'draft': True,
+        'target_teacher': True,
         'center_confirm': True,
     }
 
@@ -31,6 +33,12 @@ class PlanWizard(models.Model):
 
     result_origin_plan = fields.Many2one('school.timetable.plan', 'Result Origin Plan')
     result_target_plan = fields.Many2one('school.timetable.plan', 'Result Target Plan')
+
+    target_teacher_user = fields.Many2one('res.users', 'Target Teacher User')
+    target_teacher_datetime = fields.Datetime('Target Teacher Datetime')
+
+    draft_user = fields.Many2one('res.users', 'Draft User')
+    draft_datetime = fields.Datetime('Draft Datetime')
 
     center_confirm_user = fields.Many2one('res.users', 'Center Confirm User')
     center_confirm_datetime = fields.Datetime('Center Confirm Datetime')

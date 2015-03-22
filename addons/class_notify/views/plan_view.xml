@@ -106,19 +106,23 @@
             <field name="arch" type="xml">
                 <form>
                     <header>
-                        <button name="common_apply" string="提交" type="object" class="oe_highlight" states="draft"
+                        <button name="common_apply" string="提交" type="object" class="oe_highlight"
+                                states_editable="{'draft':{'users':[origin_plan_teacher]}}"
                                 context="{'state':'target_teacher',
                                 'message_users':[target_plan_teacher],
                                 'message':'提出同您换课,请确认',
                                 }"/>
 
-                        <button name="common_apply" string="确认" type="object" class="oe_highlight" states="target_teacher"
+                        <button name="common_apply" string="确认" type="object" class="oe_highlight"
+                                states_editable="{'target_teacher':{'users':[target_plan_teacher]}}"
                                 context="{'state':'center_confirm',
                                 'message_groups':[%(class_notify.group_class_switch_manager)d],
                                 'message':'提出换课申请,请审批',
                                 }"/>
 
-                        <button name="switch_plan_confirm" string="审批通过" type="object" class="oe_highlight" states="center_confirm" is_log="1"/>
+                        <button name="switch_plan_confirm" string="审批通过" type="object" class="oe_highlight" is_log="1"
+                                states_editable="{'center_confirm':{'groups':[%(class_notify.group_class_switch_manager)d]}}"
+                                />
 
                         <button name="common_reject" string="取消申请" type="object" states="draft,target_teacher,center_confirm" is_reject="1" is_log="1"
                                 context="{'state':'cancel',
@@ -164,7 +168,7 @@
             <field name="name">school.timetable.plan.switch.wizard.tree</field>
             <field name="model">school.timetable.plan.switch.wizard</field>
             <field name="arch" type="xml">
-                <tree>
+                <tree colors="grey:state=='cancel'">
                     <field name="origin_plan"/>
                     <field name="target_plan"/>
                     <field name="result_origin_plan"/>

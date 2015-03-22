@@ -16,7 +16,7 @@
             <field name="view_type">form</field>
             <field name="view_mode">tree,form</field>
             <field name="target">current</field>
-            <field name="domain">[('create_uid','=',uid)]</field>
+            <field name="domain">['|','|',('draft_user','=',uid),('target_teacher_user','=',uid),('create_uid','=',uid)]</field>
             <field name="context">{'mail_create_nosubscribe':True}</field>
         </record>
 
