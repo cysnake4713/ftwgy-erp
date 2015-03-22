@@ -1,0 +1,140 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* class_import
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 8.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-03-22 14:04+0000\n"
+"PO-Revision-Date: 2015-03-22 14:04+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: class_import
+#: code:addons/class_import/models/import_timetable.py:78
+#, python-format
+msgid "Already Have Cells, if what redo import, please delete current cells and import again."
+msgstr "Already Have Cells, if what redo import, please delete current cells and import again."
+
+#. module: class_import
+#: field:school.timetable.import,code:0
+msgid "Code"
+msgstr "Code"
+
+#. module: class_import
+#: code:addons/class_import/models/import_timetable.py:83
+#, python-format
+msgid "Code Error, please select correct code to import file."
+msgstr "Code Error, please select correct code to import file."
+
+#. module: class_import
+#: field:school.timetable.import,create_uid:0
+msgid "Created by"
+msgstr "Created by"
+
+#. module: class_import
+#: field:school.timetable.import,create_date:0
+msgid "Created on"
+msgstr "Created on"
+
+#. module: class_import
+#: field:school.timetable.import,data:0
+msgid "Data"
+msgstr "Data"
+
+#. module: class_import
+#: selection:school.timetable.import,state:0
+msgid "Draft"
+msgstr "Draft"
+
+#. module: class_import
+#: field:school.timetable.import,message:0
+msgid "Error Message"
+msgstr "Error Message"
+
+#. module: class_import
+#: selection:school.timetable.import,state:0
+msgid "Finish"
+msgstr "Finish"
+
+#. module: class_import
+#: selection:school.timetable.import,code:0
+msgid "GBK"
+msgstr "GBK"
+
+#. module: class_import
+#: field:school.timetable.import,id:0
+msgid "ID"
+msgstr "ID"
+
+#. module: class_import
+#: field:school.timetable.import,write_uid:0
+msgid "Last Updated by"
+msgstr "Last Updated by"
+
+#. module: class_import
+#: field:school.timetable.import,write_date:0
+msgid "Last Updated on"
+msgstr "Last Updated on"
+
+#. module: class_import
+#: field:school.timetable.import,state:0
+msgid "State"
+msgstr "State"
+
+#. module: class_import
+#: code:addons/class_import/models/import_timetable.py:38
+#, python-format
+msgid "The head is not equal"
+msgstr "The head is not equal"
+
+#. module: class_import
+#: field:school.timetable.import,timetable_id:0
+msgid "Timetable Id"
+msgstr "Timetable Id"
+
+#. module: class_import
+#: selection:school.timetable.import,code:0
+msgid "UTF-8"
+msgstr "UTF-8"
+
+#. module: class_import
+#: view:school.timetable.import:class_import.view_school_timetable_import_form
+msgid "or"
+msgstr "or"
+
+#. module: class_import
+#: view:school.timetable.import:class_import.view_school_timetable_import_form
+msgid "上传的文件必须是csv格式,并且注意编码选择,一般windows用户请选择gbk,linux用户选择utf-8"
+msgstr "上传的文件必须是csv格式,并且注意编码选择,一般windows用户请选择gbk,linux用户选择utf-8"
+
+#. module: class_import
+#: view:school.timetable.import:class_import.view_school_timetable_import_form
+msgid "参考样例文件"
+msgstr "参考样例文件"
+
+#. module: class_import
+#: view:school.timetable:class_import.view_school_timetable_form_inherit
+msgid "如果需要重新导入本课表内容，请先点击[清除课表信息]，再执行本操作。"
+msgstr "如果需要重新导入本课表内容，请先点击[清除课表信息]，再执行本操作。"
+
+#. module: class_import
+#: view:school.timetable:class_import.view_school_timetable_form_inherit
+msgid "导入课表信息"
+msgstr "导入课表信息"
+
+#. module: class_import
+#: view:school.timetable.import:class_import.view_school_timetable_import_form
+msgid "文件上传"
+msgstr "文件上传"
+
+#. module: class_import
+#: model:ir.actions.act_window,name:class_import.action_school_timetable_import
+msgid "课表导入"
+msgstr "课表导入"
+
