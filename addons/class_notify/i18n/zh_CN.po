@@ -1,0 +1,684 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* class_notify
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 8.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-03-22 13:48+0000\n"
+"PO-Revision-Date: 2015-03-22 13:48+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: class_notify
+#: selection:school.timetable.plan.switch.wizard,state:0
+msgid "Cancel"
+msgstr "取消"
+
+#. module: class_notify
+#: field:school.timetable,cell_ids:0
+msgid "Cells"
+msgstr "单元格"
+
+#. module: class_notify
+#: selection:school.timetable.plan.switch.wizard,state:0
+msgid "Center Confirm"
+msgstr "教务处审批"
+
+#. module: class_notify
+#: field:school.timetable.plan.switch.wizard,center_confirm_datetime:0
+msgid "Center Confirm Datetime"
+msgstr "教务处审批时间"
+
+#. module: class_notify
+#: field:school.timetable.plan.switch.wizard,center_confirm_user:0
+msgid "Center Confirm User"
+msgstr "教务处审批人"
+
+#. module: class_notify
+#: field:school.timetable.cell,classroom:0
+#: field:school.timetable.cell.abstract,classroom:0
+#: field:school.timetable.plan,classroom:0
+msgid "Classroom"
+msgstr "班级"
+
+#. module: class_notify
+#: selection:school.timetable.plan.switch.wizard,state:0
+msgid "Confirmed"
+msgstr "通过"
+
+#. module: class_notify
+#: field:school.classroom,create_uid:0
+#: field:school.lesson,create_uid:0
+#: field:school.semester,create_uid:0
+#: field:school.subject,create_uid:0
+#: field:school.timetable,create_uid:0
+#: field:school.timetable.cell,create_uid:0
+#: field:school.timetable.plan,create_uid:0
+#: field:school.timetable.plan.switch.wizard,create_uid:0
+#: field:school.timetable.wizard,create_uid:0
+msgid "Created by"
+msgstr "Created by"
+
+#. module: class_notify
+#: field:school.classroom,create_date:0
+#: field:school.lesson,create_date:0
+#: field:school.semester,create_date:0
+#: field:school.subject,create_date:0
+#: field:school.timetable,create_date:0
+#: field:school.timetable.cell,create_date:0
+#: field:school.timetable.plan,create_date:0
+#: field:school.timetable.plan.switch.wizard,create_date:0
+#: field:school.timetable.wizard,create_date:0
+msgid "Created on"
+msgstr "Created on"
+
+#. module: class_notify
+#: code:addons/class_notify/models/timetable.py:54
+#, python-format
+msgid "Current timetable already have plans!"
+msgstr "当前课程表已经生成过上课计划!"
+
+#. module: class_notify
+#: help:school.timetable.plan.switch.wizard,message_last_post:0
+msgid "Date of the last message posted on the record."
+msgstr "Date of the last message posted on the record."
+
+#. module: class_notify
+#: selection:school.timetable.plan.switch.wizard,state:0
+msgid "Draft"
+msgstr "草稿"
+
+#. module: class_notify
+#: field:school.timetable.plan.switch.wizard,draft_datetime:0
+msgid "Draft Datetime"
+msgstr "Draft Datetime"
+
+#. module: class_notify
+#: field:school.timetable.plan.switch.wizard,draft_user:0
+msgid "Draft User"
+msgstr "Draft User"
+
+#. module: class_notify
+#: field:school.semester,end_date:0
+msgid "End Date"
+msgstr "End Date"
+
+#. module: class_notify
+#: code:addons/class_notify/models/config.py:62
+#, python-format
+msgid "End Date cannot be set before Start Date."
+msgstr "End Date cannot be set before Start Date."
+
+#. module: class_notify
+#: field:school.timetable.plan,end_datetime:0
+msgid "End Datetime"
+msgstr "End Datetime"
+
+#. module: class_notify
+#: field:school.timetable.plan.switch.wizard,message_follower_ids:0
+msgid "Followers"
+msgstr "Followers"
+
+#. module: class_notify
+#: view:school.timetable.plan:class_notify.view_school_plan_search
+msgid "Group By"
+msgstr "Group By"
+
+#. module: class_notify
+#: help:school.timetable.plan.switch.wizard,message_summary:0
+msgid "Holds the Chatter summary (number of messages, ...). This summary is directly in html format in order to be inserted in kanban views."
+msgstr "Holds the Chatter summary (number of messages, ...). This summary is directly in html format in order to be inserted in kanban views."
+
+#. module: class_notify
+#: field:report.class_notify.report_timetable,id:0
+#: field:school.classroom,id:0
+#: field:school.lesson,id:0
+#: field:school.semester,id:0
+#: field:school.subject,id:0
+#: field:school.timetable,id:0
+#: field:school.timetable.cell,id:0
+#: field:school.timetable.cell.abstract,id:0
+#: field:school.timetable.plan,id:0
+#: field:school.timetable.plan.switch.wizard,id:0
+#: field:school.timetable.wizard,id:0
+msgid "ID"
+msgstr "ID"
+
+#. module: class_notify
+#: help:school.timetable.plan.switch.wizard,message_unread:0
+msgid "If checked new messages require your attention."
+msgstr "If checked new messages require your attention."
+
+#. module: class_notify
+#: field:school.timetable,initial_lesson_type:0
+#: field:school.timetable.wizard,lesson_type:0
+msgid "Initial Lesson Type"
+msgstr "Initial Lesson Type"
+
+#. module: class_notify
+#: field:school.timetable.plan,active:0
+msgid "Is Active"
+msgstr "Is Active"
+
+#. module: class_notify
+#: field:school.timetable.plan.switch.wizard,message_is_follower:0
+msgid "Is a Follower"
+msgstr "Is a Follower"
+
+#. module: class_notify
+#: field:school.timetable.plan.switch.wizard,message_last_post:0
+msgid "Last Message Date"
+msgstr "Last Message Date"
+
+#. module: class_notify
+#: field:school.classroom,write_uid:0
+#: field:school.lesson,write_uid:0
+#: field:school.semester,write_uid:0
+#: field:school.subject,write_uid:0
+#: field:school.timetable,write_uid:0
+#: field:school.timetable.cell,write_uid:0
+#: field:school.timetable.plan,write_uid:0
+#: field:school.timetable.plan.switch.wizard,write_uid:0
+#: field:school.timetable.wizard,write_uid:0
+msgid "Last Updated by"
+msgstr "Last Updated by"
+
+#. module: class_notify
+#: field:school.classroom,write_date:0
+#: field:school.lesson,write_date:0
+#: field:school.semester,write_date:0
+#: field:school.subject,write_date:0
+#: field:school.timetable,write_date:0
+#: field:school.timetable.cell,write_date:0
+#: field:school.timetable.plan,write_date:0
+#: field:school.timetable.plan.switch.wizard,write_date:0
+#: field:school.timetable.wizard,write_date:0
+msgid "Last Updated on"
+msgstr "Last Updated on"
+
+#. module: class_notify
+#: field:school.timetable.cell,lesson:0
+#: field:school.timetable.cell.abstract,lesson:0
+#: field:school.timetable.plan,lesson:0
+msgid "Lesson"
+msgstr "Lesson"
+
+#. module: class_notify
+#: field:school.timetable.plan,lesson_type:0
+msgid "Lesson Type"
+msgstr "Lesson Type"
+
+#. module: class_notify
+#: field:school.timetable.plan.switch.wizard,message_ids:0
+msgid "Messages"
+msgstr "Messages"
+
+#. module: class_notify
+#: help:school.timetable.plan.switch.wizard,message_ids:0
+msgid "Messages and communication history"
+msgstr "Messages and communication history"
+
+#. module: class_notify
+#: code:addons/class_notify/models/plan_switch.py:65
+#, python-format
+msgid "Must have both Origin Plan and Target Plan!"
+msgstr "Must have both Origin Plan and Target Plan!"
+
+#. module: class_notify
+#: field:school.classroom,name:0
+#: field:school.lesson,name:0
+#: field:school.semester,name:0
+#: field:school.subject,name:0
+msgid "Name"
+msgstr "Name"
+
+#. module: class_notify
+#: field:school.timetable.plan.switch.wizard,origin_plan:0
+msgid "Need To Switch"
+msgstr "Need To Switch"
+
+#. module: class_notify
+#: field:school.timetable,plan_ids:0
+msgid "Plans"
+msgstr "Plans"
+
+#. module: class_notify
+#: field:school.timetable.plan.switch.wizard,result_origin_plan:0
+msgid "Result Origin Plan"
+msgstr "Result Origin Plan"
+
+#. module: class_notify
+#: field:school.timetable.plan.switch.wizard,result_target_plan:0
+msgid "Result Target Plan"
+msgstr "Result Target Plan"
+
+#. module: class_notify
+#: field:school.timetable,semester_id:0
+msgid "Semester id"
+msgstr "Semester id"
+
+#. module: class_notify
+#: field:school.subject,short_name:0
+msgid "Short Name"
+msgstr "Short Name"
+
+#. module: class_notify
+#: field:school.semester,start_date:0
+#: field:school.timetable.plan,start_date:0
+#: field:school.timetable.wizard,start_date:0
+msgid "Start Date"
+msgstr "Start Date"
+
+#. module: class_notify
+#: field:school.timetable.plan,start_datetime:0
+msgid "Start Datetime"
+msgstr "Start Datetime"
+
+#. module: class_notify
+#: field:school.timetable.plan.switch.wizard,state:0
+msgid "State"
+msgstr "State"
+
+#. module: class_notify
+#: field:school.timetable.cell,subject:0
+#: field:school.timetable.cell.abstract,subject:0
+#: field:school.timetable.plan,subject:0
+msgid "Subject"
+msgstr "Subject"
+
+#. module: class_notify
+#: field:school.timetable.plan.switch.wizard,message_summary:0
+msgid "Summary"
+msgstr "Summary"
+
+#. module: class_notify
+#: field:school.lesson,summer_end_time:0
+msgid "Summer End Time"
+msgstr "Summer End Time"
+
+#. module: class_notify
+#: field:school.lesson,summer_start_time:0
+msgid "Summer Start Time"
+msgstr "Summer Start Time"
+
+#. module: class_notify
+#: field:school.timetable.plan.switch.wizard,target_plan:0
+msgid "Switch To"
+msgstr "Switch To"
+
+#. module: class_notify
+#: selection:school.timetable.plan.switch.wizard,state:0
+msgid "Target Teacher Confirm"
+msgstr "Target Teacher Confirm"
+
+#. module: class_notify
+#: field:school.timetable.plan.switch.wizard,target_teacher_datetime:0
+msgid "Target Teacher Datetime"
+msgstr "Target Teacher Datetime"
+
+#. module: class_notify
+#: field:school.timetable.plan.switch.wizard,target_teacher_user:0
+msgid "Target Teacher User"
+msgstr "Target Teacher User"
+
+#. module: class_notify
+#: field:school.timetable.cell,teacher:0
+#: field:school.timetable.cell.abstract,teacher:0
+#: field:school.timetable.plan,teacher:0
+msgid "Teacher"
+msgstr "Teacher"
+
+#. module: class_notify
+#: field:school.timetable.cell,timetable_id:0
+msgid "Timetable"
+msgstr "Timetable"
+
+#. module: class_notify
+#: code:addons/class_notify/models/timetable.py:90
+#, python-format
+msgid "Timetable have plans, please delete plans before delete the timetable."
+msgstr "Timetable have plans, please delete plans before delete the timetable."
+
+#. module: class_notify
+#: field:school.timetable.plan.switch.wizard,message_unread:0
+msgid "Unread Messages"
+msgstr "Unread Messages"
+
+#. module: class_notify
+#: model:ir.model,name:class_notify.model_res_users
+msgid "Users"
+msgstr "用户"
+
+#. module: class_notify
+#: code:addons/class_notify/models/timetable.py:54
+#, python-format
+msgid "Warning"
+msgstr "Warning"
+
+#. module: class_notify
+#: field:school.timetable.cell,week:0
+msgid "Week"
+msgstr "Week"
+
+#. module: class_notify
+#: field:school.lesson,winter_end_time:0
+msgid "Winter End Time"
+msgstr "Winter End Time"
+
+#. module: class_notify
+#: field:school.lesson,winter_start_time:0
+msgid "Winter Start Time"
+msgstr "Winter Start Time"
+
+#. module: class_notify
+#: model:ir.actions.act_window,name:class_notify.action_school_timetable_wizard
+msgid "action.school.timetable.wizard"
+msgstr "action.school.timetable.wizard"
+
+#. module: class_notify
+#: code:addons/class_notify/models/config.py:17
+#: code:addons/class_notify/models/config.py:26
+#: sql_constraint:school.classroom:0
+#: sql_constraint:school.subject:0
+#, python-format
+msgid "name must be unique !"
+msgstr "name must be unique !"
+
+#. module: class_notify
+#: view:school.timetable.wizard:class_notify.view_school_timetable_wizard_form
+msgid "or"
+msgstr "or"
+
+#. module: class_notify
+#: code:addons/class_notify/models/plan_switch.py:60
+#, python-format
+msgid "target plan teacher's plan is conflict to the origin plan date and lesson!"
+msgstr "target plan teacher's plan is conflict to the origin plan date and lesson!"
+
+#. module: class_notify
+#: view:school.timetable.plan:class_notify.view_school_plan_form
+msgid "上课时间:"
+msgstr "上课时间:"
+
+#. module: class_notify
+#: selection:school.timetable,initial_lesson_type:0
+#: selection:school.timetable.plan,lesson_type:0
+#: selection:school.timetable.wizard,lesson_type:0
+msgid "冬时"
+msgstr "冬时"
+
+#. module: class_notify
+#: view:school.timetable.plan.switch.wizard:class_notify.view_school_plan_switch_form
+msgid "取消申请"
+msgstr "取消申请"
+
+#. module: class_notify
+#: model:ir.ui.menu,name:class_notify.menuitem_school_config_base
+msgid "基础数据"
+msgstr "基础数据"
+
+#. module: class_notify
+#: selection:school.timetable,initial_lesson_type:0
+#: selection:school.timetable.plan,lesson_type:0
+#: selection:school.timetable.wizard,lesson_type:0
+msgid "夏时"
+msgstr "夏时"
+
+#. module: class_notify
+#: model:ir.ui.menu,name:class_notify.menuitem_school_config_semester
+msgid "学期"
+msgstr "学期"
+
+#. module: class_notify
+#: model:ir.actions.act_window,name:class_notify.action_school_semester_config
+msgid "学期设置"
+msgstr "学期设置"
+
+#. module: class_notify
+#: view:school.timetable.plan.switch.wizard:class_notify.view_school_plan_switch_form
+msgid "审批信息"
+msgstr "审批信息"
+
+#. module: class_notify
+#: view:school.timetable.plan.switch.wizard:class_notify.view_school_plan_switch_form
+msgid "审批通过"
+msgstr "审批通过"
+
+#. module: class_notify
+#: model:ir.actions.act_window,name:class_notify.action_school_plan_switch_my
+msgid "我的换课"
+msgstr "我的换课"
+
+#. module: class_notify
+#: model:ir.ui.menu,name:class_notify.menuitem_school_plan_switch_my
+msgid "我的换课申请"
+msgstr "我的换课申请"
+
+#. module: class_notify
+#: model:ir.ui.menu,name:class_notify.menuitem_mail_personal_timetable_plan
+msgid "我的课程"
+msgstr "我的课程"
+
+#. module: class_notify
+#: model:ir.actions.act_window,name:class_notify.action_my_personal_timetable_plan
+msgid "我的课程日历"
+msgstr "我的课程日历"
+
+#. module: class_notify
+#: model:ir.actions.act_window,name:class_notify.action_school_plan_all
+msgid "所有上课提醒"
+msgstr "所有上课提醒"
+
+#. module: class_notify
+#: model:ir.actions.act_window,name:class_notify.action_school_timetable_all
+msgid "所有课表"
+msgstr "所有课表"
+
+#. module: class_notify
+#: model:res.groups,name:class_notify.group_class_switch_manager
+msgid "换课审批"
+msgstr "换课审批"
+
+#. module: class_notify
+#: model:ir.ui.menu,name:class_notify.menuitem_school_plan_switch
+msgid "换课申请管理"
+msgstr "换课申请管理"
+
+#. module: class_notify
+#: model:ir.actions.act_window,name:class_notify.action_school_plan_switch
+msgid "换课管理"
+msgstr "换课管理"
+
+#. module: class_notify
+#: selection:school.timetable.cell,week:0
+msgid "星期一"
+msgstr "星期一"
+
+#. module: class_notify
+#: selection:school.timetable.cell,week:0
+msgid "星期三"
+msgstr "星期三"
+
+#. module: class_notify
+#: selection:school.timetable.cell,week:0
+msgid "星期二"
+msgstr "星期二"
+
+#. module: class_notify
+#: selection:school.timetable.cell,week:0
+msgid "星期五"
+msgstr "星期五"
+
+#. module: class_notify
+#: selection:school.timetable.cell,week:0
+msgid "星期六"
+msgstr "星期六"
+
+#. module: class_notify
+#: selection:school.timetable.cell,week:0
+msgid "星期四"
+msgstr "星期四"
+
+#. module: class_notify
+#: selection:school.timetable.cell,week:0
+msgid "星期日"
+msgstr "星期日"
+
+#. module: class_notify
+#: model:res.groups,name:class_notify.group_class_user
+msgid "普通老师"
+msgstr "普通老师"
+
+#. module: class_notify
+#: view:school.timetable:class_notify.view_school_timetable_form
+msgid "更新课程时刻会对当前课表下的所有课程计划产生影响，请谨慎处理。"
+msgstr "更新课程时刻会对当前课表下的所有课程计划产生影响，请谨慎处理。"
+
+#. module: class_notify
+#: view:school.timetable:class_notify.view_school_timetable_form
+msgid "更新课程时刻类型"
+msgstr "更新课程时刻类型"
+
+#. module: class_notify
+#: view:school.timetable.plan:class_notify.view_school_plan_search
+msgid "未执行课程"
+msgstr "未执行课程"
+
+#. module: class_notify
+#: view:school.timetable:class_notify.view_school_timetable_form
+msgid "清除课程计划"
+msgstr "清除课程计划"
+
+#. module: class_notify
+#: view:school.timetable:class_notify.view_school_timetable_form
+msgid "清除课表信息"
+msgstr "清除课表信息"
+
+#. module: class_notify
+#: model:ir.ui.menu,name:class_notify.menuitem_school_config_classroom
+msgid "班级"
+msgstr "班级"
+
+#. module: class_notify
+#: model:ir.actions.act_window,name:class_notify.action_school_classroom_config
+msgid "班级设置"
+msgstr "班级设置"
+
+#. module: class_notify
+#: view:school.timetable:class_notify.view_school_timetable_form
+msgid "生成课程计划"
+msgstr "生成课程计划"
+
+#. module: class_notify
+#: view:school.timetable:class_notify.view_school_timetable_form
+msgid "确定清除本课表的排课信息？"
+msgstr "确定清除本课表的排课信息？"
+
+#. module: class_notify
+#: model:ir.ui.menu,name:class_notify.menuitem_school_config_subject
+msgid "科目"
+msgstr "科目"
+
+#. module: class_notify
+#: model:ir.actions.act_window,name:class_notify.action_school_subject_config
+msgid "科目设置"
+msgstr "科目设置"
+
+#. module: class_notify
+#: model:res.groups,name:class_notify.group_class_admin
+msgid "管理员"
+msgstr "管理员"
+
+#. module: class_notify
+#: model:ir.ui.menu,name:class_notify.menuitem_school_config_lesson
+msgid "节数"
+msgstr "节数"
+
+#. module: class_notify
+#: model:ir.actions.act_window,name:class_notify.action_school_lesson_config
+msgid "节数设置"
+msgstr "节数设置"
+
+#. module: class_notify
+#: model:ir.ui.menu,name:class_notify.menuitem_school_config
+msgid "设置"
+msgstr "设置"
+
+#. module: class_notify
+#: view:school.timetable:class_notify.view_school_timetable_form
+msgid "请在确认课表信息无误后，再生成课程计划，生成课程计划会花费较长时间，期间请耐心等待"
+msgstr "请在确认课表信息无误后，再生成课程计划，生成课程计划会花费较长时间，期间请耐心等待"
+
+#. module: class_notify
+#: model:ir.ui.menu,name:class_notify.menuitem_mail_timetable_plan
+msgid "课程"
+msgstr "课程"
+
+#. module: class_notify
+#: view:website:class_notify.report_timetable
+msgid "课程总表"
+msgstr "课程总表"
+
+#. module: class_notify
+#. openerp-web
+#: code:addons/class_notify/static/src/xml/plan_quick.xml:8
+#, python-format
+msgid "课程日期:"
+msgstr "课程日期:"
+
+#. module: class_notify
+#: model:ir.ui.menu,name:class_notify.menuitem_school_root
+msgid "课程管理"
+msgstr "课程管理"
+
+#. module: class_notify
+#: model:ir.ui.menu,name:class_notify.menuitem_school_plan_all
+msgid "课程计划"
+msgstr "课程计划"
+
+#. module: class_notify
+#: view:school.timetable:class_notify.view_school_timetable_form
+msgid "课程计划一旦清除后数据不可恢复，请谨慎处理。"
+msgstr "课程计划一旦清除后数据不可恢复，请谨慎处理。"
+
+#. module: class_notify
+#: model:ir.ui.menu,name:class_notify.menuitem_school_plan_manage
+msgid "课程计划管理"
+msgstr "课程计划管理"
+
+#. module: class_notify
+#: model:ir.ui.menu,name:class_notify.menuitem_school_timetable_all
+msgid "课表"
+msgstr "课表"
+
+#. module: class_notify
+#: model:ir.actions.report.xml,name:class_notify.action_report_timetable
+msgid "课表一览"
+msgstr "课表一览"
+
+#. module: class_notify
+#: view:school.timetable:class_notify.view_school_timetable_form
+msgid "课表信息"
+msgstr "课表信息"
+
+#. module: class_notify
+#: model:ir.ui.menu,name:class_notify.menuitem_school_timetable_manage
+msgid "课表管理"
+msgstr "课表管理"
+
+#. module: class_notify
+#: view:school.timetable.plan.switch.wizard:class_notify.view_school_plan_switch_form
+msgid "调换结果"
+msgstr "调换结果"
+
+#. module: class_notify
+#: view:school.timetable.plan.switch.wizard:class_notify.view_school_plan_switch_form
+msgid "需要调换的课程"
+msgstr "需要调换的课程"
+
