@@ -10,10 +10,10 @@ class TempDepartment(models.Model):
     _rec_name = 'name'
 
     name = fields.Char('Name', required=True)
+    users = fields.Many2many('res.users', 'hr_department_users_rel', 'department_id', 'user_id', 'Users')
 
 
 class ResUsersInherit(models.Model):
     _inherit = 'res.users'
 
-    department_id = fields.Many2one('hr.department', 'Department')
-
+    department_id = fields.Many2many('hr.department', 'hr_department_users_rel', 'user_id', 'department_id', 'Department')

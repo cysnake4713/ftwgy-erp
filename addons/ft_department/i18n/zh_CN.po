@@ -56,6 +56,11 @@ msgid "Name"
 msgstr "名称"
 
 #. module: ft_department
+#: field:hr.department,users:0
+msgid "Users"
+msgstr "成员"
+
+#. module: ft_department
 #: model:ir.model,name:ft_department.model_res_users
 msgid "Users"
 msgstr "用户"
