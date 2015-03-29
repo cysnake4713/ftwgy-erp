@@ -10,6 +10,7 @@
     'website': 'http://odoosoft.com',
     'depends': ['base', 'mail', 'odoosoft_workflow'],
     'data': [
+        'data/data.xml',
         'security/security.xml',
         'security/ir.model.access.csv',
         'views/menu.xml',

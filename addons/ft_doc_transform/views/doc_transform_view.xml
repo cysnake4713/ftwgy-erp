@@ -27,6 +27,7 @@
                                 context="{'state':'principal',
                                 'message_users':[request_principal_user],
                                 'message':'需要您的批示',
+                                'wechat_code':[%(ft_doc_transform.map_ft_doc_transform)d],
                                 }"/>
 
                         <button name="principal_apply" string="提交" type="object" class="oe_highlight" is_log="1"
@@ -89,7 +90,7 @@
                                 <p>如果本公文需要抄送部门经理,请在下方字段填入部门经理姓名</p>
                             </div>
                             <field name="request_department_users" string="抄送部门执行人" widget="many2many_tags"
-                                   attrs="{'required':[('state','=','principal'),('principal_apply_type','=','department')]}"
+                                   states_required="department"
                                    domain="[('groups_id','=',%(ft_doc_transform.group_doc_trans_department)d)]"
                                    states_editable="{'principal':{'users':[request_principal_user]},'department':{'users':[1]}}"/>
 
