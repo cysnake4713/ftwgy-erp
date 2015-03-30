@@ -67,6 +67,10 @@
                             <field name="name" states_editable="{'draft':{'groups':%(ft_doc_transform.group_doc_trans_user)d}}"/>
                             <field name="attachments" widget="many2many_binary"
                                    states_editable="{'draft':{'groups':[%(ft_doc_transform.group_doc_trans_user)d]}}"/>
+                            <group colspan="2" string="备注">
+                                <field name="comment" nolabel="1" colspan="2"
+                                       states_editable="{'draft':{'groups':[%(ft_doc_transform.group_doc_trans_user)d]}}"/>
+                            </group>
                             <field name="request_principal_user" required="1"
                                    domain="[('groups_id','=',%(ft_doc_transform.group_doc_trans_principal)d)]"
                                    states_editable="{'draft':{'groups':[%(ft_doc_transform.group_doc_trans_user)d]}}"/>
@@ -112,9 +116,6 @@
                                 <field name="department_datetime" readonly="1"/>
                             </group>
                         </group>
-                        <!--<group string="备注">-->
-                        <!--<field name="comment" nolabel="1"/>-->
-                        <!--</group>-->
                     </sheet>
                     <div class="oe_chatter">
                         <field name="message_follower_ids" widget="mail_followers"/>

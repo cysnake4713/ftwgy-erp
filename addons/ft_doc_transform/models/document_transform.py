@@ -33,7 +33,7 @@ class DocumentTransform(models.Model):
     department_user = fields.Many2one('res.users', 'Department User')
     department_datetime = fields.Datetime('Department Datetime')
 
-    comment = fields.Text('Comment')
+    comment = fields.Html('Comment')
 
     _state_field_map = {
         'draft': True,
