@@ -92,6 +92,7 @@
                     <field name="start_date"/>
                     <field name="lesson"/>
                     <field name="classroom"/>
+                    <button icon="stock_calendar" name="button_classroom_related_plan" context="{'classroom':classroom}" type="object"/>
                     <field name="subject"/>
                     <field name="teacher"/>
                     <button icon="stock_calendar" name="button_teacher_related_plan" context="{'teacher':teacher}" type="object"/>

@@ -104,3 +104,17 @@ class Plan(models.Model):
             'domain': [('teacher', '=', teacher_id)],
             'context': self.env.context,
         }
+
+    @api.multi
+    def button_classroom_related_plan(self):
+        classroom = self.env.context.get('classroom')
+        return {
+            'name': u'班级课程日历',
+            'type': 'ir.actions.act_window',
+            'view_mode': 'calendar',
+            'view_type': 'form',
+            'res_model': 'school.timetable.plan',
+            'target': 'new',
+            'domain': [('classroom', '=', classroom)],
+            'context': self.env.context,
+        }
