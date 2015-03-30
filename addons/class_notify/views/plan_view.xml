@@ -117,12 +117,12 @@
                         <button name="common_apply" string="确认" type="object" class="oe_highlight"
                                 states_editable="{'target_teacher':{'users':[target_plan_teacher]}}"
                                 context="{'state':'center_confirm',
-                                'message_groups':[%(class_notify.group_class_switch_manager)d],
+                                'message_users':[request_center_user],
                                 'message':'提出换课申请,请审批',
                                 }"/>
 
                         <button name="switch_plan_confirm" string="审批通过" type="object" class="oe_highlight" is_log="1"
-                                states_editable="{'center_confirm':{'groups':[%(class_notify.group_class_switch_manager)d]}}"
+                                states_editable="{'center_confirm':{'users':[request_center_user]}}"
                                 />
 
                         <button name="common_reject" string="取消申请" type="object" states="draft,target_teacher,center_confirm" is_reject="1" is_log="1"
@@ -151,6 +151,11 @@
                             <field name="target_plan" required="1" context="{'tree_view_ref': 'class_notify.view_school_plan_tree'}"
                                    domain="[('classroom','=',origin_plan_classroom),('start_date','&gt;=',current_date),('teacher','!=',uid)]"
                                    states_editable="{'draft':True}"/>
+                        </group>
+                        <group>
+                            <field name="request_center_user" states_required="draft,target_teacher"
+                                   domain="[('groups_id','=',%(class_notify.group_class_switch_manager)d)]"
+                                   states_editable="{'draft':True,'target_teacher':True}"/>
                         </group>
                         <group string="审批信息" col="4" states="confirmed">
                             <field name="center_confirm_user" readonly="1"/>

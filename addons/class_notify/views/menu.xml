@@ -66,7 +66,7 @@
                   action="action_school_plan_all"/>
 
         <menuitem id="menuitem_school_plan_switch" name="换课申请管理" parent="menuitem_school_plan_manage" sequence="15"
-                  groups="class_notify.group_class_admin"
+                  groups="class_notify.group_class_admin,class_notify.group_class_switch_manager"
                   action="action_school_plan_switch"/>
 
         <menuitem id="menuitem_school_timetable_manage" name="课表管理" parent='menuitem_school_root' sequence="20"

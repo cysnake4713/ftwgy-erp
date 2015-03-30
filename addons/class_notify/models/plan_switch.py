@@ -40,6 +40,7 @@ class PlanWizard(models.Model):
     draft_user = fields.Many2one('res.users', 'Draft User')
     draft_datetime = fields.Datetime('Draft Datetime')
 
+    request_center_user = fields.Many2one('res.users', 'Request Center Confirm User')
     center_confirm_user = fields.Many2one('res.users', 'Center Confirm User')
     center_confirm_datetime = fields.Datetime('Center Confirm Datetime')
 
@@ -63,9 +64,10 @@ class PlanWizard(models.Model):
     def switch_plan_confirm(self):
         if not (self.origin_plan or self.target_plan):
             raise exceptions.Warning(_('Must have both Origin Plan and Target Plan!'))
+        sudo_user = self.sudo()
 
-        result_origin_plan = self.origin_plan.copy()
-        result_target_plan = self.target_plan.copy()
+        result_origin_plan = sudo_user.origin_plan.copy()
+        result_target_plan = sudo_user.target_plan.copy()
 
         result_origin_plan.teacher = self.target_plan.teacher
         result_origin_plan.subject = self.target_plan.subject
@@ -79,9 +81,9 @@ class PlanWizard(models.Model):
         self.origin_plan.active = False
         self.target_plan.active = False
 
-        origin_timetable = self.env['school.timetable'].search([('plan_ids', '=', self.origin_plan.id)])
+        origin_timetable = sudo_user.env['school.timetable'].search([('plan_ids', '=', self.origin_plan.id)])
         origin_timetable.write({'plan_ids': [(4, self.result_origin_plan.id)]})
-        target_timetable = self.env['school.timetable'].search([('plan_ids', '=', self.target_plan.id)])
+        target_timetable = sudo_user.env['school.timetable'].search([('plan_ids', '=', self.target_plan.id)])
         target_timetable.write({'plan_ids': [(4, self.result_target_plan.id)]})
 
         self.send_notify_mail(self.origin_plan, self.result_target_plan)
