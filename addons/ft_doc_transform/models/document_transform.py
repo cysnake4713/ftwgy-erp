@@ -10,6 +10,7 @@ class DocumentTransform(models.Model):
     _inherit = ['mail.thread', 'odoosoft.workflow.abstract']
     _rec_name = 'name'
     _description = 'FT Doc Transform'
+    _order = 'id desc'
 
     name = fields.Char('Name', required=True)
     state = fields.Selection([('draft', 'Draft'),
