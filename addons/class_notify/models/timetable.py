@@ -54,7 +54,6 @@ class Curriculum(models.Model):
             raise osv.except_osv(_('Warning'), _('Current timetable already have plans!'))
 
         week_dict = self._get_date_week_dict(self.semester_id.start_date, self.semester_id.end_date)
-        nolog_rec = self.with_context({'mail_create_nolog': True, 'mail_notify_noemail': True, 'mail_create_nosubscribe': True})
         for cell in self.cell_ids:
             value = self.pool['school.timetable.cell'].copy_data(self.env.cr, self.env.uid, cell.id, context={})
             value['lesson_type'] = self.initial_lesson_type
@@ -62,7 +61,24 @@ class Curriculum(models.Model):
             del (value['timetable_id'])
             for target_date in week_dict[week_map[cell.week]]:
                 value['start_date'] = target_date.strftime(DEFAULT_SERVER_DATE_FORMAT)
-                nolog_rec.write({'plan_ids': [(0, 0, value)]})
+                self.env.cr.execute('''
+                    INSERT INTO "school_timetable_plan" ("id", "classroom", "lesson_type", "teacher", "active",
+                                "lesson", "start_date", "subject", "create_uid", "write_uid", "create_date", "write_date")
+                    VALUES(nextval('school_timetable_plan_id_seq'), %s, %s, %s, true,
+                            %s, %s, %s, %s, %s, (now() at time zone 'UTC'), (now() at time zone 'UTC')) RETURNING id
+                ''', (value['classroom'],
+                      value['lesson_type'],
+                      value['teacher'],
+                      value['lesson'],
+                      value['start_date'],
+                      value['subject'],
+                      self.env.uid,
+                      self.env.uid,)
+                )
+                plan_id = self.env.cr.fetchone()[0]
+                self.env.cr.execute('''
+                    INSERT INTO timetable_plan_rel (timetable_id,plan_id) values (%s, %s)
+                ''', (self.id, plan_id))
         return True
 
     @staticmethod
@@ -80,7 +96,10 @@ class Curriculum(models.Model):
     @api.multi
     def button_clear_plans(self):
         for timetable in self:
-            timetable.plan_ids.unlink()
+            plan_ids = [p.id for p in timetable.plan_ids]
+            self.env.cr.execute('''
+                    DELETE FROM school_timetable_plan WHERE id IN %s
+                ''', (tuple(plan_ids),))
         return True
 
     @api.multi
