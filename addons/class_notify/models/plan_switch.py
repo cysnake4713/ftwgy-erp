@@ -1,8 +1,12 @@
-__author__ = 'cysnake4713'
 # coding=utf-8
+__author__ = 'cysnake4713'
+
 from openerp import tools, exceptions
 from openerp import models, fields, api
 from openerp.tools.translate import _
+
+from datetime import date, timedelta
+from openerp.tools import DEFAULT_SERVER_DATE_FORMAT
 
 
 class PlanWizard(models.Model):
@@ -43,6 +47,13 @@ class PlanWizard(models.Model):
     request_center_user = fields.Many2one('res.users', 'Request Center Confirm User')
     center_confirm_user = fields.Many2one('res.users', 'Center Confirm User')
     center_confirm_datetime = fields.Datetime('Center Confirm Datetime')
+
+    @api.multi
+    def name_get(self):
+        result = []
+        for plan in self:
+            result.append((plan.id, u'换课申请记录'))
+        return result
 
     @api.one
     @api.depends('origin_plan', 'target_plan')
@@ -100,6 +111,16 @@ class PlanWizard(models.Model):
                 'wechat_code': ['class_notify.plan_swtich'],
             }).common_apply()
 
+    @api.model
+    def cron_send_notify_mail(self):
+        tomorrow = (date.today() + timedelta(days=1)).strftime(DEFAULT_SERVER_DATE_FORMAT)
+        need_notify_plan = self.search([('state', '=', 'confirmed'), ('result_origin_plan.start_date', '=', tomorrow)])
+        for plan in need_notify_plan:
+            plan.send_notify_mail(plan.target_plan, plan.result_origin_plan)
+
+        need_notify_plan = self.search([('state', '=', 'confirmed'), ('result_target_plan.start_date', '=', tomorrow)])
+        for plan in need_notify_plan:
+            plan.send_notify_mail(plan.origin_plan, plan.result_target_plan)
 
     @api.multi
     def button_reverse_plan(self):
