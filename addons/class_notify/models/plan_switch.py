@@ -97,6 +97,7 @@ class PlanWizard(models.Model):
             self.with_context({
                 'message_users': [origin_plan.teacher.id],
                 'message': text,
+                'wechat_code': ['class_notify.plan_swtich'],
             }).common_apply()
 
 

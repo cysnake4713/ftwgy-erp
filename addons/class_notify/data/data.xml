@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+        <record id="map_class_notify" model="odoosoft.wechat.enterprise.map">
+            <field name="code">class_notify.plan_swtich</field>
+        </record>
+    </data>
+</openerp>
