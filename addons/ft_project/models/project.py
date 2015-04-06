@@ -1,5 +1,5 @@
-__author__ = 'cysnake4713'
 # coding=utf-8
+__author__ = 'cysnake4713'
 from openerp import tools
 from openerp import models, fields, api
 from openerp.tools.translate import _
@@ -121,10 +121,14 @@ class TaskDelegateInherit(models.Model):
         task_pool = self.pool.get('project.task')
         task = task_pool.browse(cr, uid, record_id, context=context)
 
-        if ['department_id'] in fields:
+        if 'department_id' in fields:
             res['department_id'] = task.department_id.id
-        if ['date_deadline'] in fields:
+        if 'date_deadline' in fields:
             res['date_deadline'] = task.date_deadline
+        if 'prefix' in fields:
+            res['prefix'] = task.name
+        if 'name' in fields:
+            res['name'] = task.name + '-'
 
         return res
 

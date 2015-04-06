@@ -1,0 +1,118 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* ft_project
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 8.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-04-06 04:18+0000\n"
+"PO-Revision-Date: 2015-04-06 04:18+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: ft_project
+#: model:ir.model,name:ft_project.model_account_analytic_account
+msgid "Analytic Account"
+msgstr "辅助核算项"
+
+#. module: ft_project
+#: view:project.project:ft_project.view_project_tree_inherit
+msgid "Contact"
+msgstr "联系"
+
+#. module: ft_project
+#: field:project.task.delegate,date_deadline:0
+msgid "Date Deadline"
+msgstr "计划完成日期"
+
+#. module: ft_project
+#: field:project.task.delegate,date_end:0
+msgid "Date End"
+msgstr "结束日期"
+
+#. module: ft_project
+#: field:project.task.delegate,date_start:0
+msgid "Date Start"
+msgstr "开始日期"
+
+#. module: ft_project
+#: code:addons/ft_project/models/project.py:68
+#, python-format
+msgid "Delegated User should be specified"
+msgstr "应当指定代理的用户"
+
+#. module: ft_project
+#: field:project.project,department_id:0
+#: field:project.task,department_id:0
+#: field:project.task.delegate,department_id:0
+msgid "Department"
+msgstr "部门"
+
+#. module: ft_project
+#: field:project.project,description:0
+msgid "Description"
+msgstr "描述"
+
+#. module: ft_project
+#: view:project.project:ft_project.view_edit_project_inherit
+#: view:project.project:ft_project.view_project_tree_inherit
+msgid "End Date"
+msgstr "结束日期"
+
+#. module: ft_project
+#: field:project.task.type,is_end:0
+msgid "Is End"
+msgstr "是结束节点"
+
+#. module: ft_project
+#: model:ir.model,name:ft_project.model_project_project
+msgid "Project"
+msgstr "项目"
+
+#. module: ft_project
+#: view:project.project:ft_project.view_edit_project_inherit
+#: view:project.project:ft_project.view_project_tree_inherit
+msgid "Start Date"
+msgstr "开始日期"
+
+#. module: ft_project
+#: model:ir.model,name:ft_project.model_project_task
+msgid "Task"
+msgstr "任务"
+
+#. module: ft_project
+#: model:ir.model,name:ft_project.model_project_task_delegate
+msgid "Task Delegate"
+msgstr "任务分派"
+
+#. module: ft_project
+#: model:ir.model,name:ft_project.model_project_task_type
+msgid "Task Stage"
+msgstr "任务阶段"
+
+#. module: ft_project
+#: model:ir.ui.menu,name:ft_project.menuitem_mail_project_task
+msgid "任务"
+msgstr "任务"
+
+#. module: ft_project
+#: model:ir.actions.act_window,name:ft_project.action_project_task_personal
+#: model:ir.ui.menu,name:ft_project.menuitem_mail_project_task_personal
+msgid "我的任务"
+msgstr "我的任务"
+
+#. module: ft_project
+#: view:project.project:ft_project.view_edit_project_inherit
+msgid "这里填写项目简介..."
+msgstr "这里填写项目简介..."
+
+#. module: ft_project
+#: view:project.project:ft_project.view_edit_project_inherit
+msgid "项目简介"
+msgstr "项目简介"
+
