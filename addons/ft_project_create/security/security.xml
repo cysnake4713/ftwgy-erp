@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+        <record id="group_create_sign_manager" model="res.groups">
+            <field name="name">审批流程指定</field>
+            <field name="category_id" ref="base.module_category_project_create"/>
+        </record>
+
+        <!--<record model="ir.rule" id="rule_group_doc_trans_user_draft_state">-->
+            <!--<field name="name">ft doc trans user, deletable in draft state</field>-->
+            <!--<field name="model_id" ref="ft_doc_transform.model_ft_document_transform"/>-->
+            <!--<field name="domain_force">[('state', 'in',['draft'])]</field>-->
+            <!--<field name="groups" eval="[(4, ref('ft_doc_transform.group_doc_trans_user'))]"/>-->
+        <!--</record>-->
+        <!--<record model="ir.rule" id="rule_group_doc_trans_user_not_draft_state">-->
+            <!--<field name="name">ft doc trans user, not deletable in draft state</field>-->
+            <!--<field name="model_id" ref="ft_doc_transform.model_ft_document_transform"/>-->
+            <!--<field name="domain_force">[('state', 'not in',['draft'])]</field>-->
+            <!--<field name="groups" eval="[(4, ref('ft_doc_transform.group_doc_trans_user'))]"/>-->
+            <!--<field name="perm_unlink" eval="False"/>-->
+        <!--</record>-->
+
+    </data>
+</openerp>

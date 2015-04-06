@@ -9,13 +9,15 @@ class ProjectGuide(models.Model):
     _name = 'project.project.create.guide'
     _rec_name = 'name'
 
+    _inherit = 'odoosoft.workflow.abstract'
+
     name = fields.Char('Name', required=True)
     state = fields.Selection([('draft', u'项目设计'),
                               ('select_approver', u'审批流程选择'),
                               ('approver_confirm', u'审批人确认'),
                               ('finished', u'项目已启动'),
                               ('cancel', u'项目取消'), ], 'State')
-    create_type = fields.Selection([('create_project', u'完成后创建项目和任务'), ('create_task', u'完成后创建任务'), ('no_create', u'不创建')], 'Create Type')
+    create_type = fields.Selection([('create_project', u'完成后创建项目和任务'), ('create_task', u'完成后创建任务')], 'Create Type')
 
     department_id = fields.Many2one('hr.department', 'Department')
     user_id = fields.Many2one('res.users', 'Manager')
@@ -35,11 +37,22 @@ class ProjectGuide(models.Model):
 
     attachments = fields.Many2many('ir.attachment', 'project_create_attachment_rel', 'create_id', 'attachment_id', 'Attachments')
 
+    draft_user = fields.Many2one('res.users', 'Draft User')
+    draft_datetime = fields.Datetime('Draft Request Datetime')
+
+    select_approver_user = fields.Many2one('res.users', 'Select Approver User')
+    select_approver_datetime = fields.Datetime('Select Approver Datetime')
+
     _defaults = {
         'state': 'draft',
         'create_type': 'create_project',
         'date_start': lambda *a: fields.Date.today()
 
+    }
+
+    _state_field_map = {
+        'draft': True,
+        'select_approver': True,
     }
 
     @api.one
@@ -50,7 +63,7 @@ class ProjectGuide(models.Model):
                 raise Warning(_('End Date cannot be set before Start Date.'))
 
     @api.multi
-    def onchange_plan(self):
+    def button_change_plan(self):
         if self.plan:
             self.tasks.unlink()
             new_tasks = self.plan.tasks.copy()
@@ -60,21 +73,26 @@ class ProjectGuide(models.Model):
             # self.tasks = [t.id for t in new_tasks]
 
     @api.multi
-    def onchange_sign_template(self):
+    def button_change_sign_template(self):
         if self.sign_template:
             self.sign_group.unlink()
             for user in self.sign_template.users:
                 self.sign_group.create({'user': user.id, 'guide_id': self.id})
 
     @api.multi
-    def button_draft(self):
-        self.state = 'select_approver'
+    def button_draft_to_select_approver(self):
+        if self.create_type == 'create_project':
+            if self.tasks.filtered(lambda t: not t.user_id):
+                raise exceptions.Warning(_('Task assign user is empty, please define user before apply.'))
+        self.common_apply()
 
     @api.multi
-    def button_select_approver(self):
+    def button_select_approver_to_confirm(self):
         if not self.sign_group:
             raise exceptions.Warning(_('No Approver Selected, Selected approver before apply.'))
-        self.state = 'approver_confirm'
+        else:
+            user_ids = [g.user.id for g in self.sign_group]
+            self.with_context(message_users=user_ids).common_apply()
 
     @api.multi
     def button_approver_sign(self):
@@ -91,11 +109,14 @@ class ProjectGuide(models.Model):
                 self.create_project()
             if self.create_type == 'create_task':
                 self.create_task()
-            self.state = 'finished'
+            self.common_apply()
 
     @api.multi
     def button_approver_reject(self):
-        pass
+        if self.sign_group.filtered(lambda s: s.user.id == self.env.uid):
+            self.common_reject()
+        else:
+            raise exceptions.Warning(_('You are not in the sign group!'))
 
     @api.one
     def create_project(self):
@@ -140,7 +161,3 @@ class ProjectGuide(models.Model):
         })
         self.task_id = task
         self.attachments.write({'res_model': 'project.task', 'res_id': task.id})
-
-    @api.multi
-    def button_cancel(self):
-        self.state = 'cancel'

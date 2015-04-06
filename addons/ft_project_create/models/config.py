@@ -19,7 +19,7 @@ class TaskLine(models.Model):
 
     name = fields.Char('Name', required=True)
     department_id = fields.Many2one('hr.department', 'Department')
-    user_id = fields.Many2one('res.users', 'In Charge User', required=True)
+    user_id = fields.Many2one('res.users', 'In Charge User')
     reviewer_id = fields.Many2one('res.users', 'Reviewer')
     description = fields.Text('Description')
     date_deadline = fields.Date('Deadline')

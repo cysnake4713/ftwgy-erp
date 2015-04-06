@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+        <record id="map_ft_project_create" model="odoosoft.wechat.enterprise.map">
+            <field name="code">ft_project_create.map_ft_project_create</field>
+        </record>
+    </data>
+</openerp>
