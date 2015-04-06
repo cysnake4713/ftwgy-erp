@@ -10,6 +10,8 @@ FTWGY Project Module """,
     'website': 'http://odoosoft.com',
     'depends': ['base', 'project', 'ft_department'],
     'data': [
+        'security/project_security.xml',
+        'security/ir.model.access.csv',
         'views/project_view.xml',
         'views/task_view.xml',
         'views/menu.xml',
