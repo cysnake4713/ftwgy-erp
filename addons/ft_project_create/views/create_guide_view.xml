@@ -27,11 +27,13 @@
                                 }"/>
 
                         <button name="button_select_approver_to_confirm" type="object" string="提交" class="oe_highlight" states="select_approver"
+                                groups="ft_project_create.group_create_sign_manager"
                                 context="{'state':'approver_confirm',
                                 'message':'需要您的审批',
                                 'wechat_code':['ft_project_create.map_ft_project_create'],
                                 }"/>
                         <button name="common_reject" string="打回" type="object" is_log="1" states="select_approver"
+                                groups="ft_project_create.group_create_sign_manager"
                                 context="{'state':'draft',
                                 'message_users':[draft_user],
                                 'message':'您的请求被打回,请处理',
@@ -55,7 +57,17 @@
                                 }"
                                 />
 
-                        <button name="button_cancel" type="object" string="取消" is_log="1" is_reject="1" confirm="请写明取消原因"
+                        <button name="common_apply" type="object" string="恢复" is_log="1" is_reject="1" confirm="确认恢复?"
+                                states="cancel"
+                                groups="ft_project_create.group_create_sign_manager"
+                                context="{'state':'select_approver',
+                                'message_users':[draft_user],
+                                'message':'项目创建申请已经恢复',
+                                'wechat_code':['ft_project_create.map_ft_project_create'],
+                                }"/>
+                        <button name="common_reject" type="object" string="取消" is_log="1" is_reject="1" confirm="请写明取消原因"
+                                states="draft,select_approver,approver_confirm"
+                                groups="ft_project_create.group_create_sign_manager"
                                 context="{'state':'cancel',
                                 'message_users':[draft_user],
                                 'message':'项目创建申请被取消',
@@ -68,22 +80,25 @@
                     <div states="select_approver,approver_confirm,finished,cancel">
                         <div class="oe_edit_only">
                             <p>审批流程选择：
-                                <field name="sign_template" nolabel="1" class="oe_inline"/>
-                                <button name="button_change_sign_template" type="object" string="使用"/>
+                                <field name="sign_template" nolabel="1" class="oe_inline"
+                                       states_editable="{'select_approver':{'groups':[%(ft_project_create.group_create_sign_manager)d]}}"/>
+                                <button name="button_change_sign_template" type="object" string="使用"
+                                        states_editable="{'select_approver':{'groups':[%(ft_project_create.group_create_sign_manager)d]}}"/>
                             </p>
                         </div>
                         <label for="sign_group" string="审批人"/>
-                        <field name="sign_group" nolabel="1"/>
+                        <field name="sign_group" nolabel="1"
+                               states_editable="{'select_approver':{'groups':[%(ft_project_create.group_create_sign_manager)d]}}"/>
                     </div>
 
                     <sheet>
                         <div class="oe_title">
                             <label for="name" class="oe_edit_only" string="项目名称"/>
                             <h1>
-                                <field name="name"/>
+                                <field name="name" states_editable="{'draft':True}"/>
                             </h1>
                             <div name="options_active">
-                                <field name="create_type" widget="radio"/>
+                                <field name="create_type" widget="radio" states_editable="{'draft':True}"/>
                             </div>
                         </div>
                         <div class="oe_right">
@@ -98,33 +113,35 @@
                             <page string="信息" col="1">
                                 <group>
                                     <group>
-                                        <field name="department_id"/>
-                                        <field name="user_id" domain="[('department_id','=',department_id)]"/>
+                                        <field name="department_id" states_editable="{'draft':True}"/>
+                                        <field name="user_id" domain="[('department_id','=',department_id)]" states_editable="{'draft':True}"/>
                                     </group>
                                     <group>
-                                        <field name="date_start"/>
-                                        <field name="date"/>
-                                        <field name="date_deadline" attrs="{'invisible':[('create_type','!=','create_task')]}"/>
+                                        <field name="date_start" states_editable="{'draft':True}"/>
+                                        <field name="date" states_editable="{'draft':True}"/>
+                                        <field name="date_deadline"
+                                               attrs="{'invisible':[('create_type','!=','create_task')],'readonly':[('state','!=','draft')]}"/>
                                     </group>
                                 </group>
                                 <group col="1">
-                                    <field name="description" nolabel="1" placeholder="项目的说明信息...."/>
+                                    <field name="description" nolabel="1" placeholder="项目的说明信息...." states_editable="{'draft':True}"/>
                                 </group>
                                 <group string="相关文件">
-                                    <field name="attachments" widget="many2many_binary" nolabel="1"/>
+                                    <field name="attachments" widget="many2many_binary" nolabel="1" states_editable="{'draft':True}"/>
                                 </group>
                             </page>
                             <page string="任务设计" attrs="{'invisible':[('create_type','!=','create_project')]}">
                                 <group col="1">
                                     <group class="oe_edit_only">
                                         <p>任务模板选择：
-                                            <field name="plan" nolabel="1" class="oe_inline"/>
-                                            <button name="button_change_plan" type="object" string="使用"/>
+                                            <field name="plan" nolabel="1" class="oe_inline" states_editable="{'draft':True}"/>
+                                            <button name="button_change_plan" type="object" string="使用" states_editable="{'draft':True}"/>
                                         </p>
                                     </group>
                                     <label for="tasks"/>
                                     <field name="tasks" widget="one2many" nolabel="1"
-                                           context="{'form_view_ref':'ft_project_create.view_project_plan_task_form_inherit'}"/>
+                                           context="{'form_view_ref':'ft_project_create.view_project_plan_task_form_inherit'}"
+                                           states_editable="{'draft':True}"/>
                                 </group>
                             </page>
                         </notebook>

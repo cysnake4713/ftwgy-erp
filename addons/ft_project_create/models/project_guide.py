@@ -101,16 +101,16 @@ class ProjectGuide(models.Model):
         # sign the form
         for group in self.sign_group:
             if group.user.id == self.env.uid:
-                group.result = 'signed'
+                group.sudo().result = 'signed'
                 break
         else:
             raise exceptions.Warning(_('You are not in the sign group!'))
         # if everyone is signed the form
         if not self.sign_group.filtered(lambda record: record.result != 'signed'):
             if self.create_type == 'create_project':
-                self.create_project()
+                self.sudo().create_project()
             if self.create_type == 'create_task':
-                self.create_task()
+                self.sudo().create_task()
             self.common_apply()
 
     @api.multi
