@@ -25,7 +25,7 @@
             <field name="target">current</field>
         </record>
 
-        <menuitem id="menuitem_project_process_root" name="项目流程" parent="base.menu_main_pm" sequence="30"/>
+        <menuitem id="menuitem_project_process_root" name="项目流程" parent="base.menu_main_pm" sequence="30" groups="project.group_project_user"/>
         <menuitem id="menuitem_project_create_guide" name="项目启动申请" parent="menuitem_project_process_root" sequence="20"
                   action="action_project_create_guide"/>
 

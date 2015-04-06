@@ -8,7 +8,8 @@ from openerp.tools.translate import _
 class ProjectInherit(models.Model):
     _inherit = 'project.project'
 
-    department_id = fields.Many2one('hr.department', 'Department')
+    department_id = fields.Many2one('hr.department', 'Department',
+                                    default=lambda self: self.env.user.department_id[0] if self.env.user.department_id else False)
 
     task_process = fields.Float('Task Process', compute='_compute_task_process')
     description = fields.Text('Description')

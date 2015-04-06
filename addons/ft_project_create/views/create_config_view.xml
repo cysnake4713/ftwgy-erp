@@ -114,7 +114,12 @@
                     <group>
                         <label for="users"/>
                         <newline/>
-                        <field name="users" nolabel="1"/>
+                        <field name="lines" nolabel="1">
+                            <tree editable="bottom">
+                                <field name="sequence"/>
+                                <field name="user"/>
+                            </tree>
+                        </field>
                         <newline/>
                     </group>
                 </form>

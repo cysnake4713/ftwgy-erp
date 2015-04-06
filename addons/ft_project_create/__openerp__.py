@@ -8,10 +8,11 @@
 Project Create Guide Module""",
     'author': 'Matt Cai',
     'website': 'http://odoosoft.com',
-    'depends': ['base', 'ft_project', 'odoosoft_workflow', 'odoosoft_wechat_enterprise'],
+    'depends': ['base', 'ft_project', 'project', 'odoosoft_workflow', 'odoosoft_wechat_enterprise'],
     'data': [
         'data/data.xml',
         'security/security.xml',
+        'security/ir.model.access.csv',
         'views/create_config_view.xml',
         'views/create_guide_view.xml',
         'views/menu.xml',

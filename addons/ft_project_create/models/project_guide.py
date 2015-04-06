@@ -1,5 +1,5 @@
-__author__ = 'cysnake4713'
 # coding=utf-8
+__author__ = 'cysnake4713'
 from openerp import tools
 from openerp import models, fields, api, exceptions
 from openerp.tools.translate import _
@@ -8,6 +8,7 @@ from openerp.tools.translate import _
 class ProjectGuide(models.Model):
     _name = 'project.project.create.guide'
     _rec_name = 'name'
+    _description = 'Project Create Guide'
 
     _inherit = 'odoosoft.workflow.abstract'
 
@@ -19,7 +20,8 @@ class ProjectGuide(models.Model):
                               ('cancel', u'项目取消'), ], 'State')
     create_type = fields.Selection([('create_project', u'完成后创建项目和任务'), ('create_task', u'完成后创建任务')], 'Create Type')
 
-    department_id = fields.Many2one('hr.department', 'Department')
+    department_id = fields.Many2one('hr.department', 'Department',
+                                    default=lambda self: self.env.user.department_id[0] if self.env.user.department_id else False)
     user_id = fields.Many2one('res.users', 'Manager')
     date_start = fields.Date('Date Start')
     date = fields.Date('Date End')
@@ -76,8 +78,8 @@ class ProjectGuide(models.Model):
     def button_change_sign_template(self):
         if self.sign_template:
             self.sign_group.unlink()
-            for user in self.sign_template.users:
-                self.sign_group.create({'user': user.id, 'guide_id': self.id})
+            for line in self.sign_template.lines:
+                self.sign_group.create({'user': line.user.id, 'sequence': line.sequence, 'guide_id': self.id})
 
     @api.multi
     def button_draft_to_select_approver(self):

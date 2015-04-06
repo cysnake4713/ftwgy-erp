@@ -1,5 +1,5 @@
-__author__ = 'cysnake4713'
 # coding=utf-8
+__author__ = 'cysnake4713'
 from openerp import tools
 from openerp import models, fields, api
 from openerp.tools.translate import _
@@ -18,7 +18,8 @@ class TaskLine(models.Model):
     _rec_name = 'name'
 
     name = fields.Char('Name', required=True)
-    department_id = fields.Many2one('hr.department', 'Department')
+    department_id = fields.Many2one('hr.department', 'Department',
+                                    default=lambda self: self.env.user.department_id[0] if self.env.user.department_id else False)
     user_id = fields.Many2one('res.users', 'In Charge User')
     reviewer_id = fields.Many2one('res.users', 'Reviewer')
     description = fields.Text('Description')
@@ -38,7 +39,16 @@ class SignTemplate(models.Model):
     _rec_name = 'name'
 
     name = fields.Char('Name', required=True)
-    users = fields.Many2many('res.users', 'project_create_sign_user', 'sign_id', 'user_id', 'Users')
+    lines = fields.One2many('project.project.create.sign.line', 'sign_id', 'Sign Users Lines')
+
+
+class SignTemplateLine(models.Model):
+    _name = 'project.project.create.sign.line'
+    _rec_name = 'user'
+
+    sign_id = fields.Many2one('project.project.create.sign', 'Sign', ondelete='cascade')
+    sequence = fields.Integer('Index', default=1)
+    user = fields.Many2one('res.users', 'User', required=True)
 
 
 class SignUser(models.Model):
@@ -50,9 +60,7 @@ class SignUser(models.Model):
     user = fields.Many2one('res.users', 'User', required=True)
     result = fields.Selection([('wait', u'待签'),
                                ('signed', u'已签'),
-                               ('deny', u'否决'),
-                               # ('reject', u'打回'),
-                              ], 'Sign Result')
+                               ('deny', u'否决')], 'Sign Result')
     guide_id = fields.Many2one('project.project.create.guide', 'Project Guide', ondelete='cascade')
 
     _defaults = {
