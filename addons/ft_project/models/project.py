@@ -34,7 +34,8 @@ class Analytic(models.Model):
 class TaskInherit(models.Model):
     _inherit = 'project.task'
 
-    department_id = fields.Many2one('hr.department', 'Department')
+    department_id = fields.Many2one('hr.department', 'Department',
+                                    default=lambda self: self.env.user.department_id[0] if self.env.user.department_id else False)
 
     @api.multi
     def write(self, vals):
@@ -57,7 +58,7 @@ class TaskInherit(models.Model):
         if ('user_id' in vals and vals['user_id']) or ('project_id' in vals and vals['project_id']):
             for task in self:
                 if task.project_id:
-                    task.project_id.write({'members': [(4, task.user_id.id)]})
+                    task.project_id.sudo().write({'members': [(4, task.user_id.id)]})
 
     def do_delegate(self, cr, uid, ids, delegate_data=None, context=None):
         """

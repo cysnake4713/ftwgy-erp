@@ -6,7 +6,7 @@
             <field name="res_model">project.project</field>
             <field name="view_type">form</field>
             <field name="domain">[]</field>
-            <field name="view_mode">kanban,tree,form</field>
+            <field name="view_mode">tree,kanban,form</field>
             <field name="view_id" ref="project.view_project_kanban"/>
             <field name="search_view_id" ref="project.view_project_project_filter"/>
             <field name="context">{'search_default_Current': 1}</field>
@@ -15,14 +15,14 @@
         <record id="project.action_view_task" model="ir.actions.act_window">
             <field name="name">Tasks</field>
             <field name="res_model">project.task</field>
-            <field name="view_mode">kanban,tree,form,calendar,graph</field>
+            <field name="view_mode">kanban,tree,form</field>
             <field name="search_view_id" ref="project.view_task_search_form"/>
         </record>
 
          <record id="project.act_project_project_2_project_task_all" model="ir.actions.act_window">
             <field name="name">Tasks</field>
             <field name="res_model">project.task</field>
-            <field name="view_mode">kanban,tree,form,calendar,graph</field>
+            <field name="view_mode">kanban,tree,form</field>
             <field name="context">{
                 'search_default_project_id': [active_id],
                 'default_project_id': active_id,
