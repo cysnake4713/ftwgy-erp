@@ -93,6 +93,14 @@ class TaskInherit(models.Model):
             delegated_tasks[task.id] = delegated_task_id
         return delegated_tasks
 
+    @api.model
+    def action_get_department(self):
+        res = self.env['ir.actions.act_window'].for_xml_id('ft_project', 'action_project_task_personal')
+        department_ids = [d.id for d in self.env.user.department_id]
+        res['domain'] = [('department_id', 'in', department_ids)]
+        res['name'] = u'部门任务'
+        return res
+
 
 class TaskTypeInherit(models.Model):
     _inherit = 'project.task.type'
