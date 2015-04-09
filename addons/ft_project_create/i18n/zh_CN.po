@@ -1,0 +1,375 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* ft_project_create
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 8.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-04-09 06:58+0000\n"
+"PO-Revision-Date: 2015-04-09 06:58+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: ft_project_create
+#: field:project.project.create.guide,attachments:0
+msgid "Attachments"
+msgstr "附件"
+
+#. module: ft_project_create
+#: field:project.project.create.task,categ_ids:0
+msgid "Categories"
+msgstr "标签"
+
+#. module: ft_project_create
+#: field:project.project.create.guide,create_type:0
+msgid "Create Type"
+msgstr ";类型"
+
+#. module: ft_project_create
+#: field:project.project.create.guide,date:0
+#: field:project.project.create.task,date_end:0
+msgid "Date End"
+msgstr "结束时间"
+
+#. module: ft_project_create
+#: field:project.project.create.guide,date_start:0
+msgid "Date Start"
+msgstr "开始时间"
+
+#. module: ft_project_create
+#: field:project.project.create.task,date_start:0
+msgid "Date start"
+msgstr "开始时间"
+
+#. module: ft_project_create
+#: field:project.project.create.guide,date_deadline:0
+#: field:project.project.create.task,date_deadline:0
+msgid "Deadline"
+msgstr "截止日期"
+
+#. module: ft_project_create
+#: field:project.project.create.guide,department_id:0
+#: field:project.project.create.task,department_id:0
+msgid "Department"
+msgstr "部门"
+
+#. module: ft_project_create
+#: field:project.project.create.guide,description:0
+#: field:project.project.create.task,description:0
+msgid "Description"
+msgstr "描述"
+
+#. module: ft_project_create
+#: field:project.project.create.guide,draft_datetime:0
+msgid "Draft Request Datetime"
+msgstr "发起时间"
+
+#. module: ft_project_create
+#: field:project.project.create.guide,draft_user:0
+msgid "Draft User"
+msgstr "发起人"
+
+#. module: ft_project_create
+#: code:addons/ft_project_create/models/project_guide.py:65
+#, python-format
+msgid "End Date cannot be set before Start Date."
+msgstr "结束日期必须大于开始日期."
+
+#. module: ft_project_create
+#: field:project.project.create.guide,id:0
+#: field:project.project.create.plan,id:0
+#: field:project.project.create.sign,id:0
+#: field:project.project.create.sign.group,id:0
+#: field:project.project.create.sign.line,id:0
+#: field:project.project.create.task,id:0
+msgid "ID"
+msgstr "ID"
+
+#. module: ft_project_create
+#: field:project.project.create.task,user_id:0
+msgid "In Charge User"
+msgstr "负责人"
+
+#. module: ft_project_create
+#: field:project.project.create.sign.group,sequence:0
+#: field:project.project.create.sign.line,sequence:0
+msgid "Index"
+msgstr "序号"
+
+#. module: ft_project_create
+#: field:project.project.create.task,is_template:0
+msgid "Is Template"
+msgstr "是模板"
+
+#. module: ft_project_create
+#: field:project.project.create.guide,user_id:0
+msgid "Manager"
+msgstr "负责人"
+
+#. module: ft_project_create
+#: field:project.project.create.guide,name:0
+#: field:project.project.create.plan,name:0
+#: field:project.project.create.sign,name:0
+#: field:project.project.create.task,name:0
+msgid "Name"
+msgstr "名称"
+
+#. module: ft_project_create
+#: code:addons/ft_project_create/models/project_guide.py:94
+#, python-format
+msgid "No Approver Selected, Selected approver before apply."
+msgstr "没有选择审批人,请先选择审批人再提交."
+
+#. module: ft_project_create
+#: field:project.project.create.guide,plan:0
+msgid "Plan"
+msgstr "计划"
+
+#. module: ft_project_create
+#: field:project.project.create.guide,tasks:0
+#: field:project.project.create.plan,tasks:0
+msgid "Plan Tasks"
+msgstr "计划任务"
+
+#. module: ft_project_create
+#: field:project.project.create.sign.group,guide_id:0
+msgid "Project Guide"
+msgstr "Project Guide"
+
+#. module: ft_project_create
+#: field:project.project.create.guide,project_id:0
+msgid "Relative Project"
+msgstr "相关项目"
+
+#. module: ft_project_create
+#: field:project.project.create.guide,task_id:0
+msgid "Relative Task"
+msgstr "相关任务"
+
+#. module: ft_project_create
+#: field:project.project.create.task,reviewer_id:0
+msgid "Reviewer"
+msgstr "审批人"
+
+#. module: ft_project_create
+#: field:project.project.create.guide,select_approver_datetime:0
+msgid "Select Approver Datetime"
+msgstr "流程选择审批时间"
+
+#. module: ft_project_create
+#: field:project.project.create.guide,select_approver_user:0
+msgid "Select Approver User"
+msgstr "流程选择审批人"
+
+#. module: ft_project_create
+#: field:project.project.create.sign.line,sign_id:0
+msgid "Sign"
+msgstr "审批"
+
+#. module: ft_project_create
+#: field:project.project.create.guide,sign_group:0
+msgid "Sign Group"
+msgstr "审批组"
+
+#. module: ft_project_create
+#: field:project.project.create.sign.group,result:0
+msgid "Sign Result"
+msgstr "审批结果"
+
+#. module: ft_project_create
+#: field:project.project.create.guide,sign_template:0
+msgid "Sign Template"
+msgstr "审批模板"
+
+#. module: ft_project_create
+#: field:project.project.create.sign,lines:0
+msgid "Sign Users Lines"
+msgstr "审批人"
+
+#. module: ft_project_create
+#: field:project.project.create.guide,state:0
+msgid "State"
+msgstr "状态"
+
+#. module: ft_project_create
+#: code:addons/ft_project_create/models/project_guide.py:88
+#, python-format
+msgid "Task assign user is empty, please define user before apply."
+msgstr "任务的负责人不能为空,请为每个任务选择负责人,再进行提交."
+
+#. module: ft_project_create
+#: field:project.project.create.sign.group,user:0
+#: field:project.project.create.sign.line,user:0
+msgid "User"
+msgstr "审批人"
+
+#. module: ft_project_create
+#: code:addons/ft_project_create/models/project_guide.py:107
+#: code:addons/ft_project_create/models/project_guide.py:121
+#, python-format
+msgid "You are not in the sign group!"
+msgstr "你不在审批组里!"
+
+#. module: ft_project_create
+#: view:project.project.create.task:ft_project_create.view_project_plan_task_form
+msgid "任务名称"
+msgstr "任务名称"
+
+#. module: ft_project_create
+#: model:ir.actions.act_window,name:ft_project_create.action_project_project_plan
+#: model:ir.ui.menu,name:ft_project_create.menuitem_project_create_plan
+msgid "任务模板"
+msgstr "任务模板"
+
+#. module: ft_project_create
+#: view:project.project.create.guide:ft_project_create.view_project_create_guide_form
+msgid "任务模板选择："
+msgstr "任务模板选择："
+
+#. module: ft_project_create
+#: view:project.project.create.guide:ft_project_create.view_project_create_guide_form
+msgid "任务设计"
+msgstr "任务设计"
+
+#. module: ft_project_create
+#: selection:project.project.create.sign.group,result:0
+msgid "否决"
+msgstr "否决"
+
+#. module: ft_project_create
+#: selection:project.project.create.guide,create_type:0
+msgid "完成后创建任务"
+msgstr "完成后创建任务"
+
+#. module: ft_project_create
+#: selection:project.project.create.guide,create_type:0
+msgid "完成后创建项目和任务"
+msgstr "完成后创建项目和任务"
+
+#. module: ft_project_create
+#: view:project.project.create.guide:ft_project_create.view_project_create_guide_form
+msgid "审批人"
+msgstr "审批人"
+
+#. module: ft_project_create
+#: selection:project.project.create.guide,state:0
+msgid "审批人确认"
+msgstr "审批人确认"
+
+#. module: ft_project_create
+#: model:res.groups,name:ft_project_create.group_create_sign_manager
+msgid "审批流程指定"
+msgstr "审批流程指定"
+
+#. module: ft_project_create
+#: selection:project.project.create.guide,state:0
+msgid "审批流程选择"
+msgstr "审批流程选择"
+
+#. module: ft_project_create
+#: view:project.project.create.guide:ft_project_create.view_project_create_guide_form
+msgid "审批流程选择："
+msgstr "审批流程选择："
+
+#. module: ft_project_create
+#: view:project.project.create.guide:ft_project_create.view_project_create_guide_form
+msgid "审批通过"
+msgstr "审批通过"
+
+#. module: ft_project_create
+#: selection:project.project.create.sign.group,result:0
+msgid "已签"
+msgstr "已签"
+
+#. module: ft_project_create
+#: selection:project.project.create.sign.group,result:0
+msgid "待签"
+msgstr "待签"
+
+#. module: ft_project_create
+#: view:project.project.create.guide:ft_project_create.view_project_create_guide_form
+msgid "相关任务:"
+msgstr "相关任务:"
+
+#. module: ft_project_create
+#: view:project.project.create.guide:ft_project_create.view_project_create_guide_form
+msgid "相关文件"
+msgstr "相关文件"
+
+#. module: ft_project_create
+#: view:project.project.create.guide:ft_project_create.view_project_create_guide_form
+msgid "相关项目:"
+msgstr "相关项目:"
+
+#. module: ft_project_create
+#: view:project.project.create.guide:ft_project_create.view_project_create_guide_form
+msgid "确认恢复?"
+msgstr "确认恢复?"
+
+#. module: ft_project_create
+#: model:ir.actions.act_window,name:ft_project_create.action_project_project_sign_template
+#: model:ir.ui.menu,name:ft_project_create.menuitem_project_create_sign_template
+msgid "签字流程模板"
+msgstr "签字流程模板"
+
+#. module: ft_project_create
+#: view:project.project.create.guide:ft_project_create.view_project_create_guide_form
+msgid "请写明取消原因"
+msgstr "请写明取消原因"
+
+#. module: ft_project_create
+#: view:project.project.create.guide:ft_project_create.view_project_create_guide_form
+msgid "请写明拒签原因"
+msgstr "请写明拒签原因"
+
+#. module: ft_project_create
+#: selection:project.project.create.guide,state:0
+msgid "项目取消"
+msgstr "项目取消"
+
+#. module: ft_project_create
+#: view:project.project.create.guide:ft_project_create.view_project_create_guide_form
+msgid "项目名称"
+msgstr "项目名称"
+
+#. module: ft_project_create
+#: model:ir.actions.act_window,name:ft_project_create.action_project_create_guide
+#: model:ir.ui.menu,name:ft_project_create.menuitem_project_create_config
+msgid "项目启动"
+msgstr "项目启动"
+
+#. module: ft_project_create
+#: model:ir.ui.menu,name:ft_project_create.menuitem_project_create_guide
+msgid "项目启动申请"
+msgstr "项目启动申请"
+
+#. module: ft_project_create
+#: selection:project.project.create.guide,state:0
+msgid "项目已启动"
+msgstr "项目已启动"
+
+#. module: ft_project_create
+#: model:ir.ui.menu,name:ft_project_create.menuitem_project_process_root
+msgid "项目流程"
+msgstr "项目流程"
+
+#. module: ft_project_create
+#: model:ir.ui.menu,name:ft_project_create.menuitem_project_process_config
+msgid "项目流程配置"
+msgstr "项目流程配置"
+
+#. module: ft_project_create
+#: view:project.project.create.guide:ft_project_create.view_project_create_guide_form
+msgid "项目的说明信息...."
+msgstr "项目的说明信息...."
+
+#. module: ft_project_create
+#: selection:project.project.create.guide,state:0
+msgid "项目设计"
+msgstr "项目设计"
+
