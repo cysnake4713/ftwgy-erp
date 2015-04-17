@@ -1,8 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <openerp>
-    <data>
+    <data noupdate="1">
         <record id="map_ft_project_create" model="odoosoft.wechat.enterprise.map">
             <field name="code">ft_project_create.map_ft_project_create</field>
+        </record>
+
+        <record id="message_template_project_create" model="odoosoft.wechat.enterprise.message.template">
+            <field name="name">微信项目创建流程提醒</field>
+            <field name="title">项目启动提醒</field>
+            <field name="content">
+名称: ${object.name}
+状态: ${fields['state'].convert_to_export(object.state, ctx)}
+部门: ${object.department_id.name or ''}
+负责人: ${object.user_id.name or ''}
+开始时间: ${object.date_start or ''}
+结束时间: ${object.date or ''}
+
+            </field>
         </record>
     </data>
 </openerp>

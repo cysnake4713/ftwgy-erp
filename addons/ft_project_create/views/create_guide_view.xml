@@ -24,6 +24,7 @@
                                 'message_groups':[%(ft_project_create.group_create_sign_manager)d],
                                 'message':'需要您的处理',
                                 'wechat_code':['ft_project_create.map_ft_project_create'],
+                                'wechat_template': %(ft_project_create.message_template_project_create)d,
                                 }"/>
 
                         <button name="button_select_approver_to_confirm" type="object" string="提交" class="oe_highlight" states="select_approver"
@@ -31,6 +32,7 @@
                                 context="{'state':'approver_confirm',
                                 'message':'需要您的审批',
                                 'wechat_code':['ft_project_create.map_ft_project_create'],
+                                'wechat_template': %(ft_project_create.message_template_project_create)d,
                                 }"/>
                         <button name="common_reject" string="打回" type="object" is_log="1" states="select_approver"
                                 groups="ft_project_create.group_create_sign_manager"
@@ -38,6 +40,7 @@
                                 'message_users':[draft_user],
                                 'message':'您的请求被打回,请处理',
                                 'wechat_code':['ft_project_create.map_ft_project_create'],
+                                'wechat_template': %(ft_project_create.message_template_project_create)d,
                                 }" is_reject="1"/>
 
 
@@ -46,6 +49,7 @@
                                 'message_users':[draft_user],
                                 'message':'项目创建申请通过,请跟进项目进度',
                                 'wechat_code':['ft_project_create.map_ft_project_create'],
+                                'wechat_template': %(ft_project_create.message_template_project_create)d,
                                 }"
                                 />
                         <button name="button_approver_reject" type="object" string="拒签" states="approver_confirm" is_log="1" is_reject="1"
@@ -54,6 +58,7 @@
                                 'message_users':[draft_user],
                                 'message':'项目创建申请被拒签,请查看详情',
                                 'wechat_code':['ft_project_create.map_ft_project_create'],
+                                'wechat_template': %(ft_project_create.message_template_project_create)d,
                                 }"
                                 />
 
@@ -64,6 +69,7 @@
                                 'message_users':[draft_user],
                                 'message':'项目创建申请已经恢复',
                                 'wechat_code':['ft_project_create.map_ft_project_create'],
+                                'wechat_template': %(ft_project_create.message_template_project_create)d,
                                 }"/>
                         <button name="common_reject" type="object" string="取消" is_log="1" is_reject="1" confirm="请写明取消原因"
                                 states="draft,select_approver,approver_confirm"
@@ -72,6 +78,7 @@
                                 'message_users':[draft_user],
                                 'message':'项目创建申请被取消',
                                 'wechat_code':['ft_project_create.map_ft_project_create'],
+                                'wechat_template': %(ft_project_create.message_template_project_create)d,
                                 }"/>
 
                         <field name="state" readonly="1" widget="statusbar" statusbar_visible="draft,select_approver,approver_confirm,finished"/>
