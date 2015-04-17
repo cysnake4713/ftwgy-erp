@@ -109,6 +109,7 @@ class PlanWizard(models.Model):
                 'message_users': [origin_plan.teacher.id],
                 'message': text,
                 'wechat_code': ['class_notify.plan_swtich'],
+                'wechat_template': 'class_notify.message_template_plan_switch',
             }).common_apply()
 
     @api.model

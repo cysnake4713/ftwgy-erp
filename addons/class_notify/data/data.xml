@@ -4,5 +4,15 @@
         <record id="map_class_notify" model="odoosoft.wechat.enterprise.map">
             <field name="code">class_notify.plan_swtich</field>
         </record>
+
+        <record id="message_template_plan_switch" model="odoosoft.wechat.enterprise.message.template">
+            <field name="name">微信课程调换提醒</field>
+            <field name="title">课程调换提醒</field>
+            <field name="content">
+原课程: ${object.origin_plan.name_get()[0][1]}
+调换到: ${object.target_plan.name_get()[0][1]}
+状态: ${fields['state'].convert_to_export(object.state, ctx)}
+            </field>
+        </record>
     </data>
 </openerp>

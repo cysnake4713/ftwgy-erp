@@ -113,6 +113,7 @@
                                 'message_users':[target_plan_teacher],
                                 'message':'提出同您换课,请确认',
                                 'wechat_code':['class_notify.plan_swtich'],
+                                'wechat_template': %(class_notify.message_template_plan_switch)d,
                                 }"/>
 
                         <button name="common_apply" string="确认" type="object" class="oe_highlight"
@@ -121,6 +122,7 @@
                                 'message_users':[request_center_user],
                                 'message':'提出换课申请,请审批',
                                 'wechat_code':['class_notify.plan_swtich'],
+                                'wechat_template': %(class_notify.message_template_plan_switch)d,
                                 }"/>
 
                         <button name="switch_plan_confirm" string="审批通过" type="object" class="oe_highlight" is_log="1"
@@ -132,6 +134,7 @@
                                 'message_users':[origin_plan_teacher,target_plan_teacher],
                                 'message':'换课申请被取消,请注意课程安排',
                                 'wechat_code':['class_notify.plan_swtich'],
+                                'wechat_template': %(class_notify.message_template_plan_switch)d,
                                 }"/>
                         <!--<button name="button_switch_plan" type="object" string="课程变换" groups="class_notify.group_class_admin" states="draft"/>-->
                         <!--<button name="button_reverse_plan" type="object" string="恢复" groups="class_notify.group_class_admin" states="confirmed"/>-->
