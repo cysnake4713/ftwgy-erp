@@ -1,8 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <openerp>
-    <data>
+    <data noupdate="1">
         <record id="map_ft_doc_transform" model="odoosoft.wechat.enterprise.map">
             <field name="code">ft_doc_transform.ft_doc_transform</field>
+        </record>
+
+        <record id="message_template_doc_transform" model="odoosoft.wechat.enterprise.message.template">
+            <field name="name">微信公文审批提醒</field>
+            <field name="title">公文审批提醒</field>
+            <field name="content">
+名称: ${object.name}
+状态: ${fields['state'].convert_to_export(object.state, ctx)}
+            </field>
         </record>
     </data>
 </openerp>
