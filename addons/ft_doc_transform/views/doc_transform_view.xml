@@ -70,7 +70,7 @@
                                 'wechat_template': %(ft_doc_transform.message_template_doc_transform)d,
                                 }" is_reject="1"/>
 
-                        <button name="common_apply" string="提交" type="object" class="oe_highlight"
+                        <button name="button_department_finish" string="提交" type="object" class="oe_highlight"
                                 states_editable="{'department':{'users':[request_vice_department_users,request_department_users]}}"
                                 context="{
                                 'state': 'finish',
@@ -89,10 +89,10 @@
                                 'wechat_template': %(ft_doc_transform.message_template_doc_transform)d,
                                 }"/>
 
-                        <button name="common_reject" string="撤销" type="object" is_log="1"
-                                states_editable="{'finish':{'users':[request_vice_department_users,request_department_users]}}"
+                        <!--<button name="common_reject" string="撤销" type="object" is_log="1"-->
+                                <!--states_editable="{'finish':{'users':[request_vice_department_users,request_department_users]}}"-->
                                 context="{'state':'department'}" is_reject="1"/>
-
+                        <button name="button_teacher_finish" string="已完成" class="oe_highlight" type="object" states="finish"/>
                         <field name="state" widget="statusbar" readonly="1" statusbar_visible="draft,principal,vice_principal,department,finish"/>
                     </header>
                     <sheet>
@@ -182,6 +182,15 @@
                                 <field name="department_user" readonly="1"/>
                                 <field name="department_datetime" readonly="1"/>
                             </group>
+                        </group>
+                        <group string="处理结果">
+                            <field name="results" readonly="1" nolabel="1">
+                                <tree>
+                                    <field name="user"/>
+                                    <field name="state"/>
+                                    <field name="finish_date"/>
+                                </tree>
+                            </field>
                         </group>
                     </sheet>
                     <div class="oe_chatter">

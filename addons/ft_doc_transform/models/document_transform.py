@@ -56,6 +56,8 @@ class DocumentTransform(models.Model):
 
     comment = fields.Html('Comment')
 
+    results = fields.One2many('ft.document.transform.result', 'transform', 'Results')
+
     _state_field_map = {
         'draft': True,
         'principal': True,
@@ -77,13 +79,15 @@ class DocumentTransform(models.Model):
         elif self.principal_apply_type == 'department':
             return self.with_context(state='department').common_apply()
         else:
+            self.write({'results': [(5, 0), ] + [(0, 0, {'user': u.id, 'transform': self.id}) for u in self.request_department_teacher_users]})
             return self.common_apply()
 
     @api.multi
     def vice_principal_apply(self):
-        if self.principal_apply_type == 'department':
+        if self.vice_principal_apply_type == 'department':
             return self.with_context(state='department').common_apply()
-        elif self.principal_apply_type == 'teacher':
+        elif self.vice_principal_apply_type == 'teacher':
+            self.write({'results': [(5, 0), ] + [(0, 0, {'user': u.id, 'transform': self.id}) for u in self.request_vice_department_teacher_users]})
             return self.with_context(state='finish').common_apply()
         else:
             return self.common_apply()
@@ -94,6 +98,31 @@ class DocumentTransform(models.Model):
             return self.with_context(state='principal', message_users=[self.request_principal_user.id]).common_apply()
         else:
             return self.common_apply()
+
+    @api.multi
+    def button_department_finish(self):
+        self.write({'results': [(5, 0), ] + [(0, 0, {'user': u.id, 'transform': self.id}) for u in self.department_comment_user]})
+        self.common_apply()
+
+    @api.multi
+    def button_teacher_finish(self):
+        results = self.results.filtered(lambda result: result.user.id == self.env.uid)
+        results.write({
+            'finish_date': fields.Datetime.now(),
+            'state': 'finished',
+        })
+
+
+class UserResult(models.Model):
+    _name = 'ft.document.transform.result'
+    _description = 'Doc Transform Result'
+    _rec_name = 'user'
+
+    transform = fields.Many2one('ft.document.transform', 'Related Transform', ondelete='cascade')
+    user = fields.Many2one('res.users', 'User')
+    finish_date = fields.Datetime('Finished Time')
+    state = fields.Selection([('processing', u'处理中'), ('finished', u'完成')], 'State', default='processing')
+
 
 
 
