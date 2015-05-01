@@ -32,7 +32,7 @@
                                 'wechat_template': %(ft_doc_transform.message_template_doc_transform)d,
                                 }"/>
 
-                        <button name="principal_apply" string="提交" type="object" class="oe_highlight" is_log="1"
+                        <button name="principal_apply" string="提交" type="object" class="oe_highlight"
                                 states_editable="{'principal':{'users':[request_principal_user]}}"
                                 context="{
                                 'state': 'finish',
@@ -51,7 +51,7 @@
                                 'wechat_template': %(ft_doc_transform.message_template_doc_transform)d,
                                 }" is_reject="1"/>
 
-                        <button name="vice_principal_apply" string="提交" type="object" class="oe_highlight" is_log="1"
+                        <button name="vice_principal_apply" string="提交" type="object" class="oe_highlight"
                                 states_editable="{'vice_principal':{'users':[request_principal_user,request_principal_vice_principal]}}"
                                 context="{
                                 'state': 'department',
@@ -98,6 +98,12 @@
                     <sheet>
                         <group string="草稿">
                             <field name="name" states_editable="{'draft':{'groups':%(ft_doc_transform.group_doc_trans_user)d}}"/>
+                            <group colspan="2" col="4">
+                                <field name="from_unit" states_editable="{'draft':{'groups':%(ft_doc_transform.group_doc_trans_user)d}}"/>
+                                <field name="code" states_editable="{'draft':{'groups':%(ft_doc_transform.group_doc_trans_user)d}}"/>
+                                <field name="receive_date" states_editable="{'draft':{'groups':%(ft_doc_transform.group_doc_trans_user)d}}"/>
+                                <field name="urgency" states_editable="{'draft':{'groups':%(ft_doc_transform.group_doc_trans_user)d}}"/>
+                            </group>
                             <field name="attachments" widget="many2many_binary"
                                    states_editable="{'draft':{'groups':[%(ft_doc_transform.group_doc_trans_user)d]}}"/>
                             <group colspan="2" string="备注">
@@ -133,6 +139,7 @@
                                    attrs="{'invisible':[('principal_apply_type','=','vice_principal')],'required':[('state','=','principal'),('principal_apply_type','=','department')]}"
                                    domain="[('groups_id','=',%(ft_doc_transform.group_doc_trans_department)d)]"
                                    states_editable="{'principal':{'users':[request_principal_user]},'department':{'users':[1]}}"/>
+                            <field name="principal_comment" states_editable="{'principal':{'users':[request_principal_user]}}"/>
                             <group colspan="2" col="4">
                                 <field name="principal_user" readonly="1"/>
                                 <field name="principal_datetime" readonly="1"/>
@@ -155,6 +162,8 @@
                             <field name="request_vice_department_users" string="抄送部门执行人" widget="many2many_tags"
                                    attrs="{'required':[('state','=','vice_principal'),('vice_principal_apply_type','=','department')]}"
                                    domain="[('groups_id','=',%(ft_doc_transform.group_doc_trans_department)d)]"
+                                   states_editable="{'vice_principal':{'users':[request_principal_user,request_principal_vice_principal]}}"/>
+                            <field name="vice_principal_comment"
                                    states_editable="{'vice_principal':{'users':[request_principal_user,request_principal_vice_principal]}}"/>
                             <group colspan="2" col="4">
                                 <field name="vice_principal_user" readonly="1"/>

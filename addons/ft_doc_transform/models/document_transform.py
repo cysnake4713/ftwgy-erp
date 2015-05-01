@@ -23,6 +23,12 @@ class DocumentTransform(models.Model):
     request_principal_user = fields.Many2one('res.users', 'Request Principal User')
     draft_user = fields.Many2one('res.users', 'Draft User')
     draft_datetime = fields.Datetime('Draft Request Datetime')
+    from_unit = fields.Char('From Unit')
+    code = fields.Char('Code')
+    receive_date = fields.Date('Receive Date', default=lambda *o: fields.Date.today())
+    urgency = fields.Selection([('normal', u'一般'),
+                                ('urgent', u'紧急'),
+                                ('very_urgent', u'加急')], 'Urgency', default='normal')
     # principal
     principal_apply_type = fields.Selection([('vice_principal', 'To Vice Principal'), ('department', 'To Department'), ('teacher', 'To Teacher')],
                                             'Principal To', default='vice_principal')
@@ -31,6 +37,7 @@ class DocumentTransform(models.Model):
     request_department_teacher_users = fields.Many2many('res.users', 'rel_ft_doc_trans_cc_users', 'doc_id', 'user_id', 'Request Department CC Users')
     principal_user = fields.Many2one('res.users', 'Principal User')
     principal_datetime = fields.Datetime('Principal Datetime')
+    principal_comment = fields.Text('Principal Comment')
     # vice_principal
     vice_principal_apply_type = fields.Selection([('department', 'To Department'), ('teacher', 'To Teacher')], 'Vice Principal To',
                                                  default='department')
@@ -40,6 +47,7 @@ class DocumentTransform(models.Model):
                                                      'Vice Request Department Users')
     vice_principal_user = fields.Many2one('res.users', 'Vice Principal User')
     vice_principal_datetime = fields.Datetime('Vice Principal Datetime')
+    vice_principal_comment = fields.Text('Vice Principal Comment')
     # department
     department_comment = fields.Text('Department Comment')
     department_comment_user = fields.Many2many('res.users', 'rel_ft_doc_trans_comment_users', 'doc_id', 'user_id', 'Department Comment User')
