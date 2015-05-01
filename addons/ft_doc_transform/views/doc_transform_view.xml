@@ -6,13 +6,37 @@
             <field name="model">ft.document.transform</field>
             <field name="arch" type="xml">
                 <tree colors="grey:state == 'finish'">
+                    <field name="code"/>
                     <field name="name"/>
-                    <field name="principal_user"/>
-                    <field name="principal_datetime"/>
-                    <field name="department_user"/>
-                    <field name="department_datetime"/>
+                    <field name="from_unit"/>
+                    <field name="receive_date"/>
+                    <field name="urgency"/>
                     <field name="state"/>
                 </tree>
+            </field>
+        </record>
+
+        <record id="view_doc_transform_search" model="ir.ui.view">
+            <field name="name">view.ft.document.transform.search</field>
+            <field name="model">ft.document.transform</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="code"/>
+                    <field name="name"/>
+                    <field name="from_unit"/>
+                    <field name="receive_date"/>
+                    <field name="urgency"/>
+                    <field name="state"/>
+                    <group>
+                        <filter string="状态" icon="terp-folder-orange" context="{'group_by':'state'}"/>
+                        <filter string="待校长审批" icon="terp-folder-orange" domain="[('state','=','principal')]"
+                                groups="ft_doc_transform.group_doc_trans_principal"/>
+                        <filter string="待副校长审批" icon="terp-folder-orange" domain="[('state','=','vice_principal')]"
+                                groups="ft_doc_transform.group_doc_trans_vice_principal"/>
+                        <filter string="待部门领导审批" icon="terp-folder-orange" domain="[('state','=','department')]"
+                                groups="ft_doc_transform.group_doc_trans_department"/>
+                    </group>
+                </search>
             </field>
         </record>
 
@@ -90,8 +114,8 @@
                                 }"/>
 
                         <!--<button name="common_reject" string="撤销" type="object" is_log="1"-->
-                                <!--states_editable="{'finish':{'users':[request_vice_department_users,request_department_users]}}"-->
-                                <!--context="{'state':'department'}" is_reject="1"/>-->
+                        <!--states_editable="{'finish':{'users':[request_vice_department_users,request_department_users]}}"-->
+                        <!--context="{'state':'department'}" is_reject="1"/>-->
                         <button name="button_teacher_finish" string="已完成" class="oe_highlight" type="object" states="finish"/>
                         <field name="state" widget="statusbar" readonly="1" statusbar_visible="draft,principal,vice_principal,department,finish"/>
                     </header>
