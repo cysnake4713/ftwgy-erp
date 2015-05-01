@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+        <!-- QWeb Reports -->
+        <report
+                id="action_report_doc_transform"
+                model="ft.document.transform"
+                report_type="qweb-pdf"
+                string="公文审批表单"
+                name="ft_doc_transform.report_doc_transform"
+                file="ft_doc_transform.report_doc_transform"
+                />
+    </data>
+</openerp>

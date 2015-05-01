@@ -20,6 +20,7 @@ class DocumentTransform(models.Model):
                               ('finish', 'Finish'), ('finish_teacher', 'Finish By Teacher')], 'State', default='draft', track_visibility='onchange')
     # draft
     attachments = fields.Many2many('ir.attachment', 'rel_ft_doc_attachments', 'doc_id', 'attachment_id', 'Attachments')
+    comment = fields.Html('Comment')
     request_principal_user = fields.Many2one('res.users', 'Request Principal User')
     draft_user = fields.Many2one('res.users', 'Draft User')
     draft_datetime = fields.Datetime('Draft Request Datetime')
@@ -54,7 +55,6 @@ class DocumentTransform(models.Model):
     department_user = fields.Many2one('res.users', 'Department User')
     department_datetime = fields.Datetime('Department Datetime')
 
-    comment = fields.Html('Comment')
 
     results = fields.One2many('ft.document.transform.result', 'transform', 'Results')
 

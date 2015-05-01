@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <template id="report_doc_transform">
+            <t t-set="body_classname" t-value="'container'"/>
+            <t t-call="report.layout">
+                <t t-call="report.internal_layout">
+                    <div class="page">
+                        <h2 style="text-align: center">福田区侨香外国语学校文件处理表</h2>
+                        <table class="table table-bordered">
+                            <tr>
+                                <td style="width:25%">来文单位</td>
+                                <td>
+                                    <p t-field="object.from_unit"/>
+                                </td>
+                                <td>公文编号</td>
+                                <td>
+                                    <p t-field="object.code"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>收件时间</td>
+                                <td>
+                                    <p t-field="object.receive_date"/>
+                                </td>
+                                <td>紧急程度</td>
+                                <td>
+                                    <p t-field="object.urgency"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>文件标题或者摘要</td>
+                                <td colspan="3">
+                                    <h2 t-field="object.name"/>
+                                    <div t-field="object.comment"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>附件</td>
+                                <td colspan="3">
+                                    <t t-foreach="object.attachments" t-as="attachment">
+                                        <p t-field="attachment.name"/>
+                                    </t>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>校长批示</td>
+                                <td colspan="3">
+                                    <div t-field="object.principal_comment"/>
+                                    <br/>
+                                    <br/>
+                                    <div t-if="object.principal_user">
+                                        <p>批示人:
+                                            <span t-field="object.principal_user"/>
+                                        </p>
+                                        <p>批示时间:
+                                            <span t-field="object.principal_datetime"/>
+                                        </p>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>主管副校长批示</td>
+                                <td colspan="3">
+                                    <div t-field="object.vice_principal_comment"/>
+                                    <br/>
+                                    <br/>
+                                    <div t-if="object.vice_principal_user">
+                                        <p>批示人:
+                                            <span t-field="object.vice_principal_user"/>
+                                        </p>
+                                        <p>批示时间:
+                                            <span t-field="object.vice_principal_datetime"/>
+                                        </p>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>处室办理意见</td>
+                                <td colspan="3">
+                                    <div t-field="object.department_comment"/>
+                                    <br/>
+                                    <br/>
+                                    <div t-if="object.department_user">
+                                        <p>批示人:
+                                            <span t-field="object.department_user"/>
+                                        </p>
+                                        <p>批示时间:
+                                            <span t-field="object.department_datetime"/>
+                                        </p>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>处理结果</td>
+                                <td colspan="3">
+                                    <table style="width:100%">
+                                        <tr>
+                                            <th>名称</th>
+                                            <th>状态</th>
+                                            <th>完成时间</th>
+                                        </tr>
+                                        <tr t-foreach="object.results" t-as="result">
+                                            <td>
+                                                <p t-field="result.user"/>
+                                            </td>
+                                            <td>
+                                                <p t-field="result.state"/>
+                                            </td>
+                                            <td>
+                                                <p t-field="result.finish_date"/>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </t>
+                <!--<t t-set="head">-->
+                <!--<style type="text/css">-->
+                <!--body.container {-->
+                <!--width:2500px !important-->
+                <!--}-->
+                <!--</style>-->
+                <!--</t>-->
+            </t>
+        </template>
+    </data>
+</openerp>
