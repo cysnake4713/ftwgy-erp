@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+        <!-- Inherit Form View to Modify it -->
+        <record id="email_compose_message_wizard_form_inherit" model="ir.ui.view">
+            <field name="name">view.mail.compose.message.inherit</field>
+            <field name="model">mail.compose.message</field>
+            <field name="inherit_id" ref="odoosoft_mail_send.email_compose_message_wizard_form_inherit"/>
+            <field name="arch" type="xml">
+                <field name="res_users" position="before">
+                    <field name="departments" widget="many2many_tags_email_multi" placeholder="部门..."/>
+                </field>
+                <field name="res_users" position="attributes">
+                    <attribute name="required" eval="False"/>
+                    <attribute name="placeholder">人员...</attribute>
+                </field>
+                <xpath expr="//button[@name='send_mail_res_users']" position="replace">
+                    <button string="立刻发送" name="send_mail_multi" type="object" class="oe_highlight"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</openerp>
