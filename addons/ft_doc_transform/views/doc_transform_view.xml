@@ -91,7 +91,7 @@
 
                         <!--<button name="common_reject" string="撤销" type="object" is_log="1"-->
                                 <!--states_editable="{'finish':{'users':[request_vice_department_users,request_department_users]}}"-->
-                                context="{'state':'department'}" is_reject="1"/>
+                                <!--context="{'state':'department'}" is_reject="1"/>-->
                         <button name="button_teacher_finish" string="已完成" class="oe_highlight" type="object" states="finish"/>
                         <field name="state" widget="statusbar" readonly="1" statusbar_visible="draft,principal,vice_principal,department,finish"/>
                     </header>

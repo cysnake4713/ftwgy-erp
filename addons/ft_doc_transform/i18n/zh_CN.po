@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-03-21 14:20+0000\n"
-"PO-Revision-Date: 2015-03-21 14:20+0000\n"
+"POT-Creation-Date: 2015-05-01 08:44+0000\n"
+"PO-Revision-Date: 2015-05-01 08:44+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -21,24 +21,14 @@ msgid "Attachments"
 msgstr "附件"
 
 #. module: ft_doc_transform
+#: field:ft.document.transform,code:0
+msgid "Code"
+msgstr "公文编号"
+
+#. module: ft_doc_transform
 #: field:ft.document.transform,comment:0
 msgid "Comment"
 msgstr "备注"
-
-#. module: ft_doc_transform
-#: field:ft.document.transform,create_uid:0
-msgid "Created by"
-msgstr "Created by"
-
-#. module: ft_doc_transform
-#: field:ft.document.transform,create_date:0
-msgid "Created on"
-msgstr "Created on"
-
-#. module: ft_doc_transform
-#: help:ft.document.transform,message_last_post:0
-msgid "Date of the last message posted on the record."
-msgstr "Date of the last message posted on the record."
 
 #. module: ft_doc_transform
 #: selection:ft.document.transform,state:0
@@ -66,6 +56,11 @@ msgid "Department User"
 msgstr "审批人"
 
 #. module: ft_doc_transform
+#: model:ir.model,name:ft_doc_transform.model_ft_document_transform_result
+msgid "Doc Transform Result"
+msgstr "处理结果"
+
+#. module: ft_doc_transform
 #: selection:ft.document.transform,state:0
 msgid "Draft"
 msgstr "草稿"
@@ -82,8 +77,8 @@ msgstr "申情人"
 
 #. module: ft_doc_transform
 #: model:ir.model,name:ft_doc_transform.model_ft_document_transform
-msgid "FT doc Transform"
-msgstr "公文审批"
+msgid "FT Doc Transform"
+msgstr "公文审批流程"
 
 #. module: ft_doc_transform
 #: selection:ft.document.transform,state:0
@@ -96,54 +91,20 @@ msgid "Finish By Teacher"
 msgstr "知会老师"
 
 #. module: ft_doc_transform
-#: field:ft.document.transform,message_follower_ids:0
-msgid "Followers"
-msgstr "Followers"
+#: field:ft.document.transform.result,finish_date:0
+msgid "Finished Time"
+msgstr "完成时间"
 
 #. module: ft_doc_transform
-#: help:ft.document.transform,message_summary:0
-msgid "Holds the Chatter summary (number of messages, ...). This summary is directly in html format in order to be inserted in kanban views."
-msgstr "Holds the Chatter summary (number of messages, ...). This summary is directly in html format in order to be inserted in kanban views."
+#: field:ft.document.transform,from_unit:0
+msgid "From Unit"
+msgstr "来文单位"
 
 #. module: ft_doc_transform
 #: field:ft.document.transform,id:0
+#: field:ft.document.transform.result,id:0
 msgid "ID"
 msgstr "ID"
-
-#. module: ft_doc_transform
-#: help:ft.document.transform,message_unread:0
-msgid "If checked new messages require your attention."
-msgstr "If checked new messages require your attention."
-
-#. module: ft_doc_transform
-#: field:ft.document.transform,message_is_follower:0
-msgid "Is a Follower"
-msgstr "Is a Follower"
-
-#. module: ft_doc_transform
-#: field:ft.document.transform,message_last_post:0
-msgid "Last Message Date"
-msgstr "Last Message Date"
-
-#. module: ft_doc_transform
-#: field:ft.document.transform,write_uid:0
-msgid "Last Updated by"
-msgstr "Last Updated by"
-
-#. module: ft_doc_transform
-#: field:ft.document.transform,write_date:0
-msgid "Last Updated on"
-msgstr "Last Updated on"
-
-#. module: ft_doc_transform
-#: field:ft.document.transform,message_ids:0
-msgid "Messages"
-msgstr "Messages"
-
-#. module: ft_doc_transform
-#: help:ft.document.transform,message_ids:0
-msgid "Messages and communication history"
-msgstr "Messages and communication history"
 
 #. module: ft_doc_transform
 #: field:ft.document.transform,name:0
@@ -154,6 +115,11 @@ msgstr "名称"
 #: selection:ft.document.transform,state:0
 msgid "Principal"
 msgstr "校领导批示"
+
+#. module: ft_doc_transform
+#: field:ft.document.transform,principal_comment:0
+msgid "Principal Comment"
+msgstr "校长批示"
 
 #. module: ft_doc_transform
 #: field:ft.document.transform,principal_datetime:0
@@ -171,6 +137,16 @@ msgid "Principal User"
 msgstr "审批人"
 
 #. module: ft_doc_transform
+#: field:ft.document.transform,receive_date:0
+msgid "Receive Date"
+msgstr "收件时间"
+
+#. module: ft_doc_transform
+#: field:ft.document.transform.result,transform:0
+msgid "Related Transform"
+msgstr "相关公文审批流程"
+
+#. module: ft_doc_transform
 #: field:ft.document.transform,request_department_teacher_users:0
 msgid "Request Department CC Users"
 msgstr "知会老师"
@@ -186,29 +162,87 @@ msgid "Request Principal User"
 msgstr "待批示校领导"
 
 #. module: ft_doc_transform
+#: field:ft.document.transform,request_principal_vice_principal:0
+msgid "Request Vice Principal User"
+msgstr "待审批副校长"
+
+#. module: ft_doc_transform
+#: field:ft.document.transform,results:0
+msgid "Results"
+msgstr "处理结果"
+
+#. module: ft_doc_transform
 #: field:ft.document.transform,state:0
+#: field:ft.document.transform.result,state:0
 msgid "State"
 msgstr "状态"
 
 #. module: ft_doc_transform
-#: field:ft.document.transform,message_summary:0
-msgid "Summary"
-msgstr "Summary"
-
-#. module: ft_doc_transform
 #: selection:ft.document.transform,principal_apply_type:0
+#: selection:ft.document.transform,vice_principal_apply_type:0
 msgid "To Department"
 msgstr "部门负责人"
 
 #. module: ft_doc_transform
 #: selection:ft.document.transform,principal_apply_type:0
+#: selection:ft.document.transform,vice_principal_apply_type:0
 msgid "To Teacher"
 msgstr "老师"
 
 #. module: ft_doc_transform
-#: field:ft.document.transform,message_unread:0
-msgid "Unread Messages"
-msgstr "Unread Messages"
+#: selection:ft.document.transform,principal_apply_type:0
+msgid "To Vice Principal"
+msgstr "副校长"
+
+#. module: ft_doc_transform
+#: field:ft.document.transform,urgency:0
+msgid "Urgency"
+msgstr "紧急程度"
+
+#. module: ft_doc_transform
+#: field:ft.document.transform.result,user:0
+msgid "User"
+msgstr "人员"
+
+#. module: ft_doc_transform
+#: selection:ft.document.transform,state:0
+msgid "Vice Principal"
+msgstr "副校长批示"
+
+#. module: ft_doc_transform
+#: field:ft.document.transform,vice_principal_comment:0
+msgid "Vice Principal Comment"
+msgstr "副校长批示"
+
+#. module: ft_doc_transform
+#: field:ft.document.transform,vice_principal_datetime:0
+msgid "Vice Principal Datetime"
+msgstr "副校长审批时间"
+
+#. module: ft_doc_transform
+#: field:ft.document.transform,vice_principal_apply_type:0
+msgid "Vice Principal To"
+msgstr "发送到"
+
+#. module: ft_doc_transform
+#: field:ft.document.transform,vice_principal_user:0
+msgid "Vice Principal User"
+msgstr "副校长"
+
+#. module: ft_doc_transform
+#: field:ft.document.transform,request_vice_department_users:0
+msgid "Vice Request Department Users"
+msgstr "部门负责人"
+
+#. module: ft_doc_transform
+#: field:ft.document.transform,request_vice_department_teacher_users:0
+msgid "Vice Request Teacher"
+msgstr "相关教师"
+
+#. module: ft_doc_transform
+#: selection:ft.document.transform,urgency:0
+msgid "一般"
+msgstr "一般"
 
 #. module: ft_doc_transform
 #: model:res.groups,name:ft_doc_transform.group_doc_trans_user
@@ -222,9 +256,44 @@ msgid "公文审批"
 msgstr "公文审批"
 
 #. module: ft_doc_transform
+#: model:res.groups,name:ft_doc_transform.group_doc_trans_vice_principal
+msgid "副校长"
+msgstr "副校长"
+
+#. module: ft_doc_transform
+#: view:ft.document.transform:ft_doc_transform.view_doc_transform_form
+msgid "副校长批示"
+msgstr "副校长批示"
+
+#. module: ft_doc_transform
+#: selection:ft.document.transform,urgency:0
+msgid "加急"
+msgstr "加急"
+
+#. module: ft_doc_transform
+#: selection:ft.document.transform.result,state:0
+msgid "处理中"
+msgstr "处理中"
+
+#. module: ft_doc_transform
+#: view:ft.document.transform:ft_doc_transform.view_doc_transform_form
+msgid "处理结果"
+msgstr "处理结果"
+
+#. module: ft_doc_transform
 #: view:ft.document.transform:ft_doc_transform.view_doc_transform_form
 msgid "如果本公文需要抄送部门经理,请在下方字段填入部门经理姓名"
 msgstr "如果本公文需要抄送部门经理,请在下方字段填入部门经理姓名"
+
+#. module: ft_doc_transform
+#: selection:ft.document.transform.result,state:0
+msgid "完成"
+msgstr "完成"
+
+#. module: ft_doc_transform
+#: view:ft.document.transform:ft_doc_transform.view_doc_transform_form
+msgid "已完成"
+msgstr "已完成"
 
 #. module: ft_doc_transform
 #: model:ir.ui.menu,name:ft_doc_transform.menu_process_root
@@ -238,18 +307,23 @@ msgstr "抄送部门执行人"
 
 #. module: ft_doc_transform
 #: model:res.groups,name:ft_doc_transform.group_doc_trans_principal
-msgid "校领导"
-msgstr "校领导"
+msgid "校长"
+msgstr "校长"
 
 #. module: ft_doc_transform
 #: view:ft.document.transform:ft_doc_transform.view_doc_transform_form
-msgid "校领导批示"
-msgstr "校领导批示"
+msgid "校长批示"
+msgstr "校长批示"
 
 #. module: ft_doc_transform
 #: model:res.groups,name:ft_doc_transform.group_doc_trans_admin
 msgid "管理员"
 msgstr "管理员"
+
+#. module: ft_doc_transform
+#: selection:ft.document.transform,urgency:0
+msgid "紧急"
+msgstr "紧急"
 
 #. module: ft_doc_transform
 #: view:ft.document.transform:ft_doc_transform.view_doc_transform_form
