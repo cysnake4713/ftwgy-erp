@@ -30,8 +30,8 @@ class Timetable(report_sxw.rml_parse):
         lesson_map = {}
         for cell in cells:
             lesson_map[(cell['classroom'][0], cell['week'], cell['lesson'][0])] = (
-                cell['subject'][1] if 'subject' in cell else '',
-                cell['teacher'][1] if 'teacher' in cell else '',)
+                cell['subject'][1] if 'subject' in cell and cell['subject'] else '',
+                cell['teacher'][1] if 'teacher' in cell and cell['teacher'] else '',)
 
         self.localcontext.update({
             'classrooms': self.classrooms,
