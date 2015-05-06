@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-03-22 13:48+0000\n"
-"PO-Revision-Date: 2015-03-22 13:48+0000\n"
+"POT-Creation-Date: 2015-05-06 09:25+0000\n"
+"PO-Revision-Date: 2015-05-06 09:25+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -53,7 +53,7 @@ msgid "Confirmed"
 msgstr "通过"
 
 #. module: class_notify
-#: code:addons/class_notify/models/timetable.py:54
+#: code:addons/class_notify/models/timetable.py:67
 #, python-format
 msgid "Current timetable already have plans!"
 msgstr "当前课程表已经生成过上课计划!"
@@ -85,9 +85,9 @@ msgid "End Date cannot be set before Start Date."
 msgstr "结束时间必须大于开始时间."
 
 #. module: class_notify
-#: field:school.timetable.plan,end_datetime:0
-msgid "End Datetime"
-msgstr "结束时间"
+#: view:school.timetable.plan:class_notify.view_school_plan_search
+msgid "Group By"
+msgstr "分组"
 
 #. module: class_notify
 #: field:school.timetable,initial_lesson_type:0
@@ -113,7 +113,7 @@ msgid "Lesson Type"
 msgstr "节数类型"
 
 #. module: class_notify
-#: code:addons/class_notify/models/plan_switch.py:65
+#: code:addons/class_notify/models/plan_switch.py:77
 #, python-format
 msgid "Must have both Origin Plan and Target Plan!"
 msgstr "必须同时填写原课程和目标课程"
@@ -132,9 +132,19 @@ msgid "Need To Switch"
 msgstr "原课程"
 
 #. module: class_notify
+#: field:school.timetable.cell.wizard,old_cell:0
+msgid "Old Cell"
+msgstr "待换课程"
+
+#. module: class_notify
 #: field:school.timetable,plan_ids:0
 msgid "Plans"
 msgstr "上课计划"
+
+#. module: class_notify
+#: field:school.timetable.plan.switch.wizard,request_center_user:0
+msgid "Request Center Confirm User"
+msgstr "教务处审批人"
 
 #. module: class_notify
 #: field:school.timetable.plan.switch.wizard,result_origin_plan:0
@@ -145,6 +155,11 @@ msgstr "原课程变换为"
 #: field:school.timetable.plan.switch.wizard,result_target_plan:0
 msgid "Result Target Plan"
 msgstr "目标课程变换为"
+
+#. module: class_notify
+#: model:ir.model,name:class_notify.model_school_timetable_plan_switch_wizard
+msgid "School Timetable Wizard"
+msgstr "换课审批"
 
 #. module: class_notify
 #: field:school.timetable,semester_id:0
@@ -158,14 +173,10 @@ msgstr "短名称"
 
 #. module: class_notify
 #: field:school.semester,start_date:0
+#: field:school.timetable.cell.wizard,start_date:0
 #: field:school.timetable.plan,start_date:0
 #: field:school.timetable.wizard,start_date:0
 msgid "Start Date"
-msgstr "开始时间"
-
-#. module: class_notify
-#: field:school.timetable.plan,start_datetime:0
-msgid "Start Datetime"
 msgstr "开始时间"
 
 #. module: class_notify
@@ -176,6 +187,7 @@ msgstr "状态"
 #. module: class_notify
 #: field:school.timetable.cell,subject:0
 #: field:school.timetable.cell.abstract,subject:0
+#: field:school.timetable.cell.wizard,subject:0
 #: field:school.timetable.plan,subject:0
 msgid "Subject"
 msgstr "科目"
@@ -213,6 +225,7 @@ msgstr "待换课教师审批人"
 #. module: class_notify
 #: field:school.timetable.cell,teacher:0
 #: field:school.timetable.cell.abstract,teacher:0
+#: field:school.timetable.cell.wizard,teacher:0
 #: field:school.timetable.plan,teacher:0
 msgid "Teacher"
 msgstr "教师"
@@ -223,7 +236,7 @@ msgid "Timetable"
 msgstr "课程表"
 
 #. module: class_notify
-#: code:addons/class_notify/models/timetable.py:90
+#: code:addons/class_notify/models/timetable.py:123
 #, python-format
 msgid "Timetable have plans, please delete plans before delete the timetable."
 msgstr "当前课表已经含有课程计划,请先清除当前课程计划,再生成新的计划."
@@ -234,7 +247,7 @@ msgid "Users"
 msgstr "用户"
 
 #. module: class_notify
-#: code:addons/class_notify/models/timetable.py:54
+#: code:addons/class_notify/models/timetable.py:67
 #, python-format
 msgid "Warning"
 msgstr "警告"
@@ -255,6 +268,11 @@ msgid "Winter Start Time"
 msgstr "冬时开始时间"
 
 #. module: class_notify
+#: model:ir.actions.act_window,name:class_notify.action_school_timetable_cell_wizard
+msgid "action.school.timetable.cell.wizard"
+msgstr "课表修改"
+
+#. module: class_notify
 #: model:ir.actions.act_window,name:class_notify.action_school_timetable_wizard
 msgid "action.school.timetable.wizard"
 msgstr "调课申请"
@@ -269,12 +287,13 @@ msgid "name must be unique !"
 msgstr "名称不可重复!"
 
 #. module: class_notify
+#: view:school.timetable.cell.wizard:class_notify.view_school_timetable_cell_wizard_form
 #: view:school.timetable.wizard:class_notify.view_school_timetable_wizard_form
 msgid "or"
 msgstr "或"
 
 #. module: class_notify
-#: code:addons/class_notify/models/plan_switch.py:60
+#: code:addons/class_notify/models/plan_switch.py:72
 #, python-format
 msgid "target plan teacher's plan is conflict to the origin plan date and lesson!"
 msgstr "目标课程无法和您的课程调换,因为目标课程的老师在当天本节课同样需要上课!"
@@ -290,6 +309,11 @@ msgstr "上课时间:"
 #: selection:school.timetable.wizard,lesson_type:0
 msgid "冬时"
 msgstr "冬时"
+
+#. module: class_notify
+#: view:school.timetable.plan:class_notify.view_school_plan_form
+msgid "发送微信信息"
+msgstr "发送微信信息"
 
 #. module: class_notify
 #: view:school.timetable.plan.switch.wizard:class_notify.view_school_plan_switch_form
@@ -422,6 +446,21 @@ msgstr "更新课程时刻会对当前课表下的所有课程计划产生影响
 #: view:school.timetable:class_notify.view_school_timetable_form
 msgid "更新课程时刻类型"
 msgstr "更新课程时刻类型"
+
+#. module: class_notify
+#: view:school.timetable:class_notify.view_school_timetable_form
+msgid "更新课表信息"
+msgstr "更新课表信息"
+
+#. module: class_notify
+#: view:school.timetable:class_notify.view_school_timetable_form
+msgid "更新课表信息会对当前课表下的所有课程计划产生影响，请谨慎处理。"
+msgstr "更新课表信息会对当前课表下的所有课程计划产生影响，请谨慎处理。"
+
+#. module: class_notify
+#: view:school.timetable.cell.wizard:class_notify.view_school_timetable_cell_wizard_form
+msgid "替换为"
+msgstr "替换为"
 
 #. module: class_notify
 #: view:school.timetable.plan:class_notify.view_school_plan_search

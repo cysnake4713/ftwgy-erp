@@ -27,11 +27,24 @@ class CurriculumCell(models.Model):
     _inherit = 'school.timetable.cell.abstract'
     _rec_name = 'timetable_id'
 
-    timetable_id = fields.Many2one('school.timetable', 'Timetable', ondelete='cascade')
+    timetable_id = fields.Many2one('school.timetable', 'Timetable', ondelete='cascade', required=True)
     # 周几
     week = fields.Selection([("Monday", u"星期一"), ("Tuesday", u"星期二"),
                              ("Wednesday", u"星期三"), ("Thursday", u"星期四"),
                              ("Friday", u"星期五"), ("Saturday", u"星期六"), ("Sunday", u"星期日")], 'Week')
+
+    @api.multi
+    @api.depends('lesson', 'teacher', 'classroom', 'subject', 'week')
+    def name_get(self):
+        week_map = dict([("Monday", u"星期一"), ("Tuesday", u"星期二"),
+                         ("Wednesday", u"星期三"), ("Thursday", u"星期四"),
+                         ("Friday", u"星期五"), ("Saturday", u"星期六"), ("Sunday", u"星期日")])
+        result = []
+        for plan in self:
+            result.append(
+                (plan.id,
+                 u'%s %s %s %s 第%s节' % (plan.classroom.name, plan.subject.name, plan.teacher.name, week_map[plan.week], plan.lesson.name)))
+        return result
 
 
 class Curriculum(models.Model):
@@ -53,7 +66,7 @@ class Curriculum(models.Model):
         if self.plan_ids:
             raise osv.except_osv(_('Warning'), _('Current timetable already have plans!'))
 
-        week_dict = self._get_date_week_dict(self.semester_id.start_date, self.semester_id.end_date)
+        week_dict = self.get_date_week_dict(self.semester_id.start_date, self.semester_id.end_date)
         for cell in self.cell_ids:
             value = self.pool['school.timetable.cell'].copy_data(self.env.cr, self.env.uid, cell.id, context={})
             value['lesson_type'] = self.initial_lesson_type
@@ -82,7 +95,7 @@ class Curriculum(models.Model):
         return True
 
     @staticmethod
-    def _get_date_week_dict(start_date, end_date):
+    def get_date_week_dict(start_date, end_date):
         dates = list(rrule.rrule(rrule.DAILY, dtstart=parser.parse(start_date), until=parser.parse(end_date)))
         result = {}
         for date in dates:
@@ -125,4 +138,34 @@ class TypeChangeWizard(models.TransientModel):
         timetable.initial_lesson_type = self.lesson_type
         plan_ids = timetable.plan_ids.filtered(lambda record: record.start_date >= self.start_date)
         plan_ids.write({'lesson_type': self.lesson_type})
+        return True
+
+
+class CellChangeWizard(models.TransientModel):
+    _name = 'school.timetable.cell.wizard'
+
+    old_cell = fields.Many2one('school.timetable.cell', 'Old Cell', required=True)
+
+    teacher = fields.Many2one('res.users', 'Teacher')
+    # 科目
+    subject = fields.Many2one('school.subject', 'Subject', required=True)
+
+    start_date = fields.Date('Start Date', required=True, default=lambda *o: fields.Date.today())
+
+    @api.one
+    def button_save(self):
+        week_map = {"Monday": 0, "Tuesday": 1,
+                    "Wednesday": 2, "Thursday": 3,
+                    "Friday": 4, "Saturday": 5, "Sunday": 6}
+        timetable = self.env['school.timetable'].browse(self.env.context['active_id'])
+        week_dict = timetable.get_date_week_dict(self.start_date, timetable.semester_id.end_date)
+        target_date = week_dict[week_map[self.old_cell.week]]
+        target_plans = self.env['school.timetable.plan'].search([
+            ('id', 'in', [p.id for p in timetable.plan_ids]),
+            ('classroom', '=', self.old_cell.classroom.id),
+            ('lesson', '=', self.old_cell.lesson.id),
+            ('start_date', 'in', target_date),
+        ])
+        target_plans.write({'subject': self.subject.id, 'teacher': self.teacher.id})
+        self.old_cell.write({'subject': self.subject.id, 'teacher': self.teacher.id})
         return True

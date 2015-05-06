@@ -20,12 +20,45 @@
                 </form>
             </field>
         </record>
+
+        <record id="view_school_timetable_cell_wizard_form" model="ir.ui.view">
+            <field name="name">view.school.timetable.cell.wizard.form</field>
+            <field name="model">school.timetable.cell.wizard</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <field name="old_cell" domain="[('timetable_id','=',context.get('timetable_id'))]"/>
+                            <group string="替换为" colspan="2" col="4">
+                                <field name="subject"/>
+                                <field name="teacher"/>
+                            </group>
+                            <field name="start_date"/>
+                        </group>
+                    </sheet>
+                    <footer>
+                        <button string="保存" name="button_save" type="object" groups="class_notify.group_class_admin"/>
+                        or
+                        <button string="取消" special="cancel" class="oe_link"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
         <record id="action_school_timetable_wizard" model="ir.actions.act_window">
             <field name="name">action.school.timetable.wizard</field>
             <field name="res_model">school.timetable.wizard</field>
             <field name="view_type">form</field>
             <field name="view_mode">form</field>
             <field name="target">new</field>
+        </record>
+
+        <record id="action_school_timetable_cell_wizard" model="ir.actions.act_window">
+            <field name="name">action.school.timetable.cell.wizard</field>
+            <field name="res_model">school.timetable.cell.wizard</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+            <field name="context">{'timetable_id':active_id}</field>
         </record>
 
         <record id="view_school_timetable_tree" model="ir.ui.view">
@@ -53,6 +86,8 @@
                                 confirm="确定清除本课表的排课信息？"/>
                         <button name="%(action_school_timetable_wizard)d" type="action" string="更新课程时刻类型" groups="class_notify.group_class_admin"
                                 confirm="更新课程时刻会对当前课表下的所有课程计划产生影响，请谨慎处理。"/>
+                        <button name="%(action_school_timetable_cell_wizard)d" type="action" string="更新课表信息" groups="class_notify.group_class_admin"
+                                confirm="更新课表信息会对当前课表下的所有课程计划产生影响，请谨慎处理。"/>
                     </header>
                     <group col="1">
                         <group col="4">
@@ -77,20 +112,35 @@
             </field>
         </record>
 
+        <record id="view_school_timetable_cell_tree" model="ir.ui.view">
+            <field name="name">view.school.timetable.cell.tree</field>
+            <field name="model">school.timetable.cell</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="classroom"/>
+                    <field name="subject"/>
+                    <field name="teacher"/>
+                    <field name="week"/>
+                    <field name="lesson"/>
+                    <field name="timetable_id"/>
+                </tree>
+            </field>
+        </record>
 
-        <!--<record id="view_school_timetable_cell_tree" model="ir.ui.view">-->
-        <!--<field name="name">view.school.timetable.cell.tree</field>-->
-        <!--<field name="model">school.timetable.cell</field>-->
-        <!--<field name="arch" type="xml">-->
-        <!--<tree>-->
-        <!--<field name="classroom"/>-->
-        <!--<field name="subject"/>-->
-        <!--<field name="teacher"/>-->
-        <!--<field name="week"/>-->
-        <!--<field name="lesson"/>-->
-        <!--</tree>-->
-        <!--</field>-->
-        <!--</record>-->
+        <record id="view_school_timetable_cell_search" model="ir.ui.view">
+            <field name="name">view.school.timetable.cell.search</field>
+            <field name="model">school.timetable.cell</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="classroom"/>
+                    <field name="subject"/>
+                    <field name="teacher"/>
+                    <field name="week"/>
+                    <field name="lesson"/>
+                    <field name="timetable_id"/>
+                </search>
+            </field>
+        </record>
 
     </data>
 </openerp>
