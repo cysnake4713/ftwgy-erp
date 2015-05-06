@@ -11,7 +11,7 @@ FTWGY Mail Send Plugin Module""",
     'depends': ['base', 'mail', 'odoosoft_mail_send', 'ft_department'],
     'data': [
         'views/compose_view.xml',
-        'views/menu.xml',
+        # 'views/menu.xml',
     ],
     'qweb': [
         'static/src/xml/*.xml',
