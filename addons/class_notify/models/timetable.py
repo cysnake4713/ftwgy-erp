@@ -68,7 +68,7 @@ class Curriculum(models.Model):
                             %s, %s, %s, %s, %s, (now() at time zone 'UTC'), (now() at time zone 'UTC')) RETURNING id
                 ''', (value['classroom'],
                       value['lesson_type'],
-                      value['teacher'],
+                      value['teacher'] or None,
                       value['lesson'],
                       value['start_date'],
                       value['subject'],
