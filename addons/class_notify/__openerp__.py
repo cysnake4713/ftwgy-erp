@@ -8,7 +8,7 @@
 Class Notify""",
     'author': 'Matt Cai',
     'website': 'http://odoosoft.com',
-    'depends': ['base', 'report', 'mail', 'odoosoft_workflow'],
+    'depends': ['base', 'report', 'mail', 'odoosoft_workflow', 'odoosoft_wechat_enterprise'],
     'data': [
         'data/cron.xml',
         'data/data.xml',

@@ -14,5 +14,16 @@
 状态: ${fields['state'].convert_to_export(object.state, ctx)}
             </field>
         </record>
+
+        <record id="message_template_plan_notify" model="odoosoft.wechat.enterprise.message.template">
+            <field name="name">微信课程信息提醒</field>
+            <field name="title">课程信息提醒</field>
+            <field name="content">
+班级: ${object.classroom.name}
+节数: 第${object.lesson.name}节课
+课程: ${object.subject.name}
+任课老师: ${object.teacher.name}
+            </field>
+        </record>
     </data>
 </openerp>

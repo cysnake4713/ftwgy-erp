@@ -6,6 +6,16 @@
             <field name="model">school.timetable.plan</field>
             <field name="arch" type="xml">
                 <form>
+                    <header>
+                        <button name="send" string="发送微信信息" type="object" is_wechat="1"
+                                groups="class_notify.group_class_switch_manager"
+                                context="{
+                                'message_users':[teacher],
+                                'wechat_code':['class_notify.plan_swtich'],
+                                'wechat_template': %(class_notify.message_template_plan_notify)d,
+                                'wechat_type':'news',
+                                }"/>
+                    </header>
                     <sheet>
                         <div class="oe_title">
                             <h1>
