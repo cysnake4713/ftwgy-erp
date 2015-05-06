@@ -46,13 +46,13 @@ class TimetableImport(models.TransientModel):
         results = []
         for row in import_datas:
             for i in range(1, len(row)):
-                m = re.match(r'(\S+)\s+(\S+)', row[i])
+                m = re.match(r'(\S+)\s*(\S+)*', row[i])
                 if m:
                     results += [(head_map[i][0],
                                  head_map[i][1],
                                  row[0],
                                  m.group(1),
-                                 m.group(2),
+                                 m.group(2) or False,
                                  timetable_id,)]
         return results, import_fields
 
