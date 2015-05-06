@@ -97,9 +97,10 @@ class Curriculum(models.Model):
     def button_clear_plans(self):
         for timetable in self:
             plan_ids = [p.id for p in timetable.plan_ids]
-            self.env.cr.execute('''
-                    DELETE FROM school_timetable_plan WHERE id IN %s
-                ''', (tuple(plan_ids),))
+            if plan_ids:
+                self.env.cr.execute('''
+                        DELETE FROM school_timetable_plan WHERE id IN %s
+                    ''', (tuple(plan_ids),))
         return True
 
     @api.multi
