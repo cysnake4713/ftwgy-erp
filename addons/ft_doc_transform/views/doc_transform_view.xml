@@ -55,7 +55,11 @@
                                 'wechat_code': [%(ft_doc_transform.map_ft_doc_transform)d],
                                 'wechat_template': %(ft_doc_transform.message_template_doc_transform)d,
                                 }"/>
-
+                        <button name="common_reject" string="撤销到草稿" type="object" class="oe_highlight" states="principal,vice_principal"
+                                groups="ft_doc_transform.group_doc_trans_user" is_reject="1"
+                                context="{
+                                'state': 'draft',
+                                }"/>
                         <button name="principal_apply" string="提交" type="object" class="oe_highlight"
                                 states_editable="{'principal':{'users':[request_principal_user]}}"
                                 context="{
