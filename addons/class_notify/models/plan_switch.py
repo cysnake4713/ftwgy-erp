@@ -41,6 +41,8 @@ class PlanWizard(models.Model):
     target_teacher_user = fields.Many2one('res.users', 'Target Teacher User')
     target_teacher_datetime = fields.Datetime('Target Teacher Datetime')
 
+    head_teacher = fields.Many2many('res.users', 'class_plan_wizard_head_user_rel', 'plan_id', 'user_id', 'Head Teacher')
+
     draft_user = fields.Many2one('res.users', 'Draft User')
     draft_datetime = fields.Datetime('Draft Datetime')
 
@@ -99,6 +101,7 @@ class PlanWizard(models.Model):
 
         self.send_notify_mail(self.origin_plan, self.result_target_plan)
         self.send_notify_mail(self.target_plan, self.result_origin_plan)
+        self.send_notify_mail_to_head(self.target_plan, self.result_origin_plan, self.origin_plan, self.result_target_plan, self.head_teacher)
         self.state = 'confirmed'
 
     @api.multi
@@ -111,6 +114,22 @@ class PlanWizard(models.Model):
                 'wechat_code': ['class_notify.plan_swtich'],
                 'wechat_template': 'class_notify.message_template_plan_switch',
             }).common_apply()
+
+    @api.multi
+    def send_notify_mail_to_head(self, origin_plan, target_plan, s_origin_plan, s_target_plan, teachers):
+        if origin_plan and target_plan:
+            text = u'课程:%s 调换到了:%s,<br/>' \
+                   u'课程:%s 调换到了:%s,<br/>' \
+                   u'请注意本班课程变更' % (
+                       origin_plan.name_get()[0][1], target_plan.name_get()[0][1],
+                       s_origin_plan.name_get()[0][1], s_target_plan.name_get()[0][1],)
+            self.with_context({
+                'message_users': [t.id for t in teachers],
+                'message': text,
+                'wechat_code': ['class_notify.plan_swtich'],
+                'wechat_template': 'class_notify.message_template_plan_switch',
+            }).common_apply()
+
 
     @api.model
     def cron_send_notify_mail(self):
