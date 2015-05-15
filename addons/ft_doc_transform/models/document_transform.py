@@ -17,7 +17,8 @@ class DocumentTransform(models.Model):
                               ('principal', 'Principal'),
                               ('vice_principal', 'Vice Principal'),
                               ('department', 'Department'),
-                              ('finish', 'Finish'), ('finish_teacher', 'Finish By Teacher')], 'State', default='draft', track_visibility='onchange')
+                              ('finish_teacher', 'Finish By Teacher'),
+                              ('finish', 'Finish')], 'State', default='draft', track_visibility='onchange')
     # draft
     attachments = fields.Many2many('ir.attachment', 'rel_ft_doc_attachments', 'doc_id', 'attachment_id', 'Attachments')
     comment = fields.Html('Comment')
@@ -63,7 +64,6 @@ class DocumentTransform(models.Model):
         'principal': True,
         'vice_principal': True,
         'department': True,
-        'finish': False,
     }
 
     @api.multi
@@ -88,7 +88,7 @@ class DocumentTransform(models.Model):
             return self.with_context(state='department').common_apply()
         elif self.vice_principal_apply_type == 'teacher':
             self.write({'results': [(5, 0), ] + [(0, 0, {'user': u.id, 'transform': self.id}) for u in self.request_vice_department_teacher_users]})
-            return self.with_context(state='finish').common_apply()
+            return self.with_context(state='finish_teacher').common_apply()
         else:
             return self.common_apply()
 
@@ -110,7 +110,10 @@ class DocumentTransform(models.Model):
         results.write({
             'finish_date': fields.Datetime.now(),
             'state': 'finished',
+            'comment': self.env.context['message'] if 'message' in self.env.context else False,
         })
+        if len(self.results.filtered(lambda result: result.state == 'finished')) == len(self.results):
+            self.state = 'finish'
 
 
 class UserResult(models.Model):
@@ -122,6 +125,7 @@ class UserResult(models.Model):
     user = fields.Many2one('res.users', 'User')
     finish_date = fields.Datetime('Finished Time')
     state = fields.Selection([('processing', u'处理中'), ('finished', u'完成')], 'State', default='processing')
+    comment = fields.Char('Comment')
 
 
 

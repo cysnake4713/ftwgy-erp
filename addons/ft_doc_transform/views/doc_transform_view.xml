@@ -63,7 +63,7 @@
                         <button name="principal_apply" string="提交" type="object" class="oe_highlight"
                                 states_editable="{'principal':{'users':[request_principal_user]}}"
                                 context="{
-                                'state': 'finish',
+                                'state': 'finish_teacher',
                                 'message_users': [request_department_users,request_department_teacher_users],
                                 'message': '需要您的查看',
                                 'wechat_code': [%(ft_doc_transform.map_ft_doc_transform)d],
@@ -101,7 +101,7 @@
                         <button name="button_department_finish" string="提交" type="object" class="oe_highlight"
                                 states_editable="{'department':{'users':[request_vice_department_users,request_department_users]}}"
                                 context="{
-                                'state': 'finish',
+                                'state': 'finish_teacher',
                                 'message_users': [department_comment_user],
                                 'message': department_comment,
                                 'wechat_code': [%(ft_doc_transform.map_ft_doc_transform)d],
@@ -120,8 +120,9 @@
                         <!--<button name="common_reject" string="撤销" type="object" is_log="1"-->
                         <!--states_editable="{'finish':{'users':[request_vice_department_users,request_department_users]}}"-->
                         <!--context="{'state':'department'}" is_reject="1"/>-->
-                        <button name="button_teacher_finish" string="已完成" class="oe_highlight" type="object" states="finish"/>
-                        <field name="state" widget="statusbar" readonly="1" statusbar_visible="draft,principal,vice_principal,department,finish"/>
+                        <button name="button_teacher_finish" string="已完成" class="oe_highlight" type="object" states="finish_teacher"
+                                is_wechat="1" prompt="处理结果"/>
+                        <field name="state" widget="statusbar" readonly="1" statusbar_visible="draft,principal,vice_principal,department,finish_teacher,finish"/>
                     </header>
                     <sheet>
                         <group string="草稿">
@@ -179,7 +180,6 @@
                                    states_editable="{'vice_principal':{'users':[request_principal_user,request_principal_vice_principal]}}"/>
 
                             <field name="request_vice_department_teacher_users" widget="many2many_tags_multi"
-                                   domain="[('groups_id','!=',%(ft_doc_transform.group_doc_trans_department)d)]"
                                    attrs="{'invisible':[('vice_principal_apply_type','!=','teacher')],'required':[('state','=','vice_principal'),('vice_principal_apply_type','=','teacher')]}"
                                    states_editable="{'vice_principal':{'users':[request_principal_user,request_principal_vice_principal]}}" context="{
                                    'tree_view_ref':'ft_department.view_users_tree',
@@ -198,7 +198,7 @@
                                 <field name="vice_principal_datetime" readonly="1"/>
                             </group>
                         </group>
-                        <group string="部门落实" states="department,finish">
+                        <group string="部门落实" states="department,finish,finish_teacher">
                             <field name="department_comment" states_required="department"
                                    states_editable="{'department':{'users':[request_department_users,request_vice_department_users]}}"
                                     />
@@ -217,6 +217,7 @@
                                     <field name="user"/>
                                     <field name="state"/>
                                     <field name="finish_date"/>
+                                    <field name="comment"/>
                                 </tree>
                             </field>
                         </group>
