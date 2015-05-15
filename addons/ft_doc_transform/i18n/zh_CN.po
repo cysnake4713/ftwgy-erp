@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-05-01 08:44+0000\n"
-"PO-Revision-Date: 2015-05-01 08:44+0000\n"
+"POT-Creation-Date: 2015-05-15 13:39+0000\n"
+"PO-Revision-Date: 2015-05-15 13:39+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -27,6 +27,7 @@ msgstr "公文编号"
 
 #. module: ft_doc_transform
 #: field:ft.document.transform,comment:0
+#: field:ft.document.transform.result,comment:0
 msgid "Comment"
 msgstr "备注"
 
@@ -49,6 +50,11 @@ msgstr "相关人员"
 #: field:ft.document.transform,department_datetime:0
 msgid "Department Datetime"
 msgstr "审批时间"
+
+#. module: ft_doc_transform
+#: field:ft.document.transform,department_apply_type:0
+msgid "Department To"
+msgstr "发送到"
 
 #. module: ft_doc_transform
 #: field:ft.document.transform,department_user:0
@@ -103,6 +109,7 @@ msgstr "来文单位"
 #. module: ft_doc_transform
 #: field:ft.document.transform,id:0
 #: field:ft.document.transform.result,id:0
+#: field:report.ft_doc_transform.report_doc_transform,id:0
 msgid "ID"
 msgstr "ID"
 
@@ -184,6 +191,14 @@ msgid "To Department"
 msgstr "部门负责人"
 
 #. module: ft_doc_transform
+#: selection:ft.document.transform,department_apply_type:0
+#: selection:ft.document.transform,principal_apply_type:0
+#: selection:ft.document.transform,vice_principal_apply_type:0
+msgid "To End"
+msgstr "直接结束"
+
+#. module: ft_doc_transform
+#: selection:ft.document.transform,department_apply_type:0
 #: selection:ft.document.transform,principal_apply_type:0
 #: selection:ft.document.transform,vice_principal_apply_type:0
 msgid "To Teacher"
@@ -245,6 +260,11 @@ msgid "一般"
 msgstr "一般"
 
 #. module: ft_doc_transform
+#: view:website:ft_doc_transform.report_doc_transform
+msgid "主管副校长批示"
+msgstr "主管副校长批示"
+
+#. module: ft_doc_transform
 #: model:res.groups,name:ft_doc_transform.group_doc_trans_user
 msgid "公文上传"
 msgstr "公文上传"
@@ -252,8 +272,21 @@ msgstr "公文上传"
 #. module: ft_doc_transform
 #: model:ir.actions.act_window,name:ft_doc_transform.action_process_doc_transform
 #: model:ir.ui.menu,name:ft_doc_transform.menu_process_doc_transform
+#: model:ir.ui.menu,name:ft_doc_transform.menu_process_doc_transform_manager
+#: model:ir.ui.menu,name:ft_doc_transform.menu_process_root_manage
+#: model:ir.ui.menu,name:ft_doc_transform.menu_process_root_top
 msgid "公文审批"
 msgstr "公文审批"
+
+#. module: ft_doc_transform
+#: model:ir.actions.report.xml,name:ft_doc_transform.action_report_doc_transform
+msgid "公文审批表单"
+msgstr "公文审批表单"
+
+#. module: ft_doc_transform
+#: view:website:ft_doc_transform.report_doc_transform
+msgid "公文编号"
+msgstr "公文编号"
 
 #. module: ft_doc_transform
 #: model:res.groups,name:ft_doc_transform.group_doc_trans_vice_principal
@@ -271,12 +304,18 @@ msgid "加急"
 msgstr "加急"
 
 #. module: ft_doc_transform
+#: view:website:ft_doc_transform.report_doc_transform
+msgid "处室办理意见"
+msgstr "处室办理意见"
+
+#. module: ft_doc_transform
 #: selection:ft.document.transform.result,state:0
 msgid "处理中"
 msgstr "处理中"
 
 #. module: ft_doc_transform
 #: view:ft.document.transform:ft_doc_transform.view_doc_transform_form
+#: view:website:ft_doc_transform.report_doc_transform
 msgid "处理结果"
 msgstr "处理结果"
 
@@ -291,9 +330,20 @@ msgid "完成"
 msgstr "完成"
 
 #. module: ft_doc_transform
+#: view:website:ft_doc_transform.report_doc_transform
+msgid "完成时间"
+msgstr "完成时间"
+
+#. module: ft_doc_transform
 #: view:ft.document.transform:ft_doc_transform.view_doc_transform_form
 msgid "已完成"
 msgstr "已完成"
+
+#. module: ft_doc_transform
+#: model:ir.actions.act_window,name:ft_doc_transform.action_process_doc_transform_finish
+#: model:ir.ui.menu,name:ft_doc_transform.menu_process_doc_transform_manage_finish
+msgid "已完成公文审批"
+msgstr "已完成公文审批"
 
 #. module: ft_doc_transform
 #: model:ir.ui.menu,name:ft_doc_transform.menu_process_root
@@ -301,9 +351,54 @@ msgid "常用"
 msgstr "常用"
 
 #. module: ft_doc_transform
+#: view:ft.document.transform:ft_doc_transform.view_doc_transform_search
+msgid "待副校长审批"
+msgstr "待副校长审批"
+
+#. module: ft_doc_transform
+#: view:ft.document.transform:ft_doc_transform.view_doc_transform_search
+msgid "待校长审批"
+msgstr "待校长审批"
+
+#. module: ft_doc_transform
+#: view:ft.document.transform:ft_doc_transform.view_doc_transform_search
+msgid "待部门领导审批"
+msgstr "待部门领导审批"
+
+#. module: ft_doc_transform
+#: view:website:ft_doc_transform.report_doc_transform
+msgid "批示人:"
+msgstr "批示人:"
+
+#. module: ft_doc_transform
+#: view:website:ft_doc_transform.report_doc_transform
+msgid "批示时间:"
+msgstr "批示时间:"
+
+#. module: ft_doc_transform
 #: view:ft.document.transform:ft_doc_transform.view_doc_transform_form
 msgid "抄送部门执行人"
 msgstr "抄送部门执行人"
+
+#. module: ft_doc_transform
+#: view:ft.document.transform:ft_doc_transform.view_doc_transform_form
+msgid "撤销到草稿"
+msgstr "撤销到草稿"
+
+#. module: ft_doc_transform
+#: view:website:ft_doc_transform.report_doc_transform
+msgid "收件时间"
+msgstr "收件时间"
+
+#. module: ft_doc_transform
+#: view:website:ft_doc_transform.report_doc_transform
+msgid "文件标题或者摘要"
+msgstr "文件标题或者摘要"
+
+#. module: ft_doc_transform
+#: view:website:ft_doc_transform.report_doc_transform
+msgid "来文单位"
+msgstr "来文单位"
 
 #. module: ft_doc_transform
 #: model:res.groups,name:ft_doc_transform.group_doc_trans_principal
@@ -312,8 +407,14 @@ msgstr "校长"
 
 #. module: ft_doc_transform
 #: view:ft.document.transform:ft_doc_transform.view_doc_transform_form
+#: view:website:ft_doc_transform.report_doc_transform
 msgid "校长批示"
 msgstr "校长批示"
+
+#. module: ft_doc_transform
+#: view:website:ft_doc_transform.report_doc_transform
+msgid "福田区侨香外国语学校文件处理表"
+msgstr "福田区侨香外国语学校文件处理表"
 
 #. module: ft_doc_transform
 #: model:res.groups,name:ft_doc_transform.group_doc_trans_admin
@@ -324,6 +425,11 @@ msgstr "管理员"
 #: selection:ft.document.transform,urgency:0
 msgid "紧急"
 msgstr "紧急"
+
+#. module: ft_doc_transform
+#: view:website:ft_doc_transform.report_doc_transform
+msgid "紧急程度"
+msgstr "紧急程度"
 
 #. module: ft_doc_transform
 #: view:ft.document.transform:ft_doc_transform.view_doc_transform_form
