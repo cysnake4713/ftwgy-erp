@@ -32,8 +32,9 @@ class DocumentTransform(models.Model):
                                 ('urgent', u'紧急'),
                                 ('very_urgent', u'加急')], 'Urgency', default='normal')
     # principal
-    principal_apply_type = fields.Selection([('vice_principal', 'To Vice Principal'), ('department', 'To Department'), ('teacher', 'To Teacher')],
-                                            'Principal To', default='vice_principal')
+    principal_apply_type = fields.Selection(
+        [('vice_principal', 'To Vice Principal'), ('department', 'To Department'), ('teacher', 'To Teacher'), ('to_end', 'To End')],
+        'Principal To', default='vice_principal')
     request_principal_vice_principal = fields.Many2one('res.users', 'Request Vice Principal User')
     request_department_users = fields.Many2many('res.users', 'rel_ft_doc_trans_department_users', 'doc_id', 'user_id', 'Request Department Users')
     request_department_teacher_users = fields.Many2many('res.users', 'rel_ft_doc_trans_cc_users', 'doc_id', 'user_id', 'Request Department CC Users')
@@ -41,8 +42,8 @@ class DocumentTransform(models.Model):
     principal_datetime = fields.Datetime('Principal Datetime')
     principal_comment = fields.Text('Principal Comment')
     # vice_principal
-    vice_principal_apply_type = fields.Selection([('department', 'To Department'), ('teacher', 'To Teacher')], 'Vice Principal To',
-                                                 default='department')
+    vice_principal_apply_type = fields.Selection([('department', 'To Department'), ('teacher', 'To Teacher'), ('to_end', 'To End')],
+                                                 'Vice Principal To', default='department')
     request_vice_department_teacher_users = fields.Many2many('res.users', 'rel_ft_doc_trans_vice_cc_users', 'doc_id', 'user_id',
                                                              'Vice Request Teacher')
     request_vice_department_users = fields.Many2many('res.users', 'rel_ft_doc_trans_vice_department_users', 'doc_id', 'user_id',
@@ -51,11 +52,11 @@ class DocumentTransform(models.Model):
     vice_principal_datetime = fields.Datetime('Vice Principal Datetime')
     vice_principal_comment = fields.Text('Vice Principal Comment')
     # department
+    department_apply_type = fields.Selection([('teacher', 'To Teacher'), ('to_end', 'To End')], 'Department To', default='teacher')
     department_comment = fields.Text('Department Comment')
     department_comment_user = fields.Many2many('res.users', 'rel_ft_doc_trans_comment_users', 'doc_id', 'user_id', 'Department Comment User')
     department_user = fields.Many2one('res.users', 'Department User')
     department_datetime = fields.Datetime('Department Datetime')
-
 
     results = fields.One2many('ft.document.transform.result', 'transform', 'Results')
 
@@ -78,6 +79,8 @@ class DocumentTransform(models.Model):
             return self.with_context(state='vice_principal', message_users=[self.request_principal_vice_principal.id]).common_apply()
         elif self.principal_apply_type == 'department':
             return self.with_context(state='department').common_apply()
+        elif self.principal_apply_type == 'to_end':
+            return self.with_context(state='finish').common_apply()
         else:
             self.write({'results': [(5, 0), ] + [(0, 0, {'user': u.id, 'transform': self.id}) for u in self.request_department_teacher_users]})
             return self.common_apply()
@@ -89,6 +92,8 @@ class DocumentTransform(models.Model):
         elif self.vice_principal_apply_type == 'teacher':
             self.write({'results': [(5, 0), ] + [(0, 0, {'user': u.id, 'transform': self.id}) for u in self.request_vice_department_teacher_users]})
             return self.with_context(state='finish_teacher').common_apply()
+        elif self.vice_principal_apply_type == 'to_end':
+            return self.with_context(state='finish').common_apply()
         else:
             return self.common_apply()
 
@@ -101,8 +106,11 @@ class DocumentTransform(models.Model):
 
     @api.multi
     def button_department_finish(self):
-        self.write({'results': [(5, 0), ] + [(0, 0, {'user': u.id, 'transform': self.id}) for u in self.department_comment_user]})
-        self.common_apply()
+        if self.department_apply_type == 'teacher':
+            self.write({'results': [(5, 0), ] + [(0, 0, {'user': u.id, 'transform': self.id}) for u in self.department_comment_user]})
+            self.common_apply()
+        elif self.department_apply_type == 'to_end':
+            return self.with_context(state='finish').common_apply()
 
     @api.multi
     def button_teacher_finish(self):
