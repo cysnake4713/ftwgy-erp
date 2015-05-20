@@ -42,6 +42,8 @@
             <field name="model_id" ref="ft_doc_transform.model_ft_document_transform"/>
             <field name="domain_force">
                 [
+                '&amp;',
+                ('state', 'in', ['finish_teacher','finish'])
                 '|','|',
                 ('request_department_teacher_users', '=', user.id),
                 ('request_vice_department_teacher_users', '=', user.id),
@@ -73,7 +75,11 @@
             <field name="model_id" ref="ft_doc_transform.model_ft_document_transform"/>
             <field name="domain_force">
                 [
-                ('state', 'in', ['vice_principal','department','finish_teacher','finish'])
+                '&amp;',
+                ('state', 'in', ['vice_principal','department','finish_teacher','finish']),
+                '|',
+                ('request_principal_user', '=', user.id),
+                ('request_principal_vice_principal', '=', user.id),
                 ]
             </field>
             <field name="groups" eval="[(4, ref('ft_doc_transform.group_doc_trans_vice_principal'))]"/>
@@ -86,7 +92,11 @@
             <field name="model_id" ref="ft_doc_transform.model_ft_document_transform"/>
             <field name="domain_force">
                 [
-                ('state', 'in', ['department','finish_teacher','finish'])
+                '&amp;',
+                ('state', 'in', ['department','finish_teacher','finish']),
+                '|',
+                ('request_department_users', '=', user.id),
+                ('request_vice_department_users', '=', user.id),
                 ]
             </field>
             <field name="groups" eval="[(4, ref('ft_doc_transform.group_doc_trans_department'))]"/>
