@@ -43,7 +43,7 @@
             <field name="domain_force">
                 [
                 '&amp;',
-                ('state', 'in', ['finish_teacher','finish'])
+                ('state', 'in', ['finish_teacher','finish']),
                 '|','|',
                 ('request_department_teacher_users', '=', user.id),
                 ('request_vice_department_teacher_users', '=', user.id),
