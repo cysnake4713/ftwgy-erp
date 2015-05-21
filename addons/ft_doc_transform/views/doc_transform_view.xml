@@ -27,7 +27,7 @@
                     <field name="receive_date"/>
                     <field name="urgency"/>
                     <field name="state"/>
-                    <group>
+                    <group string="分组">
                         <filter string="状态" icon="terp-folder-orange" context="{'group_by':'state'}"/>
                         <filter string="待校长审批" icon="terp-folder-orange" domain="[('state','=','principal')]"
                                 groups="ft_doc_transform.group_doc_trans_principal"/>
