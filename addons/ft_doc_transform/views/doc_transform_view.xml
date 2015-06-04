@@ -44,7 +44,7 @@
             <field name="name">view.ft.document.transform.form</field>
             <field name="model">ft.document.transform</field>
             <field name="arch" type="xml">
-                <form>
+                <form class="float_header">
                     <header>
                         <button name="button_draft" string="提交" type="object" class="oe_highlight" states="draft"
                                 groups="ft_doc_transform.group_doc_trans_user"
