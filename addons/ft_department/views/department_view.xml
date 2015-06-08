@@ -70,10 +70,10 @@
             <field name="model">res.users</field>
             <field name="inherit_id" ref="base.view_users_search"/>
             <field name="arch" type="xml">
-                <field name="name" position="after">
+                <xpath expr="//field[@name='name']" position="after">
                     <field name="department_id"/>
                     <field name="email"/>
-                </field>
+                </xpath>
             </field>
         </record>
     </data>
