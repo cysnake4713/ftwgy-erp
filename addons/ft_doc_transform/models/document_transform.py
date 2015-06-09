@@ -35,6 +35,8 @@ class DocumentTransform(models.Model):
     principal_apply_type = fields.Selection(
         [('vice_principal', 'To Vice Principal'), ('department', 'To Department'), ('teacher', 'To Teacher'), ('to_end', 'To End')],
         'Principal To', default='vice_principal')
+    request_principal_vice_principals = fields.Many2many('res.users', 'rel_ft_doc_trans_v_principal_users', 'doc_id', 'user_id',
+                                                         'Request Vice Principal Users')
     request_principal_vice_principal = fields.Many2one('res.users', 'Request Vice Principal User')
     request_department_users = fields.Many2many('res.users', 'rel_ft_doc_trans_department_users', 'doc_id', 'user_id', 'Request Department Users')
     request_department_teacher_users = fields.Many2many('res.users', 'rel_ft_doc_trans_cc_users', 'doc_id', 'user_id', 'Request Department CC Users')
@@ -76,7 +78,7 @@ class DocumentTransform(models.Model):
     @api.multi
     def principal_apply(self):
         if self.principal_apply_type == 'vice_principal':
-            return self.with_context(state='vice_principal', message_users=[self.request_principal_vice_principal.id]).common_apply()
+            return self.with_context(state='vice_principal', message_users=[p.id for p in self.request_principal_vice_principals]).common_apply()
         elif self.principal_apply_type == 'department':
             return self.with_context(state='department').common_apply()
         elif self.principal_apply_type == 'to_end':
@@ -122,6 +124,15 @@ class DocumentTransform(models.Model):
         })
         if len(self.results.filtered(lambda result: result.state == 'finished')) == len(self.results):
             self.state = 'finish'
+
+    @api.v7
+    def fix_change_principal_problem(self, cr, uid, context=None):
+        docs = self.browse(None, 1, self.search(cr, 1, [(1, '=', 1)], context), context)
+        for doc in docs:
+            if doc.request_principal_vice_principal:
+                self.write(cr, 1, doc.id, {
+                    'request_principal_vice_principals': [(6, 0, [doc.request_principal_vice_principal.id])]
+                }, context)
 
 
 class UserResult(models.Model):

@@ -17,6 +17,7 @@
         'security/ir.model.access.csv',
         'views/menu.xml',
         'views/doc_transform_view.xml',
+        'data/fix.xml',
     ],
     'qweb': [
         'static/src/xml/*.xml',

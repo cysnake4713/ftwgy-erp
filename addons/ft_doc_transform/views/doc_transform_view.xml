@@ -80,7 +80,7 @@
                                 }" is_reject="1"/>
 
                         <button name="vice_principal_apply" string="提交" type="object" class="oe_highlight"
-                                states_editable="{'vice_principal':{'users':[request_principal_user,request_principal_vice_principal]}}"
+                                states_editable="{'vice_principal':{'users':[request_principal_user,request_principal_vice_principals]}}"
                                 context="{
                                 'state': 'department',
                                 'message_users': [request_vice_department_users,request_vice_department_teacher_users],
@@ -89,7 +89,7 @@
                                 'wechat_template': %(ft_doc_transform.message_template_doc_transform)d,
                                 }"/>
                         <button name="vice_principal_reject" string="打回" type="object" is_log="1"
-                                states_editable="{'vice_principal':{'users':[request_principal_user,request_principal_vice_principal]}}"
+                                states_editable="{'vice_principal':{'users':[request_principal_user,request_principal_vice_principals]}}"
                                 context="{
                                 'state': 'draft',
                                 'message_users': [draft_user],
@@ -151,7 +151,7 @@
                         <group string="校长批示" states="principal,vice_principal,department,finish,finish_teacher">
                             <field name="principal_apply_type" widget="radio" required="1" class="oe_edit_only"
                                    states_editable="{'principal':{'users':[request_principal_user]}}"/>
-                            <field name="request_principal_vice_principal"
+                            <field name="request_principal_vice_principals" widget="many2many_tags"
                                    domain="[('groups_id','=',%(ft_doc_transform.group_doc_trans_vice_principal)d)]"
                                    attrs="{'invisible':[('principal_apply_type','!=','vice_principal')],'required':[('state','=','principal'),('principal_apply_type','=','vice_principal')]}"
                                    states_editable="{'principal':{'users':[request_principal_user]}}"
@@ -178,11 +178,11 @@
 
                         <group string="副校长批示" states="vice_principal,department,finish,finish_teacher">
                             <field name="vice_principal_apply_type" widget="radio" required="1" class="oe_edit_only"
-                                   states_editable="{'vice_principal':{'users':[request_principal_user,request_principal_vice_principal]}}"/>
+                                   states_editable="{'vice_principal':{'users':[request_principal_user,request_principal_vice_principals]}}"/>
 
                             <field name="request_vice_department_teacher_users" widget="many2many_tags_multi"
                                    attrs="{'invisible':[('vice_principal_apply_type','!=','teacher')],'required':[('state','=','vice_principal'),('vice_principal_apply_type','=','teacher')]}"
-                                   states_editable="{'vice_principal':{'users':[request_principal_user,request_principal_vice_principal]}}" context="{
+                                   states_editable="{'vice_principal':{'users':[request_principal_user,request_principal_vice_principals]}}" context="{
                                    'tree_view_ref':'ft_department.view_users_tree',
                                    }"/>
                             <div colspan="2" class="oe_edit_only" attrs="{'invisible':[('vice_principal_apply_type','!=','teacher')]}">
@@ -191,9 +191,9 @@
                             <field name="request_vice_department_users" string="抄送部门执行人" widget="many2many_tags"
                                    attrs="{'invisible':[('vice_principal_apply_type','=','to_end')],'required':[('state','=','vice_principal'),('vice_principal_apply_type','=','department')]}"
                                    domain="[('groups_id','=',%(ft_doc_transform.group_doc_trans_department)d)]"
-                                   states_editable="{'vice_principal':{'users':[request_principal_user,request_principal_vice_principal]}}"/>
+                                   states_editable="{'vice_principal':{'users':[request_principal_user,request_principal_vice_principals]}}"/>
                             <field name="vice_principal_comment"
-                                   states_editable="{'vice_principal':{'users':[request_principal_user,request_principal_vice_principal]}}"/>
+                                   states_editable="{'vice_principal':{'users':[request_principal_user,request_principal_vice_principals]}}"/>
                             <group colspan="2" col="4">
                                 <field name="vice_principal_user" readonly="1"/>
                                 <field name="vice_principal_datetime" readonly="1"/>
