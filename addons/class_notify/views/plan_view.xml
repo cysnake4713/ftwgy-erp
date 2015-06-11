@@ -168,11 +168,17 @@
                                    domain="[('classroom','=',origin_plan_classroom),('start_date','&gt;=',current_date),('teacher','!=',uid)]"
                                    states_editable="{'draft':True}"/>
                         </group>
-                        <group col="4">
+                        <group col="5">
                             <field name="request_center_user" states_required="draft,target_teacher"
                                    domain="[('groups_id','=',%(class_notify.group_class_switch_manager)d)]"
                                    states_editable="{'draft':True,'target_teacher':True}"/>
-                            <field name="head_teacher" states_editable="{'center_confirm':{'users':[request_center_user]}}" widget="many2many_tags"/>
+                            <field name="head_teacher" widget="many2many_tags"
+                                   states_editable="{
+                                    'center_confirm':{'users':[request_center_user]},
+                                    'confirmed':{'users':[request_center_user]}}"
+                                    />
+                            <button string="再次给班主任发通知" name="resend_notify_mail" type="object" states_editable="{
+                                    'confirmed':{'users':[request_center_user]}}"/>
                         </group>
                         <group string="审批信息" col="4" states="confirmed">
                             <field name="center_confirm_user" readonly="1"/>

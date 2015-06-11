@@ -105,6 +105,10 @@ class PlanWizard(models.Model):
         self.state = 'confirmed'
 
     @api.multi
+    def resend_notify_mail(self):
+        self.send_notify_mail_to_head(self.origin_plan, self.result_target_plan, self.target_plan, self.result_origin_plan, self.head_teacher)
+
+    @api.multi
     def send_notify_mail(self, origin_plan, target_plan):
         if origin_plan and target_plan:
             text = u'您的课程:%s 调换到了:%s,<br/>请注意上课时间' % (origin_plan.name_get()[0][1], target_plan.name_get()[0][1])
@@ -118,11 +122,14 @@ class PlanWizard(models.Model):
     @api.multi
     def send_notify_mail_to_head(self, origin_plan, target_plan, s_origin_plan, s_target_plan, teachers):
         if origin_plan and target_plan:
-            text = u'课程:%s 调换到了:%s,<br/>' \
-                   u'课程:%s 调换到了:%s,<br/>' \
+            text = u'%s班 课程:%s 从:%s 第%s节 换到:%s 第%s节<br/>' \
+                   u'%s班 课程:%s 从:%s %s 换到:%s 第%s节<br/>' \
                    u'请注意本班课程变更' % (
-                       origin_plan.name_get()[0][1], target_plan.name_get()[0][1],
-                       s_origin_plan.name_get()[0][1], s_target_plan.name_get()[0][1],)
+                       origin_plan.classroom.name, origin_plan.subject.name, origin_plan.start_date, origin_plan.lesson.name, target_plan.start_date,
+                       target_plan.lesson.name,
+                       s_origin_plan.classroom.name, s_origin_plan.subject.name, s_origin_plan.start_date, s_origin_plan.lesson.name,
+                       s_target_plan.start_date, s_target_plan.lesson.name,
+                   )
             self.with_context({
                 'message_users': [t.id for t in teachers],
                 'message': text,
