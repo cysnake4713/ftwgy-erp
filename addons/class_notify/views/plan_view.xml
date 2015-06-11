@@ -175,10 +175,10 @@
                             <field name="head_teacher" widget="many2many_tags"
                                    states_editable="{
                                     'center_confirm':{'users':[request_center_user]},
-                                    'confirmed':{'users':[request_center_user]}}"
+                                    'confirmed':{'groups':[%(class_notify.group_class_switch_manager)d]}}"
                                     />
                             <button string="再次给班主任发通知" name="resend_notify_mail" type="object" states_editable="{
-                                    'confirmed':{'users':[request_center_user]}}"/>
+                                    'confirmed':{'groups':[%(class_notify.group_class_switch_manager)d]}}"/>
                         </group>
                         <group string="审批信息" col="4" states="confirmed">
                             <field name="center_confirm_user" readonly="1"/>
