@@ -139,7 +139,7 @@
                                 states_editable="{'center_confirm':{'users':[request_center_user]}}"
                                 />
 
-                        <button name="common_reject" string="取消申请" type="object" states="draft,target_teacher,center_confirm" is_reject="1" is_log="1"
+                        <button name="common_reject" string="取消申请" type="object" states="target_teacher,center_confirm" is_reject="1" is_log="1"
                                 context="{'state':'cancel',
                                 'message_users':[origin_plan_teacher,target_plan_teacher],
                                 'message':'换课申请被取消,请注意课程安排',
