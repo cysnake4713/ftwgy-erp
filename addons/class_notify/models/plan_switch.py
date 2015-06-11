@@ -88,11 +88,11 @@ class PlanWizard(models.Model):
         result_target_plan.teacher = self.origin_plan.teacher
         result_target_plan.subject = self.origin_plan.subject
 
-        self.result_target_plan = result_target_plan
-        self.result_origin_plan = result_origin_plan
+        sudo_user.result_target_plan = result_target_plan
+        sudo_user.result_origin_plan = result_origin_plan
 
-        self.origin_plan.active = False
-        self.target_plan.active = False
+        sudo_user.origin_plan.active = False
+        sudo_user.target_plan.active = False
 
         origin_timetable = sudo_user.env['school.timetable'].search([('plan_ids', '=', self.origin_plan.id)])
         origin_timetable.write({'plan_ids': [(4, self.result_origin_plan.id)]})

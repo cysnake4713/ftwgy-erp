@@ -127,7 +127,7 @@ class DocumentTransform(models.Model):
 
     @api.v7
     def fix_change_principal_problem(self, cr, uid, context=None):
-        docs = self.browse(None, 1, self.search(cr, 1, [(1, '=', 1)], context), context)
+        docs = self.browse(cr, 1, self.search(cr, 1, [(1, '=', 1)], context), context)
         for doc in docs:
             if doc.request_principal_vice_principal:
                 self.write(cr, 1, doc.id, {
