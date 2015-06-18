@@ -129,6 +129,9 @@
                         <!--context="{'state':'department'}" is_reject="1"/>-->
                         <button name="button_teacher_finish" string="已完成" class="oe_highlight" type="object" states="finish_teacher"
                                 is_wechat="1" prompt="处理结果"/>
+                        <button name="button_reject_teacher_finish" string="撤销到前一个状态" type="object" is_reject="1" is_log="1"
+                                states_editable="{'finish_teacher':{'groups':[%(ft_doc_transform.group_doc_trans_user)d]}}"/>
+
                         <field name="state" widget="statusbar" readonly="1"
                                statusbar_visible="draft,principal,vice_principal,department,finish_teacher,finish"/>
                     </header>
