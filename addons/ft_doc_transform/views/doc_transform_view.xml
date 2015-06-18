@@ -59,6 +59,9 @@
                                 groups="ft_doc_transform.group_doc_trans_user" is_reject="1"
                                 context="{
                                 'state': 'draft',
+                                'clear':['request_principal_vice_principals','request_department_users',
+                                'request_department_teacher_users','principal_comment',
+                                'request_vice_department_teacher_users','request_vice_department_users','vice_principal_comment'],
                                 }"/>
                         <button name="principal_apply" string="提交" type="object" class="oe_highlight"
                                 states_editable="{'principal':{'users':[request_principal_user]}}"
@@ -77,6 +80,8 @@
                                 'message': '您的请求被打回,请处理',
                                 'wechat_code': [%(ft_doc_transform.map_ft_doc_transform)d],
                                 'wechat_template': %(ft_doc_transform.message_template_doc_transform)d,
+                                'clear':['request_principal_vice_principals','request_department_users',
+                                'request_department_teacher_users','principal_comment'],
                                 }" is_reject="1"/>
 
                         <button name="vice_principal_apply" string="提交" type="object" class="oe_highlight"
@@ -96,6 +101,7 @@
                                 'message': '您的请求被打回,请处理',
                                 'wechat_code': [%(ft_doc_transform.map_ft_doc_transform)d],
                                 'wechat_template': %(ft_doc_transform.message_template_doc_transform)d,
+                                'clear':['request_vice_department_teacher_users','request_vice_department_users','vice_principal_comment'],
                                 }" is_reject="1"/>
 
                         <button name="button_department_finish" string="提交" type="object" class="oe_highlight"
@@ -115,6 +121,7 @@
                                 'message': '您的请求被打回,请处理',
                                 'wechat_code': [%(ft_doc_transform.map_ft_doc_transform)d],
                                 'wechat_template': %(ft_doc_transform.message_template_doc_transform)d,
+                                'clear':['department_comment','department_comment_user'],
                                 }"/>
 
                         <!--<button name="common_reject" string="撤销" type="object" is_log="1"-->
@@ -215,7 +222,7 @@
                                 <field name="department_datetime" readonly="1"/>
                             </group>
                         </group>
-                        <group string="处理结果">
+                        <group string="处理结果"  states="finish,finish_teacher">
                             <field name="results" readonly="1" nolabel="1">
                                 <tree>
                                     <field name="user"/>
