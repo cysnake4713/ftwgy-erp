@@ -78,23 +78,37 @@ class DocumentTransform(models.Model):
     @api.multi
     def principal_apply(self):
         if self.principal_apply_type == 'vice_principal':
+            self.write({'request_department_users': [(5, 0, 0)],
+                        'request_department_teacher_users': [(5, 0, 0)]})
             return self.with_context(state='vice_principal', message_users=[p.id for p in self.request_principal_vice_principals]).common_apply()
         elif self.principal_apply_type == 'department':
+            self.write({'request_principal_vice_principals': [(5, 0, 0)],
+                        'request_department_teacher_users': [(5, 0, 0)]})
             return self.with_context(state='department').common_apply()
         elif self.principal_apply_type == 'to_end':
+            self.write({'request_department_users': [(5, 0, 0)],
+                        'request_department_teacher_users': [(5, 0, 0)],
+                        'request_principal_vice_principals': [(5, 0, 0)]})
             return self.with_context(state='finish').common_apply()
         else:
+            self.write({'request_principal_vice_principals': [(5, 0, 0)]})
             self.write({'results': [(5, 0), ] + [(0, 0, {'user': u.id, 'transform': self.id}) for u in self.request_department_teacher_users]})
             return self.common_apply()
 
     @api.multi
     def vice_principal_apply(self):
         if self.vice_principal_apply_type == 'department':
+            self.write({'request_vice_department_teacher_users': [(5, 0, 0)],
+                        })
             return self.with_context(state='department').common_apply()
         elif self.vice_principal_apply_type == 'teacher':
             self.write({'results': [(5, 0), ] + [(0, 0, {'user': u.id, 'transform': self.id}) for u in self.request_vice_department_teacher_users]})
             return self.with_context(state='finish_teacher').common_apply()
         elif self.vice_principal_apply_type == 'to_end':
+            self.write({
+                'request_vice_department_teacher_users': [(5, 0, 0)],
+                'request_vice_department_users': [(5, 0, 0)],
+            })
             return self.with_context(state='finish').common_apply()
         else:
             return self.common_apply()
@@ -112,6 +126,9 @@ class DocumentTransform(models.Model):
             self.write({'results': [(5, 0), ] + [(0, 0, {'user': u.id, 'transform': self.id}) for u in self.department_comment_user]})
             self.common_apply()
         elif self.department_apply_type == 'to_end':
+            self.write({
+                'department_comment_user': [(5, 0, 0)],
+            })
             return self.with_context(state='finish').common_apply()
 
     @api.multi
@@ -124,6 +141,19 @@ class DocumentTransform(models.Model):
         })
         if len(self.results.filtered(lambda result: result.state == 'finished')) == len(self.results):
             self.state = 'finish'
+
+    @api.multi
+    def button_reject_teacher_finish(self):
+        if self.department_user:
+            state = 'department'
+        elif self.vice_principal_user:
+            state = 'vice_principal'
+        else:
+            state = 'principal'
+        self.write({
+            'results': [(2, r.id, 0) for r in self.results]
+        })
+        return self.with_context(state=state).common_reject()
 
     @api.v7
     def fix_change_principal_problem(self, cr, uid, context=None):
