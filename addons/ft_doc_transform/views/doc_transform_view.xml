@@ -156,7 +156,7 @@
                                    attrs="{'invisible':[('principal_apply_type','!=','vice_principal')],'required':[('state','=','principal'),('principal_apply_type','=','vice_principal')]}"
                                    states_editable="{'principal':{'users':[request_principal_user]}}"
                                     />
-                            <field name="request_department_teacher_users" widget="many2many_tags_multi"
+                            <field name="request_department_teacher_users" widget="many2many_tags"
                                    domain="[('groups_id','!=',%(ft_doc_transform.group_doc_trans_department)d)]"
                                    attrs="{'invisible':[('principal_apply_type','!=','teacher')],'required':[('state','=','principal'),('principal_apply_type','=','teacher')]}"
                                    states_editable="{'principal':{'users':[request_principal_user]}}" context="{
@@ -180,7 +180,7 @@
                             <field name="vice_principal_apply_type" widget="radio" required="1" class="oe_edit_only"
                                    states_editable="{'vice_principal':{'users':[request_principal_user,request_principal_vice_principals]}}"/>
 
-                            <field name="request_vice_department_teacher_users" widget="many2many_tags_multi"
+                            <field name="request_vice_department_teacher_users" widget="many2many_tags"
                                    attrs="{'invisible':[('vice_principal_apply_type','!=','teacher')],'required':[('state','=','vice_principal'),('vice_principal_apply_type','=','teacher')]}"
                                    states_editable="{'vice_principal':{'users':[request_principal_user,request_principal_vice_principals]}}" context="{
                                    'tree_view_ref':'ft_department.view_users_tree',
@@ -202,7 +202,7 @@
                         <group string="部门落实" states="department,finish,finish_teacher">
                             <field name="department_apply_type" widget="radio" required="1" class="oe_edit_only"
                                    states_editable="{'department':{'users':[request_department_users,request_vice_department_users]}}"/>
-                            <field name="department_comment_user" widget="many2many_tags_multi"
+                            <field name="department_comment_user" widget="many2many_tags"
                                    attrs="{'invisible':[('department_apply_type','=','to_end')],'required':[('state','=','department'),('department_apply_type','=','teacher')]}"
                                    states_editable="{'department':{'users':[request_department_users,request_vice_department_users]}}" context="{
                                    'tree_view_ref':'ft_department.view_users_tree',
