@@ -137,7 +137,7 @@
                             <field name="attachments" widget="many2many_binary"
                                    states_editable="{'draft':{'groups':[%(ft_doc_transform.group_doc_trans_user)d]}}"/>
                             <group colspan="2" string="备注">
-                                <field name="comment" nolabel="1" colspan="2" widget="html_editor"
+                                <field name="comment" nolabel="1" colspan="2"
                                        states_editable="{'draft':{'groups':[%(ft_doc_transform.group_doc_trans_user)d]}}"/>
                             </group>
                             <field name="request_principal_user" required="1"
