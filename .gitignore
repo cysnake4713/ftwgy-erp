@@ -25,3 +25,4 @@ _build/
 /log
 
 atlassian-ide-plugin.xml
+/.openerp_serverrc
