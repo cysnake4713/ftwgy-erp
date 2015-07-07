@@ -11,6 +11,7 @@ _build/
 # emacs backup files
 *~
 /odoosoft
+/web
 /odoo.conf
 # various virtualenv
 /bin/
