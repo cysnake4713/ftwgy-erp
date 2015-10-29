@@ -27,6 +27,8 @@
                     <field name="receive_date"/>
                     <field name="urgency"/>
                     <field name="state"/>
+                    <field name="request_principal_vice_principal" string="待审批领导"
+                           domain="['|','|',('request_principal_vice_principal','ilike',self),('request_principal_vice_principals','ilike',self),('vice_principal_user','ilike',self)]"/>
                     <group string="分组">
                         <filter string="状态" icon="terp-folder-orange" context="{'group_by':'state'}"/>
                         <filter string="待校长审批" icon="terp-folder-orange" domain="[('state','=','principal')]"
